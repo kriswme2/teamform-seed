@@ -1,0 +1,63 @@
+<div class="row">
+	<h2 class="text-center">User Profile</h2>
+</div>
+
+<div class="row" ng-if="message.length > 0">
+	<div class="alert alert-success col-sm-6 col-sm-offset-3">
+		{{message}}
+	</div>
+</div>
+
+<div class="row" ng-if="errorMessage.length > 0">
+	<div class="alert alert-danger col-sm-6 col-sm-offset-3">
+		{{errorMessage}}<br>
+		<span ng-if="errorCode.length>0">Error code: {{errorCode}}</span>
+	</div>
+</div>
+
+<div class="container" ng-controller="UserCtrl">
+	<div class="row profile-row">
+		<div class="col-xs-3">
+			<i class="fa fa-3x fa-envelope pull-right"></i> 
+		</div>
+		<div class="col-xs-3" style="text-align:center">
+			Email:
+		</div>
+		<div class="col-xs-6">
+			{{email}}
+		</div>
+	</div>
+
+	<hr style="background:lightgray;height:2px">
+
+	<div class="row profile-row">
+		<div class="col-xs-3">
+			<i class="fa fa-3x fa-user pull-right"></i> 
+		</div>
+		<div class="col-xs-3" style="text-align:center">
+			Name:
+		</div>
+		<div class="col-xs-6">
+			{{displayName}}
+		</div>
+	</div>
+
+	<hr style="background:lightgray;height:2px">
+
+	<div class="row profile-row">
+		<div class="col-xs-3">
+			<i class="fa fa-3x fa-key pull-right"></i> 
+		</div>
+		<div class="col-xs-3" style="text-align:center">
+			Password:
+		</div>
+		<div class="col-xs-6">
+			<div class="alert alert-info">
+				Your password is managed by your ((provider))
+			</div>
+			<button class="btn btn-info">(Undone) Change password</button>
+		</div>
+	</div>
+
+
+</div>

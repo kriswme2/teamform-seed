@@ -1,0 +1,57 @@
+<div class="login" ng-controller="AuthCtrl">
+	<div class="container">
+		<div class="row" ng-if="message.length > 0">
+			<div class="alert alert-success col-sm-6 col-sm-offset-3">
+				{{message}}
+			</div>
+		</div>
+
+		<div class="row" ng-if="errorMessage.length > 0">
+			<div class="alert alert-danger col-sm-6 col-sm-offset-3">
+				{{errorMessage}}<br>
+				<span ng-if="errorCode.length>0">Error code: {{errorCode}}</span>
+			</div>
+		</div>
+		
+		<div class="row">
+			<h2 class="text-center">Login</h2>
+			<h5 class="text-center greeting">To start using teamform, please login.</h5>
+		</div>
+		
+		<div class="row">
+			<form class="col-sm-6 col-sm-offset-3" ng-submit="signIn()">
+			  <div class="form-group">
+			    <label class="sr-only" for="auth_email">Email address</label>
+			    <input type="email" class="form-control" id="auth_email" placeholder="Enter email" ng-model="email" required>
+			  </div>
+			  <div class="form-group">
+			    <label class="sr-only" for="auth_password">Password</label>
+			    <input type="password" class="form-control" id="auth_password" placeholder="Password" ng-model="password" required>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Login</button>
+			  <a class="btn btn-info" href="#/register">Register</a>
+			</form>
+		</div>
+
+		<div style="padding-top: 15px;"></div>
+
+		<div class="row">
+			<div class="col-xs-4 col-xs-offset-0 col-sm-2 col-sm-offset-3">
+				<button type="submit" class="btn btn-primary" ng-click="signInWithFacebook()">
+					<i class="fa fa-2x fa-facebook"></i>
+				</button>
+			</div>
+			<div class="col-xs-4 col-xs-offset-0 col-sm-2 col-sm-offset-0">
+				<button type="submit" class="btn btn-danger" ng-click="signInWithGoogle()">
+					<i class="fa fa-2x fa-google"></i>
+				</button>
+			</div>
+			<div class="col-xs-4 col-xs-offset-0 col-sm-2 col-sm-offset-0">
+				<button type="submit" class="btn btn-black" ng-click="signInWithGithub()">
+					<i class="fa fa-2x fa-github"></i>
+				</button>
+			</div>
+		</div>
+
+	</div>
+</div>

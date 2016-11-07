@@ -1,0 +1,12 @@
+{
+    // JSHint Default Configuration File (as on JSHint website)
+    // See http://jshint.com/docs/ for more details
+
+    "strict": false,
+    
+    // Custom Globals
+    "globals"       : {
+        "angular": true,
+        "firebase": true
+    }        // additional predefined global variables
+}
