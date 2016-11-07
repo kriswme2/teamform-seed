@@ -20,6 +20,12 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             }]
         };
 
+        var onEnterCheckSignIn = ["Auth", "$state", function(Auth, $state){
+            if(Auth.$getAuth()) {
+                $state.go('index');
+            }
+        }];
+
         // Application routes
         $stateProvider
             .state('login', {
@@ -32,11 +38,21 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                       // $waitForSignIn returns a promise so the resolve waits for it to complete
                       return Auth.$waitForSignIn();
                     }]
-                }
+                },
+                onEnter: onEnterCheckSignIn
             })
             .state('register', {
                 url: '/register',
-                templateUrl: 'templates/auth/register.html'
+                templateUrl: 'templates/auth/register.html',
+                resolve: {
+                    // controller will not be loaded until $waitForSignIn resolves
+                    // Auth refers to our $firebaseAuth wrapper in the factory below
+                    "currentAuth": ["Auth", function(Auth) {
+                      // $waitForSignIn returns a promise so the resolve waits for it to complete
+                      return Auth.$waitForSignIn();
+                    }]
+                },
+                onEnter: onEnterCheckSignIn 
             })
             .state('index', {
                 url: '/',

@@ -2,19 +2,6 @@ angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase'
 .run(function($rootScope, $state, $location, $cookies, Auth) {
 		$rootScope.auth = Auth;
 
-		//Redirect user to index if the user is logged in.
-    $rootScope.$on( '$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
-
-      if(toState.name === "login" || toState.name === "register"){
-        if(Auth.$getAuth()) {
-          e.preventDefault();
-          $state.go('index');
-        }
-      	return; // no need to redirect 
-      }
-
-    });
-
     //Redirect user to login if they aren't logged in.
     $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
 
