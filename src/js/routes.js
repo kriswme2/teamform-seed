@@ -2,8 +2,10 @@
 /**
  * Route configuration for the RDash module.
  */
-angular.module('teamform').config(['$stateProvider', '$urlRouterProvider',
-    function($stateProvider, $urlRouterProvider) {
+angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
+    function($locationProvider, $stateProvider, $urlRouterProvider) {
+        
+        $locationProvider.html5Mode(true);
 
         // For unmatched routes
         $urlRouterProvider.otherwise('/');
