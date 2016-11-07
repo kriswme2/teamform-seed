@@ -31,7 +31,7 @@ angular
 
     $scope.signInWithPopup = function(provider) {
       $scope.firebaseUser = null;
-      $scope.error = null;
+      $scope.errorCode = null;
       $scope.errorMessage = null;
 
       if(provider === "facebook") {
@@ -54,7 +54,7 @@ angular
 
     $scope.createUser = function() {
       $scope.message = null;
-      $scope.error = null;
+      $scope.errorCode = null;
       $scope.errorMessage = null;
 
       if($scope.password !== $scope.confirmPassword) {
