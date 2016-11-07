@@ -20,11 +20,23 @@ var paths = {
     bower_fonts: 'src/components/**/*.{ttf,woff,eof,svg}',
 };
 
+ var options = {
+        removeComments: false,
+        collapseWhitespace: true,
+        collapseBooleanAttributes: true,
+        removeEmptyAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        minifyJS: true,
+        minifyCSS: true
+    };
+
 /**
  * Handle bower components from index
  */
 gulp.task('usemin', function() {
     return gulp.src(paths.index)
+        .pipe(minifyHTML(options))
         .pipe(usemin({
             js: [minifyJs(), 'concat'],
             css: [minifyCss({keepSpecialComments: 0}), 'concat'],
@@ -79,7 +91,7 @@ gulp.task('custom-less', function() {
 
 gulp.task('custom-templates', function() {
     return gulp.src(paths.templates)
-        .pipe(minifyHTML())
+        .pipe(minifyHTML(options))
         .pipe(gulp.dest('dist/templates'));
 });
 
