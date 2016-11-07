@@ -26,8 +26,8 @@ angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase'
        */
       $rootScope.firebaseUser = Auth.$getAuth();
       if(Auth.$getAuth()) {
-      	// redirect user to the entry point specified by the user
-        var redirectTo = $cookies.get('initialLocation'); // set in the beginning of this file
+      	// redirect user back to the uri where user came from
+        var redirectTo = $cookies.get('initialLocation'); // set in the beginning of this function
         if($location.path() === '/login') {
           $state.go('index');
         }
