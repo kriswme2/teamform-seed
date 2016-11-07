@@ -20,7 +20,13 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             }]
         };
 
-        var onEnterCheckSignIn = ["Auth", "$state", function(Auth, $state){
+        var redirectToLoginIfNotSignedIn = ["Auth", "$state", function(Auth, $state){
+            if(!Auth.$getAuth()) {
+                $state.go('login');
+            }
+        }];
+
+        var redirectToIndexIfSignedIn = ["Auth", "$state", function(Auth, $state){
             if(Auth.$getAuth()) {
                 $state.go('index');
             }
@@ -39,7 +45,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                       return Auth.$waitForSignIn();
                     }]
                 },
-                onEnter: onEnterCheckSignIn
+                onEnter: redirectToIndexIfSignedIn
             })
             .state('register', {
                 url: '/register',
@@ -52,22 +58,25 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                       return Auth.$waitForSignIn();
                     }]
                 },
-                onEnter: onEnterCheckSignIn 
+                onEnter: redirectToIndexIfSignedIn
             })
             .state('index', {
                 url: '/',
                 templateUrl: 'templates/dashboard.html',
-                resolve: requireSignInResolver
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
             })
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'templates/profile.html',
-                resolve: requireSignInResolver
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
             })
             .state('tables', {
                 url: '/tables',
                 templateUrl: 'templates/tables.html',
-                resolve: requireSignInResolver
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
             });
     }
 ]);
