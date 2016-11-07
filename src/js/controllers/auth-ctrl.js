@@ -15,7 +15,7 @@ angular
 
     $scope.signIn = function() {
       $scope.firebaseUser = null;
-      $scope.error = null;
+      $scope.errorCode = null;
       $scope.errorMessage = null;
 
       $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password).then(function(firebaseUser) {
