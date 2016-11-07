@@ -16,6 +16,7 @@ angular
     $scope.signIn = function() {
       $scope.firebaseUser = null;
       $scope.error = null;
+      $scope.errorMessage = null;
 
       $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password).then(function(firebaseUser) {
         //success
@@ -28,36 +29,23 @@ angular
 
     };
 
-    $scope.signInWithFacebook = function() {
+    $scope.signInWithPopup = function(provider) {
       $scope.firebaseUser = null;
       $scope.error = null;
+      $scope.errorMessage = null;
 
-      $firebaseAuth().$signInWithPopup( new firebase.auth.FacebookAuthProvider() ).then(function(firebaseUser) {
-        //success
-        $scope.firebaseUser = firebaseUser;
-      }).catch(function(error) {
-        // Handle Errors here.
-        $scope.errorCode = error.code;
-        $scope.errorMessage = error.message;
-      });
-    };
+      switch(provider) {
+        case "facebook":
+          provider = new firebase.auth.FacebookAuthProvider();
+          break;
+        case "google":
+          provider = new firebase.auth.GoogleAuthProvider();
+          break;
+        case "github":
+          provider = new firebase.auth.GithubAuthProvider();
+      }
 
-    $scope.signInWithGoogle = function() {
-      $scope.firebaseUser = null;
-      $scope.error = null;
-
-      $firebaseAuth().$signInWithPopup( new firebase.auth.GoogleAuthProvider() ).then(function(firebaseUser) {
-        //success
-        $scope.firebaseUser = firebaseUser;
-      }).catch(function(error) {
-        // Handle Errors here.
-        $scope.errorCode = error.code;
-        $scope.errorMessage = error.message;
-      });
-    };
-    
-    $scope.signInWithGithub = function() {
-      $firebaseAuth().$signInWithPopup( new firebase.auth.GithubAuthProvider() ).then(function(firebaseUser) {
+      $firebaseAuth().$signInWithPopup( provider ).then(function(firebaseUser) {
         //success
         $scope.firebaseUser = firebaseUser;
       }).catch(function(error) {
@@ -70,6 +58,7 @@ angular
     $scope.createUser = function() {
       $scope.message = null;
       $scope.error = null;
+      $scope.errorMessage = null;
 
       if($scope.password !== $scope.confirmPassword) {
         $scope.errorMessage = "Confirm Password is different form password!";
@@ -92,6 +81,7 @@ angular
     // $scope.deleteUser = function() {
     //   $scope.message = null;
     //   $scope.error = null;
+    //   $scope.errorMessage = null;
 
     //   // Delete the currently signed-in user
     //   Auth.$deleteUser().then(function() {
