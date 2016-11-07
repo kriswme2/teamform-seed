@@ -4,7 +4,9 @@
 
 angular
   .module('teamform')
-  .controller('UserCtrl', function($scope, Auth) {
+  .controller('UserCtrl', ['$scope', '$cookieStore', 'Auth', UserCtrl]);
+
+  function UserCtrl($scope, $cookieStore, Auth) {
     var firebaseUser = Auth.$getAuth();
     $scope.displayName = firebaseUser.displayName;
     $scope.email = firebaseUser.email;
@@ -20,4 +22,4 @@ angular
         $scope.errorMessage = error.message;
       });
     };
-  });
+  }

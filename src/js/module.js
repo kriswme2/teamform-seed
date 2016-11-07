@@ -1,5 +1,7 @@
 angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase'])
-.run(function($rootScope, $state, $location, $cookies, Auth) {
+
+.run(["$rootScope", "$state", "$location", "$cookies", "Auth", 
+  function($rootScope, $state, $location, $cookies, Auth) {
 		$rootScope.auth = Auth;
 
     //Redirect user to login if they aren't logged in.
@@ -23,4 +25,4 @@ angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase'
         $state.go('login'); // go to login
       }
     });
-});
+}]);

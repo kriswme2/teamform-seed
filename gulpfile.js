@@ -76,7 +76,7 @@ gulp.task('lint', function(){
 gulp.task('custom-js', ['lint'], function() {
     return gulp.src(paths.scripts)
         .pipe(minifyJs({
-            mangle: false // Mangle does not works well with angular
+            //mangle: false
         }))
         .pipe(concat('dashboard.min.js'))
         .pipe(gulp.dest('dist/js'));
