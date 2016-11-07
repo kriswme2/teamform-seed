@@ -34,15 +34,12 @@ angular
       $scope.error = null;
       $scope.errorMessage = null;
 
-      switch(provider) {
-        case "facebook":
-          provider = new firebase.auth.FacebookAuthProvider();
-          break;
-        case "google":
-          provider = new firebase.auth.GoogleAuthProvider();
-          break;
-        case "github":
-          provider = new firebase.auth.GithubAuthProvider();
+      if(provider === "facebook") {
+        provider = new firebase.auth.FacebookAuthProvider();
+      }else if (provider === "google") {
+        provider = new firebase.auth.GoogleAuthProvider();
+      }else if (provider === "github") {
+        provider = new firebase.auth.GithubAuthProvider();
       }
 
       $firebaseAuth().$signInWithPopup( provider ).then(function(firebaseUser) {
