@@ -85,7 +85,19 @@ gulp.task('custom-js', ['lint'], function() {
 gulp.task('custom-less', function() {
     return gulp.src(paths.styles)
         .pipe(less())
-        .pipe(minifyCss())
+        .pipe(minifyCss({
+            autoprefixer: {
+                browsers: [
+                    'last 2 versions',
+                    'safari >= 8',
+                    'ie >= 10',
+                    'ff >= 20',
+                    'ios 6',
+                    'android 4'
+                ],
+                add: true
+            }
+        }))
         .pipe(concat('teamform.min.css'))
         .pipe(gulp.dest('dist/css'));
 });
