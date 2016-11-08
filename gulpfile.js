@@ -86,6 +86,7 @@ gulp.task('custom-less', function() {
     return gulp.src(paths.styles)
         .pipe(less())
         .pipe(minifyCss())
+        .pipe(concat('teamform.min.css'))
         .pipe(gulp.dest('dist/css'));
 });
 
