@@ -1,6 +1,6 @@
 angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase'])
 
-.run(["$rootScope", "$state", "$location", "$cookies", "Auth", 
+.run(["$rootScope", "$state", "$location", "$cookies", "Auth",
   function($rootScope, $state, $location, $cookies, Auth) {
 		$rootScope.auth = Auth;
 
