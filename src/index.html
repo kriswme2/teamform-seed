@@ -54,8 +54,8 @@
       <div class="page-content">
 
         <!-- Header Bar -->
-        <div class="row header" ng-controller="AuthCtrl">
-          <div class="col-xs-12">
+        <div class="row header">
+          <div class="col-xs-12" ng-controller="AuthCtrl">
             <div class="user pull-right">
               <div class="item dropdown" uib-dropdown ng-if="auth.$getAuth()">
                 <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
@@ -89,7 +89,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="item dropdown" uib-dropdown>
+              <div class="item dropdown" uib-dropdown ng-controller="NotificationCtrl" ng-if="auth.$getAuth()">
                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
                   <i class="fa fa-bell-o"></i>
                 </a>
@@ -98,8 +98,8 @@
                     Notifications
                   </li>
                   <li class="divider"></li>
-                  <li>
-                    <a href="#">Server Down!</a>
+                  <li ng-repeat="n in notifications">
+                    <a href="#">{{n.msg}} from {{n.from}}</a>
                   </li>
                 </ul>
               </div>
