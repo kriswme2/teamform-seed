@@ -89,7 +89,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="item dropdown" uib-dropdown ng-controller="NotificationCtrl">
+              <div class="item dropdown" uib-dropdown ng-controller="NotificationCtrl" ng-if="auth.$getAuth()">
                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
                   <i class="fa fa-bell-o"></i>
                 </a>
@@ -98,8 +98,8 @@
                     Notifications
                   </li>
                   <li class="divider"></li>
-                  <li>
-                    <a href="#">{{noww}}!</a>
+                  <li ng-repeat="n in notifications">
+                    <a href="#">{{n.msg}} from {{n.from}}</a>
                   </li>
                 </ul>
               </div>
