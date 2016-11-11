@@ -15,9 +15,6 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
 
     initializeFirebase();
 
-    $scope.formData = {};
-    $scope.data = {};
-
     $scope.input = {
         organizer: "",
         semester: "Not Applicable",
@@ -36,8 +33,8 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     $scope.event = $firebaseArray(ref);
 
     $scope.addEvent = function () {
-        // $scope.input.deadline = $scope.data.Date;
-        $scope.input.regDate = new Date().toString();
+        $scope.input.deadline = $scope.dt.getTime();
+        $scope.input.regDate = new Date().getTime();
         $scope.event.$add($scope.input);
     }
 
@@ -56,5 +53,33 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         if ($scope.input.minMem < 1)
             $scope.input.minMem = 1;
     }
+
+    $scope.today = function () {
+        $scope.dt = new Date();
+    };
+    $scope.today();
+
+    $scope.clear = function () {
+        $scope.dt = null;
+    };
+
+    $scope.dateOptions = {
+        formatYear: 'yy',
+        maxDate: new Date(2020, 5, 22),
+        minDate: new Date(),
+        startingDay: 1
+    };
+
+    $scope.open = function () {
+        $scope.popup.opened = true;
+    };
+
+    $scope.setDate = function (year, month, day) {
+        $scope.dt = new Date(year, month, day);
+    };
+
+    $scope.popup = {
+        opened: false
+    };
 
 });
