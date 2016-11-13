@@ -1,12 +1,8 @@
 angular
   .module('teamform')
-  .controller("NotificationCtrl",["$scope", "$timeout", "Notification","User",
+  .controller("NotificationCtrl",["$scope", "$timeout", "Notification",
 
-  function($scope,$timeout,Notification,User) {
-    var tasks = User.getProfile("7jiVqUTaNGh8m1q0XKxX4EyacOm1");
-    tasks.$bindTo($scope, "uuuu").then(function(tasks){
-      console.log($scope.uuuu);
-    });
+  function($scope,$timeout,Notification) {
     $scope.notifications = Notification.list("bb");
 
     //Notification.send("aa", "bb", "4434");
