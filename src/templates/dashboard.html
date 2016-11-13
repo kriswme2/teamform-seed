@@ -73,9 +73,9 @@
 		</rd-widget>
 
 		<br>
-		<span>
-			<form onsubmit=sendMessage()>
-				<input id="message-box" type="text" class="form-control message-input-box" placeholder="Type your message here">
+		<span ng-controller="ChatroomCtrl">
+			<form ng-submit="sendMessage()">
+				<input id="message-box" type="text" class="form-control message-input-box" placeholder="Type your message here" ng-model = "message">
 			</form>
 		</span>
 
