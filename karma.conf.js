@@ -15,6 +15,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'src/components/angular/angular.min.js',
+      'angular-ui-router/release/angular-ui-router.min.js',
+      'src/components/angular-cookies/angular-cookies.min.js',
+      'src/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+      'https://www.gstatic.com/firebasejs/3.5.3/firebase.js',
+      'https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js',
+      'src/js/module.js',
+      'src/js/routes.js',
       'src/js/**/*.js'
     ],
 
