@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="Teams">
+
+<head>
+
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+    <script type="text/javascript" src="js/firebase.js" charset="UTF-8"></script>
+
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
+
+</head>
+
+<body>
+    <div ng-controller="TeamsCtrl" class="container">
+        <form class="col-md-6">
+            <div class="form-group">
+                <label>Team Name:</label>
+                <input type="text" class="form-control" placeholder="eg. Team Testing" ng-model="input.teamName" required>
+            </div>
+
+            <div class="form-group">
+                <label>Number of Member(s):</label>
+                <select class="form-control" ng-model="selector.selected" ng-options="o as o for o in selector.options"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Tags:</label><br>
+                <select multiple data-role="tagsinput">
+                    <option value="Amsterdam">Amsterdam</option>
+                    <option value="Washington">Washington</option>
+                    <option value="Sydney">Sydney</option>
+                    <option value="Beijing">Beijing</option>
+                    <option value="Cairo">Cairo</option>
+                </select>
+            </div>
+
+            <input type="button" class="btn btn-default" value="Submit" ng-click="addTeam()">
+
+        </form>
+    </div>
+</body>
+
+<footer>
+
+    <link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="components/bootstrap-tagsinput/bootstrap-tagsinput.css">
+    <script type="text/javascript" src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="components/jQuery/dist/jQuery.min.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-2.2.0.min.js"></script>
+    <script type="text/javascript" src="js/leaderform.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="components/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript" src="components/bootstrap-tagsinput/bootstrap-tagsinput-angular.min.js"></script>
+
+</footer>
+
+</html>
