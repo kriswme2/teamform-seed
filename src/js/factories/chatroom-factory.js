@@ -17,7 +17,8 @@ angular
         $newPost.from = Auth.$getAuth().uid;
         $newPost.msg = $msg;
         $newPost.timestamp = firebase.database.ServerValue.TIMESTAMP;
-        $firebaseArray(currentRoomRef).$add($newPost);
+        var post = currentRoomRef.push();
+        post.setWithPriority($newPost, firebase.database.ServerValue.TIMESTAMP);
       }
     };
 
