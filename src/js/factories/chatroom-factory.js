@@ -18,16 +18,6 @@ angular
         $newPost.msg = $msg;
         $newPost.timestamp = firebase.database.ServerValue.TIMESTAMP;
         $firebaseArray(currentRoomRef).$add($newPost);
-      },
-      list: function(){
-        if (!currentRoom || !currentRoomRef)
-          return false;
-
-        $posts = [];
-        currentRoomRef.on("child_added", function(snapshot) {
-          $posts.push(snapshot.val());
-        });
-        return $posts;
       }
     };
 
