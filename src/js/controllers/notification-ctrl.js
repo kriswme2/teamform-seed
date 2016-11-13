@@ -3,10 +3,10 @@ angular
   .controller("NotificationCtrl",["$scope", "$timeout", "Notification","User",
 
   function($scope,$timeout,Notification,User) {
-    var tasks = User.getProfile("7jiVqUTaNGh8m1q0XKxX4EyacOm1");
-    tasks.$bindTo($scope, "uuuu").then(function(tasks){
-      console.log($scope.uuuu);
-    });
+    // var tasks = User.getProfile("7jiVqUTaNGh8m1q0XKxX4EyacOm1");
+    // tasks.$bindTo($scope, "uuuu").then(function(tasks){
+    //   console.log($scope.uuuu);
+    // });
     $scope.notifications = Notification.list("bb");
 
     //Notification.send("aa", "bb", "4434");
