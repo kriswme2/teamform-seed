@@ -10,7 +10,7 @@ angular
         currentRoomRef = ref.child($target);
       },
       send: function($msg){
-        if (!currentRoom || !currentRoomRef || $msg.trim().length)
+        if (!currentRoom || !currentRoomRef || !$msg.trim().length)
           return false;
 
         $newPost = {};
