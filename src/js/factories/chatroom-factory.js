@@ -8,6 +8,7 @@ angular
       chroom: function($target){
         currentRoom = $target;
         currentRoomRef = ref.child($target);
+        return currentRoomRef;
       },
       send: function($msg){
         if (!currentRoom || !currentRoomRef || !$msg.trim().length)

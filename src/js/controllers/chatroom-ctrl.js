@@ -1,10 +1,9 @@
 angular
   .module('teamform')
-  .controller("ChatroomCtrl",["$scope", "$timeout", "Chatroom",
+  .controller("ChatroomCtrl",["$scope", "$timeout", "$firebaseArray", "Chatroom",
 
-  function($scope,$timeout,Chatroom) {
-    Chatroom.chroom("a");
-    Chatroom.send("haha");
-    $scope.posts = Chatroom.list();
+  function($scope,$timeout,$firebaseArray,Chatroom) {
+    var currentRoomRef = Chatroom.chroom("a");
+    $scope.posts = $firebaseArray(currentRoomRef);
   }
 ]);
