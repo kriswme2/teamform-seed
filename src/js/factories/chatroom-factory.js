@@ -2,6 +2,10 @@ angular
   .module('teamform')
   .factory("Chatroom", ["firebase", "$firebaseArray", "Auth",function(firebase,$firebaseArray,Auth) {
     var ref = firebase.database().ref("chatrooms");
+    var norm = new firebase.utils.NormalizedRecord(
+       fb.child('chatrooms'),
+       [fb.child('users'), 'users', 'chatrooms.user']
+    );
     var currentRoom = null;
     var currentRoomRef = null;
     var Chatroom = {
