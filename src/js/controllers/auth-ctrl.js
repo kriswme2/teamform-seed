@@ -4,9 +4,9 @@
 
 angular
   .module('teamform')
-  .controller("AuthCtrl", ["$scope", "$firebaseAuth", "$state", "Auth",
+  .controller("AuthCtrl", ["$scope", "$firebaseAuth", "$state", "Auth", "User",
 
-  function($scope, $firebaseAuth, $state, Auth) {
+  function($scope, $firebaseAuth, $state, Auth, User) {
     $scope.auth = Auth;
     $scope.email = null;
     $scope.password = null;
@@ -21,6 +21,8 @@ angular
       $firebaseAuth().$signInWithEmailAndPassword($scope.email, $scope.password).then(function(firebaseUser) {
         //success
         $scope.firebaseUser = firebaseUser;
+        User.setCurrentProfile();
+        User.updateProfile();
       }).catch(function(error) {
         // Handle Errors here.
         $scope.errorCode = error.code;
@@ -45,6 +47,8 @@ angular
       $firebaseAuth().$signInWithPopup( provider ).then(function(firebaseUser) {
         //success
         $scope.firebaseUser = firebaseUser;
+        User.setCurrentProfile();
+        User.updateProfile();
       }).catch(function(error) {
         // Handle Errors here.
         $scope.errorCode = error.code;
