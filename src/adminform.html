@@ -14,6 +14,12 @@
 	<!-- AngularFire -->
 	<script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
 
+	<!-- ngTagsInput -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.bootstrap.min.css"
+	/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.js"></script>
+
 </head>
 
 <body>
@@ -102,6 +108,11 @@
 			<div class="form-group">
 				<label>Description:</label>
 				<textarea class="form-control" rows="5" placeholder="Add descriptions here..." ng-model="input.desc"></textarea>
+			</div>
+
+			<div class="form-group">
+				<label>Tags:</label><br>
+				<tags-input ng-model="input.tags"></tags-input>
 			</div>
 
 			<input type="button" class="btn btn-default" value="Submit" ng-click="addEvent()">

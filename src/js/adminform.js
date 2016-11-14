@@ -1,4 +1,4 @@
-var app = angular.module("Events", ["firebase", "ui.bootstrap"]);
+var app = angular.module("Events", ["firebase", "ui.bootstrap", "ngTagsInput"]);
 
 app.controller("EventsCtrl", function ($scope, $firebaseArray) {
 
@@ -16,6 +16,7 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         privacy: "public",
         desc: "",
         createDate: null,
+        tags: []
     }
 
     var ref = firebase.database().ref("Events");
