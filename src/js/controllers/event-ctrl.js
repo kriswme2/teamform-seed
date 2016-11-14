@@ -1,10 +1,11 @@
-var app = angular.module("teamform", ["firebase", "ui.bootstrap", "ngTagsInput"]);
+angular
+    .module('teamform')
+    .controller("EventCtrl", ['$scope', '$firebase', 'ui.bootstrap', 'ngTagsInput', EventCtrl]);
 
-app.controller("EventsCtrl", function ($scope, $firebaseArray) {
-
-    initializeFirebase();
+function EventCtrl($scope, $firebaseArray) {
 
     $scope.input = {
+        admin: null,
         organizer: "",
         semester: "Not Applicable",
         course: "",
@@ -19,11 +20,12 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         tags: []
     }
 
-    var userId = 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1';
+    var userId = firebase.auth().currentUser.uid;
     var refPath = '/users/' + userId + '/events';
     var ref = firebase.database().ref(refPath);
 
     $scope.addEvent = function () {
+        $scope.input.admin = userId;
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
         ref.push($scope.input);
@@ -72,5 +74,4 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     $scope.popup = {
         opened: false
     };
-
-});
+}
