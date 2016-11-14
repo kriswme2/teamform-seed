@@ -1,15 +1,4 @@
-function initializeFirebase() {
-    var config = {
-        apiKey: "AIzaSyBkpMprscaor1-pR8n8MkAJxM4AXlt0ZAs",
-        authDomain: "comp3111-group-project.firebaseapp.com",
-        databaseURL: "https://comp3111-group-project.firebaseio.com",
-        storageBucket: "comp3111-group-project.appspot.com",
-        messagingSenderId: "857402819132"
-    };
-    firebase.initializeApp(config);
-}
-
-var app = angular.module("Events", ["firebase", "ui.bootstrap"]);
+var app = angular.module("Events", ["firebase", "ui.bootstrap", "ngTagsInput"]);
 
 app.controller("EventsCtrl", function ($scope, $firebaseArray) {
 
@@ -26,7 +15,8 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         minMem: 1,
         privacy: "public",
         desc: "",
-        regDate: null
+        createDate: null,
+        tags: []
     }
 
     var ref = firebase.database().ref("Events");
@@ -34,7 +24,7 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
 
     $scope.addEvent = function () {
         $scope.input.deadline = $scope.dt.getTime();
-        $scope.input.regDate = new Date().getTime();
+        $scope.input.createDate = new Date().getTime();
         $scope.event.$add($scope.input);
     }
 
