@@ -25,6 +25,7 @@ app.controller("TeamsCtrl", function ($scope, $firebaseObject, $firebaseArray) {
             for (var i = $scope.getEvent.minMem; i <= $scope.getEvent.maxMem; i++)
                 $scope.selector.options.push(i);
         }
+        $scope.$apply();
     });
 
     $scope.addTeam = function () {
