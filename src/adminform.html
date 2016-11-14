@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html ng-app="Events">
+
+<head>
+
+	<!-- Angular -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+
+	<!-- AngularFire -->
+	<script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
+
+</head>
+
+<body>
+	<div ng-controller="EventsCtrl" class="container">
+		<form class="col-md-6">
+
+			<div class="form-group">
+				<label>Organizer:</label>
+				<input type="text" class="form-control" placeholder="eg. HKUST" ng-model="input.organizer" required>
+			</div>
+
+			<div class="form-group">
+				<label>Semester:</label><br>
+				<div class="radio-inline">
+					<label><input type="radio" name="semester" value="Not Applicable" ng-model="input.semester" checked>Not Applicable</label>
+				</div>
+				<div class="radio-inline">
+					<label><input type="radio" name="semester" value="Spring" ng-model="input.semester">Spring</label>
+				</div>
+				<div class="radio-inline">
+					<label><input type="radio" name="semester" value="Summer" ng-model="input.semester">Summer</label>
+				</div>
+				<div class="radio-inline">
+					<label><input type="radio" name="semester" value="Fall" ng-model="input.semester">Fall</label>
+				</div>
+				<div class="radio-inline">
+					<label><input type="radio" name="semester" value="Winter" ng-model="input.semester">Winter</label>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label>Course:</label>
+				<input type="text" class="form-control" placeholder="eg. COMP3111" ng-model="input.course">
+			</div>
+
+			<div class="form-group">
+				<label>Event Title:</label>
+				<input type="text" class="form-control" placeholder="eg. COMP3111 Group Project" ng-model="input.title" required>
+			</div>
+
+			<div class="form-group">
+				<label>Deadline of Team Forming:</label>
+				<p class="input-group">
+					<input type="text" class="form-control" uib-datepicker-popup="dd-MMM-yyyy" ng-model="dt" is-open="popup.opened" datepicker-options="dateOptions"
+						ng-required="true" close-text="Close" />
+					<span class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="open()">
+							<i class="glyphicon glyphicon-calendar"></i>
+						</button>
+					</span>
+				</p>
+			</div>
+
+			<div class="form-group">
+				<label>Number of Team Limit:</label>
+				<input type="text" class="form-control" placeholder="eg. 10" ng-model="input.numOfTeam">
+			</div>
+
+			<div class="form-group">
+				<label>Maximum Team Members:  <span class="badge">{{input.maxMem}}</span></label>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default" ng-click="editMaxMem(1)"><span class="glyphicon glyphicon-plus"></span></button>
+					<button type="button" class="btn btn-default" ng-click="editMaxMem(-1)"><span class="glyphicon glyphicon-minus"></span></button>
+				</div>
+				</br>
+				</br>
+				<label>Minimum Team Members:  <span class="badge">{{input.minMem}}</span></label>
+				<div class="btn-group" role="group">
+					<button type="button" class="btn btn-default" ng-click="editMinMem(1)"><span class="glyphicon glyphicon-plus"></span></button>
+					<button type="button" class="btn btn-default" ng-click="editMinMem(-1)"><span class="glyphicon glyphicon-minus"></span></button>
+				</div>
+			</div>
+
+			<div class "form-group">
+				<label>Privacy Settings:</label></br>
+				<div class="radio-inline">
+					<label><input type="radio" name="privacy" value="public" ng-model="input.privacy" checked>Public event</label>
+				</div>
+				<div class="radio-inline">
+					<label><input type="radio" name="privacy" value="private" ng-model="input.privacy">Private event</label>
+				</div>
+			</div>
+
+			</br>
+
+			<div class="form-group">
+				<label>Description:</label>
+				<textarea class="form-control" rows="5" placeholder="Add descriptions here..." ng-model="input.desc"></textarea>
+			</div>
+
+			<input type="button" class="btn btn-default" value="Submit" ng-click="addEvent()">
+		</form>
+	</div>
+</body>
+
+<footer>
+	<!--Bootstrap 3.3.7-->
+	<link rel="stylesheet" type="text/css" href="components/bootstrap/dist/css/bootstrap.min.css">
+	<script type="text/javascript" src="components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="js/ui-bootstrap-tpls-2.2.0.min.js"></script>
+	<script type="text/javascript" src="js/adminform.js" charset="UTF-8"></script>
+</footer>
+
+</html>

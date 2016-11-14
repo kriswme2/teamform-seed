@@ -54,40 +54,105 @@
 <div class="row">
 	<div class="col-lg-8">
 		<rd-widget>
-      		<rd-widget-header icon="fa-tasks" title="Servers">
-				<a href="#">Manage</a>
-      		</rd-widget-header>
-      		<rd-widget-body classes="medium no-padding">
+			<rd-widget-header icon="fa-tasks" title="Announcement">
+				<!-- <a href="#">Manage</a> -->
+			</rd-widget-header>
+			<rd-widget-body classes="medium no-padding">
 				<div class="table-responsive">
 					<table class="table">
 						<tbody ng-controller="ChatroomCtrl">
-							<tr ng-repeat="p in posts"><td>{{p.from}}</td><td>{{p.msg}}</td><td>{{p.timestamp | date:'medium'}}</td></tr>
+							<tr ng-repeat="p in posts">
+								<td>{{p.from}}</td>
+								<td>{{p.msg}}</td>
+								<td>{{p.timestamp | date:'medium'}}</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
 			</rd-widget-body>
 		</rd-widget>
+
+		<br>
+		<span ng-controller="ChatroomCtrl">
+			<form ng-submit="sendMessage()">
+				<input id="message-box" type="text" class="form-control message-input-box" placeholder="Type your message here" ng-model = "message">
+			</form>
+		</span>
+
 	</div>
+
+
+
 	<div class="col-lg-4">
 		<rd-widget>
-			<rd-widget-header icon="fa-users" title="Users">
-				<input type="text" placeholder="Search" class="form-control input-sm" />
+			<rd-widget-header icon="fa-users" title="Teams">
+				<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
 			</rd-widget-header>
 			<rd-widget-body classes="medium no-padding">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<tr><th class="text-center">ID</th><th>Username</th><th>Role</th><th>Account</th></tr>
+							<tr>
+								<th class="text-center">Team</th>
+								<th>Username</th>
+								<th>Role</th>
+								<!-- <th>Account</th> -->
+							</tr>
 						</thead>
 						<tbody>
-							<tr><td class="text-center">1</td><td>Joe Bloggs</td><td>Super Admin</td><td>AZ23045</td></tr>
-							<tr><td class="text-center">2</td><td>Timothy Hernandez</td><td>Admin</td><td>AU24783</td></tr>
-							<tr><td class="text-center">3</td><td>Joe Bickham</td><td>User</td><td>AM23781</td></tr>
+							<tr>
+								<td class="text-center">1</td>
+								<td>Joe Bloggs</td>
+								<td>Super Admin</td>
+								<!-- <td>AZ23045</td> -->
+							</tr>
+							<tr>
+								<td class="text-center">1</td>
+								<td>Timothy Hernandez</td>
+								<td>Admin</td>
+								<!-- <td>AU24783</td> -->
+							</tr>
+							<tr>
+								<td class="text-center">2</td>
+								<td>Joe Bickham</td>
+								<td>User</td>
+								<!-- <td>AM23781</td> -->
+							</tr>
+							<tr>
+								<td class="text-center">2</td>
+								<td>Joe Bickham</td>
+								<td>User</td>
+								<!-- <td>AM23781</td> -->
+							</tr>
+							<tr>
+								<td class="text-center">2</td>
+								<td>Joe Bickham</td>
+								<td>User</td>
+								<!-- <td>AM23781</td> -->
+							</tr>
+							<tr>
+								<td class="text-center">3</td>
+								<td>Joe Bickham</td>
+								<td>User</td>
+								<!-- <td>AM23781</td> -->
+							</tr>
+							<tr>
+								<td class="text-center">3</td>
+								<td>Joe Bickham</td>
+								<td>User</td>
+								<!-- <td>AM23781</td> -->
+							</tr>
+							<tr>
+								<td class="text-center">3</td>
+								<td>Joe Bickham</td>
+								<td>User</td>
+								<!-- <td>AM23781</td> -->
+							</tr>
 						</tbody>
 					</table>
-        		</div>
+				</div>
 			</rd-widget-body>
-		<rd-widget>
+			<rd-widget>
 	</div>
 </div>
 
