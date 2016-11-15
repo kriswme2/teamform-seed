@@ -11,6 +11,7 @@ function UserCtrl($scope, $cookieStore, Auth) {
   $scope.displayName = firebaseUser.displayName;
   $scope.email = firebaseUser.email;
   $scope.message = null;
+  $scope.newPassword = null;
 
   $scope.updateProfile = function () {
     firebaseUser.updateProfile({
@@ -19,6 +20,21 @@ function UserCtrl($scope, $cookieStore, Auth) {
       // Profile updated successfully!
     }, function (error) {
       // An error happened.
+      $scope.errorMessage = error.message;
+    });
+  };
+
+  $scope.changePassword = function() {
+    $scope.message = '';
+    $scope.errorMessage = '';
+    if($scope.newPassword !== $scope.confirmPassword) {
+      $scope.errorMessage = "Confirm Password is different from new password";
+      return;
+    }
+
+    Auth.$updatePassword($scope.newPassword).then(function() {
+      $scope.message = "Password successfully changed!";
+    }).catch(function(error) {
       $scope.errorMessage = error.message;
     });
   };
