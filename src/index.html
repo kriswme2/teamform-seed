@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="en" ng-app="teamform">
+
 <head>
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Teamform</title>
+  <title>Teamform</title>
 </head>
+
 <body ng-controller="MasterCtrl">
   <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
 
@@ -36,12 +38,19 @@
           <!-- <span class="menu-icon fa fa-table"></span> -->
         </li>
         <li class="sidebar-list">
-            <a href="/tables">Event 3 </a>
-            <!-- <span class="menu-icon fa fa-table"></span> -->
+          <a href="/tables">Event 3 </a>
+          <!-- <span class="menu-icon fa fa-table"></span> -->
         </li>
         <li class="sidebar-list">
-            <a href="/tables">Event 4 </a>
-            <!-- <span class="menu-icon fa fa-table"></span> -->
+          <a href="/tables">Event 4 </a>
+          <!-- <span class="menu-icon fa fa-table"></span> -->
+        </li>
+        <li class="sidebar-title"><span>Forms (Change Me)</span></li>
+        <li class="sidebar-list">
+          <a href="/admin/event">Admin form</a>
+        </li>
+        <li class="sidebar-list">
+          <a href="/leader/event">Leader form</a>
         </li>
       </ul>
       <div class="sidebar-footer">
@@ -99,7 +108,7 @@
                 </ul>
               </div>
               <div class="item dropdown" uib-dropdown ng-controller="NotificationCtrl" ng-if="auth.$getAuth()">
-               <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
                   <i class="fa fa-bell-o"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -117,7 +126,7 @@
               <div class="page">
                 Teamform
               </div>
-<!--               <div class="breadcrumb-links">
+              <!--               <div class="breadcrumb-links">
                 {{$state.this}}
               </div> -->
             </div>
@@ -128,9 +137,12 @@
         <!-- Main Content -->
         <div ui-view></div>
 
-      </div><!-- End Page Content -->
-    </div><!-- End Content Wrapper -->
-  </div><!-- End Page Wrapper -->
+      </div>
+      <!-- End Page Content -->
+    </div>
+    <!-- End Content Wrapper -->
+  </div>
+  <!-- End Page Wrapper -->
 
   <!-- STYLES -->
   <!-- build:css lib/css/main.min.css -->
@@ -140,6 +152,11 @@
   <!-- endbuild -->
   <link rel="stylesheet" href="css/teamform.min.css">
 
+  <!-- ngTagsInput -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.bootstrap.min.css"
+  />
+
   <!-- SCRIPTS -->
   <!-- build:js lib/js/main.min.js -->
   <script type="text/javascript" src="components/angular/angular.min.js"></script>
@@ -148,6 +165,10 @@
   <script type="text/javascript" src="components/angular-ui-router/release/angular-ui-router.min.js"></script>
   <!-- endbuild -->
 
+  <!-- ngTagsInput -->
+  <script src="components/ng-tags-input/ng-tags-input.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="components/ng-tags-input/ng-tags-input.min.css">
+
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
   <!-- AngularFire -->
@@ -155,16 +176,20 @@
   <script>
   // Initialize Firebase
   var config = {
-  apiKey: "AIzaSyBKPa_aZAr7C23kkYli_wPPSH069aYLRIM",
-  authDomain: "lab-firebase-aefba.firebaseapp.com",
-  databaseURL: "https://lab-firebase-aefba.firebaseio.com",
-  storageBucket: "lab-firebase-aefba.appspot.com",
-  messagingSenderId: "470761339277"
+    apiKey: "AIzaSyBKPa_aZAr7C23kkYli_wPPSH069aYLRIM",
+    authDomain: "lab-firebase-aefba.firebaseapp.com",
+    databaseURL: "https://lab-firebase-aefba.firebaseio.com",
+    storageBucket: "lab-firebase-aefba.appspot.com",
+    messagingSenderId: "470761339277"
   };
   firebase.initializeApp(config);
   </script>
 
+  <!-- ngTagsInput -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.js"></script>
+
   <!-- Custom Scripts -->
   <script type="text/javascript" src="js/dashboard.min.js"></script>
 </body>
+
 </html>

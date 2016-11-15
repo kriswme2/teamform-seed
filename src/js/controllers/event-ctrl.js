@@ -1,19 +1,8 @@
-function initializeFirebase() {
-    var config = {
-        apiKey: "AIzaSyBkpMprscaor1-pR8n8MkAJxM4AXlt0ZAs",
-        authDomain: "comp3111-group-project.firebaseapp.com",
-        databaseURL: "https://comp3111-group-project.firebaseio.com",
-        storageBucket: "comp3111-group-project.appspot.com",
-        messagingSenderId: "857402819132"
-    };
-    firebase.initializeApp(config);
-}
+angular
+    .module('teamform')
+    .controller("EventsCtrl", ['$scope', 'Auth', EventsCtrl]);
 
-var app = angular.module("Events", ["firebase", "ui.bootstrap"]);
-
-app.controller("EventsCtrl", function ($scope, $firebaseArray) {
-
-    initializeFirebase();
+function EventsCtrl($scope, Auth) {
 
     $scope.input = {
         organizer: "",
@@ -26,17 +15,22 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         minMem: 1,
         privacy: "public",
         desc: "",
-        regDate: null
-    }
+        createDate: null,
+        tags: []
+    };
 
-    var ref = firebase.database().ref("Events");
-    $scope.event = $firebaseArray(ref);
+    var userId = Auth.$getAuth().uid;
+    var eventId = null;
+    var ref = firebase.database().ref('events');
 
     $scope.addEvent = function () {
         $scope.input.deadline = $scope.dt.getTime();
-        $scope.input.regDate = new Date().getTime();
-        $scope.event.$add($scope.input);
-    }
+        $scope.input.createDate = new Date().getTime();
+        eventId = ref.push($scope.input).key;
+        ref.child('teams').child('eventId').push().set({
+            admin: userId
+        });
+    };
 
     $scope.editMaxMem = function (i) {
         $scope.input.maxMem += i;
@@ -44,7 +38,7 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
             $scope.input.maxMem = 1;
         if ($scope.input.maxMem < $scope.input.minMem)
             $scope.input.minMem = $scope.input.maxMem;
-    }
+    };
 
     $scope.editMinMem = function (i) {
         $scope.input.minMem += i;
@@ -52,7 +46,7 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
             $scope.input.maxMem = $scope.input.minMem;
         if ($scope.input.minMem < 1)
             $scope.input.minMem = 1;
-    }
+    };
 
     $scope.today = function () {
         $scope.dt = new Date();
@@ -81,5 +75,4 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     $scope.popup = {
         opened: false
     };
-
-});
+}
