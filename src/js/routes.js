@@ -4,7 +4,7 @@
  */
 angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
     function($locationProvider, $stateProvider, $urlRouterProvider) {
-        
+
         $locationProvider.html5Mode(true);
 
         // For unmatched routes
@@ -28,7 +28,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
 
         var redirectToIndexIfSignedIn = ["Auth", "$state", function(Auth, $state){
             if(Auth.$getAuth()) {
-                $state.go('index');
+                $state.go('index', { "eventID": 'a'});
             }
         }];
 
@@ -62,6 +62,12 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             })
             .state('index', {
                 url: '/',
+                templateUrl: 'templates/dashboard.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('event', {
+                url: '/event/:eventID',
                 templateUrl: 'templates/dashboard.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
