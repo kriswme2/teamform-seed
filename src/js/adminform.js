@@ -20,6 +20,7 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     }
 
     var userId = 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1';
+    var eventId = '-KWbiYkhG15C2-k5TaqI'
     var refPath = '/users/' + userId + '/events';
     var ref = firebase.database().ref(refPath);
 
@@ -27,6 +28,29 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
         ref.push($scope.input);
+    }
+
+    $scope.loadEvent = function () {
+        var refPath = 'events/' + eventId;
+        firebase.database().ref(refPath).once("value").then(function (data) {
+            if (data.val() !== null) {
+                var eventData = data.val();
+                $scope.input = {
+                    organizer: eventData.organizer,
+                    semester: eventData.semester,
+                    course: eventData.course,
+                    title: eventData.title,
+                    numOfTeam: eventData.numOfTeam,
+                    maxMem: eventData.maxMem,
+                    minMem: eventData.minMem,
+                    privacy: eventData.privacy,
+                    desc: eventData.desc,
+                    tags: eventData.tags
+                };
+                $scope.dt = new Date(eventData.deadline);
+            }
+            $scope.$apply();
+        });
     }
 
     $scope.editMaxMem = function (i) {
