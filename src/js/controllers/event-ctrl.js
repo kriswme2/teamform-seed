@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("EventsCtrl", ['$scope', 'Auth', EventsCtrl]);
+    .controller("EventsCtrl", ['$scope', 'Auth', "$firebaseArray",EventsCtrl]);
 
-function EventsCtrl($scope, Auth) {
+function EventsCtrl($scope, Auth, $firebaseArray) {
 
     $scope.input = {
         organizer: "",
@@ -31,6 +31,8 @@ function EventsCtrl($scope, Auth) {
             admin: userId
         });
     };
+
+    $scope.events = $firebaseArray(firebase.database().ref('events'));
 
     $scope.editMaxMem = function (i) {
         $scope.input.maxMem += i;
