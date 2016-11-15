@@ -18,10 +18,23 @@ describe('AlertsCtrl', function() {
 		  it('alerts', function() {
         
           scope.addAlert();
-          expect(scope).toHaveBeenCalled();
+          expect(scope.alerts).toHaveBeenCalled();
 
 		  });
 
+      it('addAlert', function(){
+
+          expect(scope.alerts.push).toHaveBeenCalled();
+
+
+      });
+
+      it('closeAlert', function(){
+
+        expect(scope.alerts.splice).toHaveBeenCalled();
+        
+
+      });
 
 
 		  

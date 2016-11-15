@@ -1,8 +1,8 @@
-var app = angular.module("Events", ["firebase", "ui.bootstrap", "ngTagsInput"]);
+angular
+    .module('teamform')
+    .controller("EventsCtrl", ['$scope', 'Auth', EventsCtrl]);
 
-app.controller("EventsCtrl", function ($scope, $firebaseArray) {
-
-    initializeFirebase();
+function EventsCtrl($scope, Auth) {
 
     $scope.input = {
         organizer: "",
@@ -17,16 +17,20 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         desc: "",
         createDate: null,
         tags: []
-    }
+    };
 
-    var ref = firebase.database().ref("Events");
-    $scope.event = $firebaseArray(ref);
+    var userId = Auth.$getAuth().uid;
+    var eventId = null;
+    var ref = firebase.database().ref('events');
 
     $scope.addEvent = function () {
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
-        $scope.event.$add($scope.input);
-    }
+        eventId = ref.push($scope.input).key;
+        ref.child('teams').child('eventId').push().set({
+            admin: userId
+        });
+    };
 
     $scope.editMaxMem = function (i) {
         $scope.input.maxMem += i;
@@ -34,7 +38,7 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
             $scope.input.maxMem = 1;
         if ($scope.input.maxMem < $scope.input.minMem)
             $scope.input.minMem = $scope.input.maxMem;
-    }
+    };
 
     $scope.editMinMem = function (i) {
         $scope.input.minMem += i;
@@ -42,7 +46,7 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
             $scope.input.maxMem = $scope.input.minMem;
         if ($scope.input.minMem < 1)
             $scope.input.minMem = 1;
-    }
+    };
 
     $scope.today = function () {
         $scope.dt = new Date();
@@ -71,5 +75,4 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     $scope.popup = {
         opened: false
     };
-
-});
+}
