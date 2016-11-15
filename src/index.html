@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" ng-app="teamform">
 
 <head>
@@ -22,7 +22,7 @@
         </li>
         <li class="sidebar-title"><span>Please sign in first</span></li>
       </ul>
-      <ul class="sidebar" ng-if="auth.$getAuth()" ng-controller = "EventsCtrl">
+      <ul class="sidebar" ng-if="auth.$getAuth()" ng-controller="EventsCtrl">
         <li class="sidebar-main">
           <a ng-click="toggleSidebar()">
             Teamform
@@ -31,13 +31,13 @@
         </li>
         <li class="sidebar-title"><span>Event</span></li>
 
-        <li class="sidebar-list" ng-repeat = "e in events">
-          <a href="/">{{e.title}} </a>
+        <li class="sidebar-list" ng-repeat="e in events">
+          <a href="/">{{e.title}}</a>
         </li>
-        
+
         <li class="sidebar-title"><span>Forms (Change Me)</span></li>
         <li class="sidebar-list">
-          <a href="/admin/event">Admin form</a>
+          <a href="/admin/event">Create Event</a>
         </li>
         <li class="sidebar-list">
           <a href="/leader/event">Leader form</a>
