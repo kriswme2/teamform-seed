@@ -18,7 +18,7 @@ function EventCtrl($scope, $firebaseArray) {
         desc: "",
         createDate: null,
         tags: []
-    }
+    };
 
     var userId = firebase.auth().currentUser.uid;
     var refPath = '/users/' + userId + '/events';
@@ -29,7 +29,7 @@ function EventCtrl($scope, $firebaseArray) {
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
         ref.push($scope.input);
-    }
+    };
 
     $scope.editMaxMem = function (i) {
         $scope.input.maxMem += i;
@@ -37,7 +37,7 @@ function EventCtrl($scope, $firebaseArray) {
             $scope.input.maxMem = 1;
         if ($scope.input.maxMem < $scope.input.minMem)
             $scope.input.minMem = $scope.input.maxMem;
-    }
+    };
 
     $scope.editMinMem = function (i) {
         $scope.input.minMem += i;
@@ -45,7 +45,7 @@ function EventCtrl($scope, $firebaseArray) {
             $scope.input.maxMem = $scope.input.minMem;
         if ($scope.input.minMem < 1)
             $scope.input.minMem = 1;
-    }
+    };
 
     $scope.today = function () {
         $scope.dt = new Date();

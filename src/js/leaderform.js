@@ -6,7 +6,7 @@ app.controller("TeamsCtrl", function ($scope, $firebaseObject, $firebaseArray) {
 
     $scope.selector = {
         options: [],
-    }
+    };
 
     $scope.input = {
         teamName: '',
@@ -21,7 +21,7 @@ app.controller("TeamsCtrl", function ($scope, $firebaseObject, $firebaseArray) {
     var eventId = '-KWYJg6RIb2lha1r0968';
     var refPath = '/users/' + adminId + '/events/' + eventId;
     retrieveOnceFirebase(firebase, refPath, function (data) {
-        if (data.val() != null) {
+        if (data.val() !== null) {
             $scope.getEvent = data.val();
             $scope.input.teamSize = $scope.getEvent.minMem;
             for (var i = $scope.getEvent.minMem; i <= $scope.getEvent.maxMem; i++)
@@ -45,6 +45,6 @@ app.controller("TeamsCtrl", function ($scope, $firebaseObject, $firebaseArray) {
         var newPath = refPath + '/teams/' + $scope.input.teamName;
         var ref = firebase.database().ref(newPath);
         ref.set(newInput, function () { });
-    }
+    };
 
 });
