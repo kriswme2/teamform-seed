@@ -1,29 +1,17 @@
-<div class="row">
-	<h2 class="text-center">User Profile</h2>
-</div>
+<div ng-controller="UserCtrl">
 
-<div class="row" ng-if="message.length > 0">
-	<div class="alert alert-success col-sm-6 col-sm-offset-3">
-		{{message}}
+	<div class="row">
+		<h2 class="text-center">User Profile</h2>
 	</div>
-</div>
 
-<div class="row" ng-if="errorMessage.length > 0">
-	<div class="alert alert-danger col-sm-6 col-sm-offset-3">
-		{{errorMessage}}<br>
-		<span ng-if="errorCode.length>0">Error code: {{errorCode}}</span>
-	</div>
-</div>
-
-<div class="container" ng-controller="UserCtrl">
 	<div class="row profile-row">
-		<div class="col-xs-3">
-			<i class="fa fa-3x fa-envelope pull-right"></i> 
+		<div class="col-sm-3 col-xs-12 profile-icon">
+			<i class="fa fa-3x fa-envelope"></i> 
 		</div>
-		<div class="col-xs-3" style="text-align:center">
+		<div class="col-sm-3 col-xs-3" style="text-align:center">
 			Email:
 		</div>
-		<div class="col-xs-6">
+		<div class="col-sm-6 col-xs-9">
 			{{email}}
 		</div>
 	</div>
@@ -31,13 +19,13 @@
 	<hr style="background:lightgray;height:2px">
 
 	<div class="row profile-row">
-		<div class="col-xs-3">
-			<i class="fa fa-3x fa-user pull-right"></i> 
+		<div class="col-sm-3 col-xs-12 profile-icon">
+			<i class="fa fa-3x fa-user"></i> 
 		</div>
-		<div class="col-xs-3" style="text-align:center">
+		<div class="col-sm-3 col-xs-3" style="text-align:center">
 			Name:
 		</div>
-		<div class="col-xs-6">
+		<div class="col-sm-6 col-xs-9">
 			{{displayName}}
 		</div>
 	</div>
@@ -45,17 +33,31 @@
 	<hr style="background:lightgray;height:2px">
 
 	<div class="row profile-row">
-		<div class="col-xs-3">
-			<i class="fa fa-3x fa-key pull-right"></i> 
+		<div class="col-sm-3 col-xs-12 profile-icon">
+			<i class="fa fa-3x fa-key"></i> 
 		</div>
-		<div class="col-xs-3" style="text-align:center">
+		<div class="col-sm-3 col-xs-12" style="text-align:center">
 			Password:
 		</div>
-		<div class="col-xs-6">
-			<div class="alert alert-info">
-				Your password is managed by your ((provider))
+		<div class="col-sm-5 col-xs-12">
+			<div class="alert alert-info" ng-if="message.length > 0">
+				{{message}}
 			</div>
-			<button class="btn btn-info">(Undone) Change password</button>
+			<div class="alert alert-danger" ng-if="errorMessage.length > 0">
+				{{errorMessage}}
+				<span ng-if="errorCode.length>0">Error code: {{errorCode}}</span>
+			</div>
+			<form ng-submit="changePassword()">
+			  <div class="form-group">
+			    <label class="sr-only" for="new_password">New Password</label>
+			    <input type="password" class="form-control" id="new_password" placeholder="New password" ng-model="newPassword" required>
+			  </div>
+			  <div class="form-group">
+			    <label class="sr-only" for="confirm_password">Confirm Password</label>
+			    <input type="password" class="form-control" id="confirm_password" placeholder="Confirm new Password" ng-model="confirmPassword" required>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Change password</button>
+			</form>
 		</div>
 	</div>
 
