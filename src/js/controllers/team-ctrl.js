@@ -20,7 +20,7 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
     $scope.input.member.push(userId);
 
     var refPath = 'events/' + eventId;
-    firebase.database().ref(refPath).once("value").then(function (data) {
+    firebase.database().ref(refPath).once("value").then(function(data) {
         if (data.val() !== null) {
             $scope.getEvent = data.val();
             $scope.input.teamSize = $scope.getEvent.minMem;
@@ -30,7 +30,7 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
         $scope.$apply();
     });
 
-    $scope.addTeam = function () {
+    $scope.addTeam = function() {
         var newInput = {
             'leaderId': userId,
             'teamSize': $scope.input.teamSize,
@@ -41,5 +41,20 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
         var newPath = 'teams/' + eventId + '/' + $scope.input.teamName;
         var ref = firebase.database().ref(newPath);
         ref.set(newInput);
+    };
+
+    $scope.loadTeam = function(eId, tName) {
+        var tPath = 'teams/' + eId + '/' + tName;
+        firebase.database().ref(tPath).once('value').then(function(data) {
+            if (data.val() !== null) {
+                var tData = data.val();
+                $scope.input = {
+                    teamName: tName,
+                    teamSize: tData.teamSize,
+                    tags: tData.tags
+                }
+            }
+            $scope.$apply();
+        });
     };
 }

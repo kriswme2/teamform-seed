@@ -29,24 +29,24 @@ function EventsCtrl($scope, Auth) {
         eventId = ref.push($scope.input).key;
     };
 
-    $scope.loadEvent = function(eventId) {
-        var refPath = 'events/' + eventId;
-        firebase.database().ref(refPath).once("value").then(function(data) {
+    $scope.loadEvent = function(eId) {
+        var ePath = 'events/' + eId;
+        firebase.database().ref(ePath).once("value").then(function(data) {
             if (data.val() !== null) {
-                var eventData = data.val();
+                var eData = data.val();
                 $scope.input = {
-                    organizer: eventData.organizer,
-                    semester: eventData.semester,
-                    course: eventData.course,
-                    title: eventData.title,
-                    numOfTeam: eventData.numOfTeam,
-                    maxMem: eventData.maxMem,
-                    minMem: eventData.minMem,
-                    privacy: eventData.privacy,
-                    desc: eventData.desc,
-                    tags: eventData.tags
+                    organizer: eData.organizer,
+                    semester: eData.semester,
+                    course: eData.course,
+                    title: eData.title,
+                    numOfTeam: eData.numOfTeam,
+                    maxMem: eData.maxMem,
+                    minMem: eData.minMem,
+                    privacy: eData.privacy,
+                    desc: eData.desc,
+                    tags: eData.tags
                 };
-                $scope.dt = new Date(eventData.deadline);
+                $scope.dt = new Date(eData.deadline);
             }
             $scope.$apply();
         });
