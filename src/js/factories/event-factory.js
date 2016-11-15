@@ -1,22 +1,22 @@
 angular
     .module('teamform')
-    .factory("Event", ["firebase", "$firebaseArray", function (firebase, $firebaseArray) {
+    .factory("Event", ["firebase", "$firebaseArray", function(firebase, $firebaseArray) {
         var ref = firebase.database().ref("events");
         var currentEventRef = null;
 
         var Event = {
-            setCurrentEvent: function (eventId) {
+            setCurrentEvent: function(eventId) {
                 currentEventRef = ref.child(eventId);
             },
 
-            getEvent: function (eventId) {
-                ref.child(eventId).once("value", function (data) {
+            getEvent: function(eventId) {
+                ref.child(eventId).once("value", function(data) {
                     console.log(data);
                 });
             },
 
-            updateEvent: function () {
-                currentEventRef.once('value', function (data) {
+            updateEvent: function() {
+                currentEventRef.once('value', function(data) {
                     $event = {};
                     $event.organizer = data.val().organizer;
                     $event.semester = data.val().semester;
@@ -33,7 +33,7 @@ angular
                 });
             },
 
-            newTeam: function (currentEventRef) {
+            newTeam: function(currentEventRef) {
                 $eventId = currentEventRef;
             }
         };
