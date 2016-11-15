@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("EventCtrl", ['$scope', 'firebase', 'Auth', 'ui.bootstrap', 'ngTagsInput', EventCtrl]);
+    .controller("EventsCtrl", ['$scope', 'Auth', EventsCtrl]);
 
-function EventCtrl($scope) {
+function EventsCtrl($scope, Auth) {
 
     $scope.input = {
         organizer: "",
