@@ -2,7 +2,9 @@ var app = angular.module("teamform", ["firebase", 'ngTagsInput']);
 
 app.controller("TeamsCtrl", function ($scope, $firebaseObject, $firebaseArray) {
 
-    refPath = '';
+    initializeFirebase();
+    var userId = 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1';
+    var eventId = '-KWbiYkhG15C2-k5TaqI';
 
     $scope.selector = {
         options: [],
@@ -14,12 +16,9 @@ app.controller("TeamsCtrl", function ($scope, $firebaseObject, $firebaseArray) {
         tags: [],
         member: []
     };
+    $scope.input.member.push(userId);
 
-    initializeFirebase();
-
-    var adminId = 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1';
-    var eventId = '-KWYJg6RIb2lha1r0968';
-    var refPath = '/users/' + adminId + '/events/' + eventId;
+    var refPath = 'events/' + eventId;
     retrieveOnceFirebase(firebase, refPath, function (data) {
         if (data.val() !== null) {
             $scope.getEvent = data.val();
@@ -31,20 +30,15 @@ app.controller("TeamsCtrl", function ($scope, $firebaseObject, $firebaseArray) {
     });
 
     $scope.addTeam = function () {
-
-        $scope.input.member.push(userId);
-
         var newInput = {
-            'leader': 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1',
+            'leaderId': userId,
             'teamSize': $scope.input.teamSize,
             'regData': new Date().getTime(),
             'tags': $scope.input.tags,
             'member': $scope.input.member
         };
-
-        var newPath = refPath + '/teams/' + $scope.input.teamName;
+        var newPath = 'teams/' + eventId + '/' + $scope.input.teamName;
         var ref = firebase.database().ref(newPath);
-        ref.set(newInput, function () { });
+        ref.set(newInput);
     };
-
 });

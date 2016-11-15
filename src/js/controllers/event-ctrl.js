@@ -4,32 +4,29 @@ angular
 
 function EventCtrl($scope) {
 
+    var userId = Auth.$getAuth().uid;
+
     $scope.input = {
         organizer: "",
         semester: "Not Applicable",
         course: "",
         title: "",
-        deadline: "",
         numOfTeam: "",
         maxMem: 4,
         minMem: 1,
         privacy: "public",
         desc: "",
-        createDate: null,
         tags: []
     };
 
-    var userId = Auth.$getAuth().uid;
     var eventId = null;
     var ref = firebase.database().ref('events');
 
     $scope.addEvent = function () {
+        $scope.input.adminId = userId;
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
         eventId = ref.push($scope.input).key;
-        ref.child('teams').child('eventId').push().set({
-            admin: userId
-        });
     };
 
     $scope.editMaxMem = function (i) {

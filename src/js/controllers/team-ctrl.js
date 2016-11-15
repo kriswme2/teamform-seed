@@ -4,6 +4,7 @@ angular
 
 function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
 
+    var userId = Auth.$getAuth().uid;
     var eventId = Event.getEventId();
 
     $scope.selector = {
@@ -16,8 +17,8 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
         tags: [],
         member: []
     };
+    $scope.input.member.push(userId);
 
-    var userId = Auth.$getAuth().uid;
     var refPath = 'events/' + eventId;
     retrieveOnceFirebase(firebase, refPath, function (data) {
         if (data.val() !== null) {
@@ -29,21 +30,16 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
         $scope.$apply();
     });
 
-    $scope.addTeam = function (eventId) {
-
-        $scope.input.member.push(userId);
-
+    $scope.addTeam = function () {
         var newInput = {
-            'leader': userId,
-            'teamName': $scope.input.name,
+            'leaderId': userId,
             'teamSize': $scope.input.teamSize,
             'regData': new Date().getTime(),
             'tags': $scope.input.tags,
             'member': $scope.input.member
         };
-
-        var newPath = refPath + '/Teams/' + eventId;
+        var newPath = 'teams/' + eventId + '/' + $scope.input.teamName;
         var ref = firebase.database().ref(newPath);
-        ref.push(newInput);
+        ref.set(newInput);
     };
 }
