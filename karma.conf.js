@@ -23,7 +23,8 @@ module.exports = function(config) {
       'https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js',
       'src/js/module.js',
       'src/js/routes.js',
-      'src/js/**/*.js'
+      'src/js/**/*.js',
+      'test/**/*.js'
     ],
 
 
@@ -35,13 +36,19 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'src/js/**/*.js': ['coverage']
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
+
+    coverageReporter: {
+      type : 'html',
+      dir : 'coverage/'
+    },
 
 
     // web server port
