@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: 'src',
 
 
     // frameworks to use
@@ -15,15 +15,16 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'src/components/angular/angular.min.js',
-      'angular-ui-router/release/angular-ui-router.min.js',
-      'src/components/angular-cookies/angular-cookies.min.js',
-      'src/components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'https://www.gstatic.com/firebasejs/3.5.3/firebase.js',
-      'https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js',
-      'src/js/module.js',
-      'src/js/routes.js',
-      'src/js/**/*.js',
+      // Do not use minified version here, easier to debug
+      'components/angular/angular.js',
+      'components/angular-ui-router/release/angular-ui-router.js',
+      'components/angular-cookies/angular-cookies.js',
+      'components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'components/firebase/firebase.js',
+      'components/angularfire/angularfire.js',
+      'js/module.js',
+      'js/routes.js',
+      'js/**/*.js',
       'test/**/*.js'
     ],
 
