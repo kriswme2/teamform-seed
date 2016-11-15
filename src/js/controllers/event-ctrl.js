@@ -50,7 +50,7 @@ function EventsCtrl($scope, Auth) {
             }
             $scope.$apply();
         });
-    }
+    };
 
     $scope.editMaxMem = function(i) {
         $scope.input.maxMem += i;

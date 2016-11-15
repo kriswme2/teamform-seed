@@ -52,7 +52,7 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
                     teamName: tName,
                     teamSize: tData.teamSize,
                     tags: tData.tags
-                }
+                };
             }
             $scope.$apply();
         });
