@@ -21,8 +21,6 @@ function EventsCtrl($scope, Auth) {
     };
 
     var eventId = null;
-    var ref = firebase.database().ref('events');
-
     $scope.addEvent = function() {
         $scope.input.adminId = userId;
         $scope.input.deadline = $scope.dt.getTime();
