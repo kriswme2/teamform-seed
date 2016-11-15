@@ -2,31 +2,37 @@ var app = angular.module("teamform", ["firebase", "ui.bootstrap", "ngTagsInput"]
 
 app.controller("EventsCtrl", function ($scope, $firebaseArray) {
 
-    initializeFirebase();
+    initializeFirebase();;
+    var userId = 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1';
 
     $scope.input = {
         organizer: "",
         semester: "Not Applicable",
         course: "",
         title: "",
-        deadline: "",
         numOfTeam: "",
         maxMem: 4,
         minMem: 1,
         privacy: "public",
         desc: "",
-        createDate: null,
         tags: []
     }
 
+<<<<<<< HEAD
     var userId = 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1';
     var eventId = '-KWbiYkhG15C2-k5TaqI'
     var refPath = '/users/' + userId + '/events';
     var ref = firebase.database().ref(refPath);
+=======
+    var eventId = null;
+    var ref = firebase.database().ref('events');
+>>>>>>> origin/adminform
 
     $scope.addEvent = function () {
+        $scope.input.adminId = userId;
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
+<<<<<<< HEAD
         ref.push($scope.input);
     }
 
@@ -52,6 +58,10 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
             $scope.$apply();
         });
     }
+=======
+        eventId = ref.push($scope.input).key;
+    };
+>>>>>>> origin/adminform
 
     $scope.editMaxMem = function (i) {
         $scope.input.maxMem += i;
@@ -96,5 +106,4 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     $scope.popup = {
         opened: false
     };
-
 });

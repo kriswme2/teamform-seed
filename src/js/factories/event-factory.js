@@ -31,6 +31,10 @@ angular
                     $event.tags = data.val().tags;
                     currentEventRef.set($event);
                 });
+            },
+
+            newTeam: function (currentEventRef) {
+                $eventId = currentEventRef;
             }
         };
 
