@@ -1,6 +1,6 @@
 angular
     .module('teamform')
-    .controller("EventsCtrl", ['$scope', 'Auth', EventsCtrl]);
+    .controller("EventsCtrl", ['$scope', 'Auth', '$firebaseArray', EventsCtrl]);
 
 function EventsCtrl($scope, Auth) {
 
