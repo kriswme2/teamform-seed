@@ -1,6 +1,6 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', '$firebase', 'Auth', 'ngTagsInput', 'Event', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Auth', 'Event', TeamCtrl]);
 
 function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
 
@@ -20,7 +20,7 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
     $scope.input.member.push(userId);
 
     var refPath = 'events/' + eventId;
-    retrieveOnceFirebase(firebase, refPath, function (data) {
+    firebase.database().ref(refPath).once("value").then(function (data) {
         if (data.val() !== null) {
             $scope.getEvent = data.val();
             $scope.input.teamSize = $scope.getEvent.minMem;
