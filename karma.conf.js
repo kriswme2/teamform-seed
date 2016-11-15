@@ -22,6 +22,8 @@ module.exports = function(config) {
       'components/angular-bootstrap/ui-bootstrap-tpls.js',
       'components/firebase/firebase.js',
       'components/angularfire/angularfire.js',
+      'components/angular-mocks/angular-mocks.js',
+      'components/mockfirebase/mockfirebase.js',
       'js/module.js',
       'js/routes.js',
       'js/**/*.js',
@@ -48,7 +50,7 @@ module.exports = function(config) {
 
     coverageReporter: {
       type : 'html',
-      dir : 'coverage/'
+      dir : '../coverage/'
     },
 
 

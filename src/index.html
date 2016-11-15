@@ -32,7 +32,7 @@
         <li class="sidebar-title"><span>Event</span></li>
 
         <li class="sidebar-list" ng-repeat="e in events">
-          <a href="/">{{e.title}}</a>
+          <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
         </li>
 
         <li class="sidebar-title"><span>Forms (Change Me)</span></li>
@@ -152,10 +152,12 @@
   <script type="text/javascript" src="components/ng-tags-input/ng-tags-input.min.js"></script>
   <script type="text/javascript" src="components/firebase/firebase.js"></script>
   <script type="text/javascript" src="components/angularfire/dist/angularfire.min.js"></script>
+  <script type="text/javascript" src="components/firebase/firebase.js"></script>
+  <script type="text/javascript" src="components/angularfire/dist/angularfire.min.js"></script>
   <!-- endbuild -->
 
   <!-- Firebase -->
-  <!--<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>-->
+  <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/2.1.0/angularfire.min.js"></script>
 
