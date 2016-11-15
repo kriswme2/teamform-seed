@@ -1,12 +1,12 @@
 angular
     .module('teamform')
-    .controller("EventsCtrl", ['$scope', 'Auth', '$firebaseArray', EventsCtrl]);
+    .controller("EventsCtrl", ['$scope', '$firebaseObject', 'Auth', EventsCtrl]);
 
-function EventsCtrl($scope, Auth) {
+function EventsCtrl($scope, $firebaseObject, Auth) {
 
     var userId = Auth.$getAuth().uid;
     var ref = firebase.database().ref('events');
-    $scope.events = $firebaseArray(ref);
+    $scope.events = $firebaseObject(ref);
 
     $scope.input = {
         organizer: "",
