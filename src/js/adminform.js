@@ -20,13 +20,14 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     };
 
     var userId = 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1';
-    var refPath = '/users/' + userId + '/events';
-    var ref = firebase.database().ref(refPath);
+    var eventId = null;
+    var ref = firebase.database().ref('events');
 
     $scope.addEvent = function () {
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
-        ref.push($scope.input);
+        eventId = ref.push($scope.input).key;
+        firebase.database().ref('teams').child(eventId).set({});
     };
 
     $scope.editMaxMem = function (i) {
