@@ -17,14 +17,14 @@ angular
                     var currentRoomRef = Chatroom.chroom("b");
                     $scope.posts = $firebaseArray(currentRoomRef);
 
-            }
+            };
 
             $scope.sendMessage = function() {
 
                 Chatroom.send($scope.message);
                 $scope.message = "";
 
-            }
+            };
 
             //$timeout($scope.setChatRoom, 3000);
 

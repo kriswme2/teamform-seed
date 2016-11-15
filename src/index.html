@@ -45,6 +45,13 @@
           <a href="/tables">Event 4 </a>
           <!-- <span class="menu-icon fa fa-table"></span> -->
         </li>
+        <li class="sidebar-title"><span>Forms (Change Me)</span></li>
+        <li class="sidebar-list">
+          <a href="/admin/event">Admin form</a>
+        </li>
+        <li class="sidebar-list">
+          <a href="/leader/event">Leader form</a>
+        </li>
       </ul>
       <div class="sidebar-footer">
         <div class="col-xs-6">
@@ -144,6 +151,11 @@
   <link rel="stylesheet" type="text/css" href="components/rdash-ui/dist/css/rdash.min.css">
   <!-- endbuild -->
   <link rel="stylesheet" href="css/teamform.min.css">
+  
+  <!-- ngTagsInput -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.bootstrap.min.css"
+  />
 
   <!-- SCRIPTS -->
   <!-- build:js lib/js/main.min.js -->
@@ -172,6 +184,9 @@
 	  firebase.database().ref(refPath).once("value").then(callbackFunc);
   }
   </script>
+
+  <!-- ngTagsInput -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-tags-input/3.1.1/ng-tags-input.min.js"></script>
 
   <!-- Custom Scripts -->
   <script type="text/javascript" src="js/dashboard.min.js"></script>

@@ -1,0 +1,21 @@
+   <div ng-controller="TeamsCtrl" class="container">
+        <form class="col-md-6">
+            <div class="form-group">
+                <label>Team Name:</label>
+                <input type="text" class="form-control" placeholder="eg. Team Testing" ng-model="input.teamName" required>
+            </div>
+
+            <div class="form-group">
+                <label>Number of Member(s):</label>
+                <select class="form-control" ng-model="input.teamSize" ng-options="o as o for o in selector.options"></select>
+            </div>
+
+            <div class="form-group">
+                <label>Additional Tags:</label><br>
+                <tags-input ng-model="input.tags"></tags-input>
+            </div>
+
+            <input type="button" class="btn btn-default" value="Submit" ng-click="addTeam()">
+
+        </form>
+    </div>
