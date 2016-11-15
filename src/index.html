@@ -32,7 +32,7 @@
         <li class="sidebar-title"><span>Event</span></li>
 
         <li class="sidebar-list" ng-repeat="e in events">
-          <a href="/">{{e.title}}</a>
+          <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
         </li>
 
         <li class="sidebar-title"><span>Forms (Change Me)</span></li>
