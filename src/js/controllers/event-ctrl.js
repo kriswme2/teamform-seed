@@ -5,6 +5,7 @@ angular
 function EventsCtrl($scope, Auth) {
 
     var userId = Auth.$getAuth().uid;
+    $scope.events = firebase.database().ref('events');
 
     $scope.input = {
         organizer: "",
@@ -26,7 +27,7 @@ function EventsCtrl($scope, Auth) {
         $scope.input.adminId = userId;
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
-        eventId = ref.push($scope.input).key;
+        eventId = $scope.events.push($scope.input).key;
     };
 
     $scope.loadEvent = function(eId) {
