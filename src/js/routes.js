@@ -4,7 +4,7 @@
  */
 angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
     function($locationProvider, $stateProvider, $urlRouterProvider) {
-        
+
         $locationProvider.html5Mode(true);
 
         // For unmatched routes
@@ -28,7 +28,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
 
         var redirectToIndexIfSignedIn = ["Auth", "$state", function(Auth, $state){
             if(Auth.$getAuth()) {
-                $state.go('index');
+                $state.go('index', { "eventID": 'a'});
             }
         }];
 
@@ -66,6 +66,12 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
             })
+            .state('event', {
+                url: '/event/:eventID',
+                templateUrl: 'templates/dashboard.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'templates/profile.html',
@@ -75,6 +81,18 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             .state('tables', {
                 url: '/tables',
                 templateUrl: 'templates/tables.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('admin_event', {
+                url: '/admin/event',
+                templateUrl: 'templates/admin/event.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('leader_event', {
+                url: '/leader/event',
+                templateUrl: 'templates/leader/event.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
             });
