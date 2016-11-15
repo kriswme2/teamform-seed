@@ -1,8 +1,8 @@
-var app = angular.module("teamform", ["firebase", "ui.bootstrap", "ngTagsInput"]);
+angular
+    .module('teamform')
+    .controller("EventCtrl", ['$scope', 'firebase', 'Auth', 'ui.bootstrap', 'ngTagsInput', EventCtrl]);
 
-app.controller("EventsCtrl", function ($scope, $firebaseArray) {
-
-    initializeFirebase();
+function EventCtrl($scope) {
 
     $scope.input = {
         organizer: "",
@@ -19,7 +19,7 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         tags: []
     };
 
-    var userId = 'FKQDZ9RMsTU53xWbXjBsHFdGcZz1';
+    var userId = Auth.$getAuth().uid;
     var eventId = null;
     var ref = firebase.database().ref('events');
 
@@ -27,7 +27,9 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
         $scope.input.deadline = $scope.dt.getTime();
         $scope.input.createDate = new Date().getTime();
         eventId = ref.push($scope.input).key;
-        firebase.database().ref('teams').child(eventId).set({});
+        ref.child('teams').child('eventId').push().set({
+            admin: userId
+        });
     };
 
     $scope.editMaxMem = function (i) {
@@ -73,5 +75,4 @@ app.controller("EventsCtrl", function ($scope, $firebaseArray) {
     $scope.popup = {
         opened: false
     };
-
-});
+}

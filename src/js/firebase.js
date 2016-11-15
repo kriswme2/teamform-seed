@@ -10,5 +10,6 @@ function initializeFirebase() {
 }
 
 function retrieveOnceFirebase(firebase, refPath, callbackFunc) {
-	firebase.database().ref(refPath).once("value").then(callbackFunc);
+    firebase.database().ref(refPath).once("value").then(callbackFunc);
 }
+

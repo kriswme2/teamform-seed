@@ -1,11 +1,13 @@
 <!doctype html>
 <html lang="en" ng-app="teamform">
+
 <head>
   <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Teamform</title>
+  <title>Teamform</title>
 </head>
+
 <body ng-controller="MasterCtrl">
   <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
 
@@ -36,12 +38,12 @@
           <!-- <span class="menu-icon fa fa-table"></span> -->
         </li>
         <li class="sidebar-list">
-            <a href="/tables">Event 3 </a>
-            <!-- <span class="menu-icon fa fa-table"></span> -->
+          <a href="/tables">Event 3 </a>
+          <!-- <span class="menu-icon fa fa-table"></span> -->
         </li>
         <li class="sidebar-list">
-            <a href="/tables">Event 4 </a>
-            <!-- <span class="menu-icon fa fa-table"></span> -->
+          <a href="/tables">Event 4 </a>
+          <!-- <span class="menu-icon fa fa-table"></span> -->
         </li>
       </ul>
       <div class="sidebar-footer">
@@ -99,7 +101,7 @@
                 </ul>
               </div>
               <div class="item dropdown" uib-dropdown ng-controller="NotificationCtrl" ng-if="auth.$getAuth()">
-               <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
                   <i class="fa fa-bell-o"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -117,7 +119,7 @@
               <div class="page">
                 Teamform
               </div>
-<!--               <div class="breadcrumb-links">
+              <!--               <div class="breadcrumb-links">
                 {{$state.this}}
               </div> -->
             </div>
@@ -128,9 +130,12 @@
         <!-- Main Content -->
         <div ui-view></div>
 
-      </div><!-- End Page Content -->
-    </div><!-- End Content Wrapper -->
-  </div><!-- End Page Wrapper -->
+      </div>
+      <!-- End Page Content -->
+    </div>
+    <!-- End Content Wrapper -->
+  </div>
+  <!-- End Page Wrapper -->
 
   <!-- STYLES -->
   <!-- build:css lib/css/main.min.css -->
@@ -155,16 +160,21 @@
   <script>
   // Initialize Firebase
   var config = {
-  apiKey: "AIzaSyBKPa_aZAr7C23kkYli_wPPSH069aYLRIM",
-  authDomain: "lab-firebase-aefba.firebaseapp.com",
-  databaseURL: "https://lab-firebase-aefba.firebaseio.com",
-  storageBucket: "lab-firebase-aefba.appspot.com",
-  messagingSenderId: "470761339277"
+      apiKey: "AIzaSyBkpMprscaor1-pR8n8MkAJxM4AXlt0ZAs",
+      authDomain: "comp3111-group-project.firebaseapp.com",
+      databaseURL: "https://comp3111-group-project.firebaseio.com",
+      storageBucket: "comp3111-group-project.appspot.com",
+      messagingSenderId: "857402819132"
   };
   firebase.initializeApp(config);
+  
+  function retrieveOnceFirebase(firebase, refPath, callbackFunc) {
+	  firebase.database().ref(refPath).once("value").then(callbackFunc);
+  }
   </script>
 
   <!-- Custom Scripts -->
   <script type="text/javascript" src="js/dashboard.min.js"></script>
 </body>
+
 </html>
