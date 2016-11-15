@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("EventCtrl", ['$scope', '$firebase', 'ui.bootstrap', 'ngTagsInput', EventCtrl]);
+    .controller("EventCtrl", ['$scope', 'firebase', 'Auth', 'ui.bootstrap', 'ngTagsInput', EventCtrl]);
 
-function EventCtrl($scope, $firebaseArray) {
+function EventCtrl($scope) {
 
     $scope.input = {
         admin: null,
@@ -20,9 +20,8 @@ function EventCtrl($scope, $firebaseArray) {
         tags: []
     };
 
-    var userId = firebase.auth().currentUser.uid;
-    var refPath = '/users/' + userId + '/events';
-    var ref = firebase.database().ref(refPath);
+    var userId = Auth.$getAuth().uid;
+    var ref = firebase.database().ref('events');
 
     $scope.addEvent = function () {
         $scope.input.admin = userId;

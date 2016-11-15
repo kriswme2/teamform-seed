@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', '$firebase', 'ngTagsInput', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', '$firebase', 'Auth', 'ngTagsInput', TeamCtrl]);
 
-function TeamCtrl($scope, $firebaseObject, $firebaseArray, adminId, eventId) {
+function TeamCtrl($scope, $firebaseObject, $firebaseArray, eventId) {
 
     $scope.selector = {
         options: [],
@@ -15,8 +15,8 @@ function TeamCtrl($scope, $firebaseObject, $firebaseArray, adminId, eventId) {
         member: []
     };
 
-    var userId = firebase.auth().currentUser.uid;
-    var refPath = '/users/' + adminId + '/events/' + eventId;
+    var userId = Auth.$getAuth().uid;
+    var refPath = 'events/' + eventId;
     retrieveOnceFirebase(firebase, refPath, function (data) {
         if (data.val() !== null) {
             $scope.getEvent = data.val();
