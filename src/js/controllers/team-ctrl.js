@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Auth', '$stateParams', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', TeamCtrl]);
 
-function TeamCtrl($scope, Auth, $stateParams) {
+function TeamCtrl($scope, Events, Teams, Auth, $stateParams) {
 
     var uId = Auth.$getAuth().uid;
     if ($stateParams.eventID)
@@ -22,10 +22,20 @@ function TeamCtrl($scope, Auth, $stateParams) {
     };
     $scope.input.member.push(uId);
 
+    $scope.addTeam = function () {
+        var newInput = {
+            'leaderId': uId,
+            'teamSize': $scope.input.teamSize,
+            'regData': new Date().getTime(),
+            'tags': $scope.input.tags,
+            'member': $scope.input.member
+        };
+        Teams.set($scope.eId, $scope.input.name, newInput);
+    };
+
     function setRange(eId) {
         $scope.eId = eId;
-        var ePath = 'events/' + eId;
-        firebase.database().ref(ePath).once("value").then(function (data) {
+        Events.childRef(eId).once("value").then(function (data) {
             if (data.val() !== null) {
                 var eData = data.val();
                 $scope.input.teamSize = eData.minMem;
@@ -37,22 +47,8 @@ function TeamCtrl($scope, Auth, $stateParams) {
         });
     }
 
-    $scope.addTeam = function () {
-        var newInput = {
-            'leaderId': uId,
-            'teamSize': $scope.input.teamSize,
-            'regData': new Date().getTime(),
-            'tags': $scope.input.tags,
-            'member': $scope.input.member
-        };
-        var newPath = 'teams/' + $scope.eId + '/' + $scope.input.teamName;
-        var ref = firebase.database().ref(newPath);
-        ref.set(newInput);
-    };
-
     function loadTeam(eId, tName) {
-        var tPath = 'teams/' + eId + '/' + tName;
-        firebase.database().ref(tPath).once('value').then(function (data) {
+        Teams.childRef(eId, tName).once('value').then(function (data) {
             if (data.val() !== null) {
                 var tData = data.val();
                 $scope.input = {
