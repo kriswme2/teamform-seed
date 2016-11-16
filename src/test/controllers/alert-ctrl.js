@@ -16,8 +16,8 @@ describe('AlertsCtrl', function() {
 
 	  	  
 		  it('alerts', function() {
-        
-          expect($scope.AlertsCtrl()).toHaveBeenCalled();
+          AlertsCtrl();
+          expect(AlertsCtrl()).toHaveBeenCalled();
 
 		  });
 
