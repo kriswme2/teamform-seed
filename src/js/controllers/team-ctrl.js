@@ -1,5 +1,6 @@
 angular
     .module('teamform')
+<<<<<<< HEAD
     .controller("TeamCtrl", ['$scope', '$sce', 'Events', 'Teams', 'Auth', '$stateParams', '$state', TeamCtrl]);
 
 function TeamCtrl($scope, $sce, Events, Teams, Auth, $stateParams, $state) {
@@ -12,6 +13,14 @@ function TeamCtrl($scope, $sce, Events, Teams, Auth, $stateParams, $state) {
     
     $scope.eventID = $stateParams.eventID;
     $scope.teams = Teams.arr($scope.eventID);
+=======
+    .controller("TeamCtrl", ['$scope', 'Auth', 'Event', '$stateParams', TeamCtrl]);
+
+function TeamCtrl($scope, Auth, Event, $stateParams) {
+
+    var userId = Auth.$getAuth().uid;
+    var eventId = $stateParams.eventID;
+>>>>>>> save
 
     $scope.selector = {
         options: [],
