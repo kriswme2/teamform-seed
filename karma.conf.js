@@ -16,7 +16,6 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // Do not use minified version here, easier to debug
-<<<<<<< HEAD
       './components/angular/angular.js',
       './components/angular-ui-router/release/angular-ui-router.js',
       './components/angular-cookies/angular-cookies.js',
