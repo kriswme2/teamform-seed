@@ -3,9 +3,9 @@
 describe('loading', function() {
 		 
       beforeEach(module('teamform'));
-      var scope, controller;
+      var $scope, controller;
       beforeEach(inject(function($controller, $rootScope){
-          scope = $rootScope.new();
+          $scope = $rootScope.$new();
           controller = $controller('rdLoading',{$scope:$scope});
       
       }));
@@ -13,7 +13,7 @@ describe('loading', function() {
 	  	  
 		  it('rdLoading', function() {
           
-          expect(scope.directive).toHaveBeenCalled();
+          expect(controller.rdLoading()).toHaveBeenCalled();
 
 		  });
 

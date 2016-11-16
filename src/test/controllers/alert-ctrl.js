@@ -7,9 +7,9 @@
 describe('AlertsCtrl', function() {
 		 
       beforeEach(module('teamform'));
-      var scope, controller;
+      var $scope, controller;
       beforeEach(inject(function($controller, $rootScope){
-          scope = $rootScope.new();
+          $scope = $rootScope.new();
           controller = $controller('AlertsCtrl',{$scope:$scope});
       
       }));
@@ -17,24 +17,10 @@ describe('AlertsCtrl', function() {
 	  	  
 		  it('alerts', function() {
         
-          scope.addAlert();
-          expect(scope.alerts).toHaveBeenCalled();
+          expect($scope.AlertsCtrl()).toHaveBeenCalled();
 
 		  });
 
-      it('addAlert', function(){
-
-          expect(scope.alerts.push).toHaveBeenCalled();
-
-
-      });
-
-      it('closeAlert', function(){
-
-        expect(scope.alerts.splice).toHaveBeenCalled();
-        
-
-      });
 
 
 		  
