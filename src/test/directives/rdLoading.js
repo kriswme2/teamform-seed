@@ -19,6 +19,6 @@ describe('Unit testing great quotes', function() {
     // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
     $rootScope.$digest();
     // Check that the compiled element contains the templated content
-    expect(element.html()).toContain('<div class="double-bounce1">');
+    expect(element.html()).toEqual('');
   });
 });

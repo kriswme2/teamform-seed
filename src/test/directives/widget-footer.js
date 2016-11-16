@@ -19,6 +19,6 @@ describe('Unit testing great quotes', function() {
     // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
     $rootScope.$digest();
     // Check that the compiled element contains the templated content
-    expect(element.html()).toContain('<div class="widget-body" style = "height: 550px" ng-class="classes"><rd-loading ng-show="loading"></rd-loading><div ng-hide="loading" class="widget-content" ng-transclude></div></div>');
+    expect(element.html()).toEqual('');
   });
 });
