@@ -66,18 +66,42 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
             })
+            .state('new_event', {
+                url: '/new',
+                templateUrl: 'templates/admin/event.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
             .state('event', {
-                url: '/events/:eventID',
+                url: '/event/{eventID}',
                 templateUrl: 'templates/dashboard.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
             })
-            // .state('team', {
-            //     url: '/events/:eventID/teams/:teamID',
-            //     templateUrl: 'templates/dashboard.html',
-            //     resolve: requireSignInResolver,
-            //     onEnter: redirectToLoginIfNotSignedIn
-            // })
+            .state('edit_event', {
+                url: '/event/{eventID}/edit',
+                templateUrl: 'templates/admin/event.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('new_team', {
+                url: '/event/{eventID}/new',
+                templateUrl: 'templates/leader/event.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('team', {
+                url: '/event/{eventID}/team/{teamID}',
+                templateUrl: 'templates/dashboard.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('edit_team', {
+                url: '/event/{eventID}/team/{teamID}/edit',
+                templateUrl: 'templates/leader/event.html',
+                resolve: requireSignInResolver,
+                onEnter: redirectToLoginIfNotSignedIn
+            })
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'templates/profile.html',
@@ -89,25 +113,6 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 templateUrl: 'templates/tables.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
-            })
-            .state('admin_event', {
-                url: '/new_event',
-                templateUrl: 'templates/admin/event.html',
-                resolve: requireSignInResolver,
-                onEnter: redirectToLoginIfNotSignedIn
-            })
-            .state('leader_event', {
-                url: '/events/:eventID/new_team',
-                templateUrl: 'templates/leader/event.html',
-                resolve: requireSignInResolver,
-                onEnter: redirectToLoginIfNotSignedIn
-            })
-            // .state('edit_event', {
-            //     url: '/events/:eventID/edit',
-            //     templateUrl: 'templates/admin/event.html',
-            //     resolve: requireSignInResolver,
-            //     onEnter: redirectToLoginIfNotSignedIn
-            // })
-            ;
+            });
     }
 ]);

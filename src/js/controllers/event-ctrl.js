@@ -1,12 +1,15 @@
 angular
     .module('teamform')
-    .controller("EventsCtrl", ['$scope', '$firebaseArray', 'Auth', EventsCtrl]);
+    .controller("EventsCtrl", ['$scope', 'Events', 'Auth', '$stateParams', EventsCtrl]);
 
-function EventsCtrl($scope, $firebaseArray, Auth) {
+function EventsCtrl($scope, Events, Auth, $stateParams) {
 
     var uId = Auth.$getAuth().uid;
-    var ref = firebase.database().ref('events');
-    $scope.events = $firebaseArray(ref);
+    $scope.events = Events.arr();
+
+    if ($stateParams.eventID) {
+        loadEvent($stateParams.eventID);
+    }
 
     $scope.input = {
         organizer: "",
@@ -27,13 +30,12 @@ function EventsCtrl($scope, $firebaseArray, Auth) {
             $scope.input.adminId = uId;
             $scope.input.deadline = $scope.dt.getTime();
             $scope.input.createDate = new Date().getTime();
-            eId = ref.push($scope.input).key;
+            eId = Events.push($scope.input).key;
         }
     };
 
-    $scope.loadEvent = function (eId) {
-        var ePath = 'events/' + eId;
-        firebase.database().ref(ePath).once("value").then(function (data) {
+    function loadEvent(eId) {
+        Events.childRef(eId).once("value").then(function (data) {
             if (data.val() !== null) {
                 var eData = data.val();
                 $scope.input = {
@@ -52,7 +54,7 @@ function EventsCtrl($scope, $firebaseArray, Auth) {
             }
             $scope.$apply();
         });
-    };
+    }
 
     $scope.editMaxMem = function (i) {
         $scope.input.maxMem += i;
