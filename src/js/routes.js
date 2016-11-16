@@ -67,7 +67,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('new_event', {
-                url: '/new',
+                url: '/event/new',
                 templateUrl: 'templates/admin/event.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
@@ -85,7 +85,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('new_team', {
-                url: '/event/{eventID}/new',
+                url: '/event/{eventID}/team/new',
                 templateUrl: 'templates/leader/event.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
