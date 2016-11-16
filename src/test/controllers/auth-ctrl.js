@@ -15,7 +15,4 @@ describe('auth-ctrl', function() {
 
       }));
 
-      
-    
-
 });

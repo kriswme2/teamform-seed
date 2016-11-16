@@ -2,7 +2,7 @@ angular
     .module('teamform')
     .controller("TeamCtrl", ['$scope', 'Auth', 'Event', TeamCtrl]);
 
-function TeamCtrl($scope, $firebaseObject, $firebaseArray, Event) {
+function TeamCtrl($scope, Auth, Event) {
 
     var userId = Auth.$getAuth().uid;
     var eventId = Event.getEventId();
