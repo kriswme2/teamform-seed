@@ -3,7 +3,7 @@
  * Route configuration for the RDash module.
  */
 angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlRouterProvider',
-    function($locationProvider, $stateProvider, $urlRouterProvider) {
+    function ($locationProvider, $stateProvider, $urlRouterProvider) {
 
         $locationProvider.html5Mode(true);
 
@@ -13,22 +13,22 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
         var requireSignInResolver = {
             // controller will not be loaded until $requireSignIn resolves
             // Auth refers to our $firebaseAuth wrapper in the factory below
-            "currentAuth": ["Auth", function(Auth) {
-              // $requireSignIn returns a promise so the resolve waits for it to complete
-              // If the promise is rejected, it will throw a $stateChangeError (see above)
-              return Auth.$requireSignIn();
+            "currentAuth": ["Auth", function (Auth) {
+                // $requireSignIn returns a promise so the resolve waits for it to complete
+                // If the promise is rejected, it will throw a $stateChangeError (see above)
+                return Auth.$requireSignIn();
             }]
         };
 
-        var redirectToLoginIfNotSignedIn = ["Auth", "$state", function(Auth, $state){
-            if(!Auth.$getAuth()) {
+        var redirectToLoginIfNotSignedIn = ["Auth", "$state", function (Auth, $state) {
+            if (!Auth.$getAuth()) {
                 $state.go('login');
             }
         }];
 
-        var redirectToIndexIfSignedIn = ["Auth", "$state", function(Auth, $state){
-            if(Auth.$getAuth()) {
-                $state.go('index', { "eventID": 'a'});
+        var redirectToIndexIfSignedIn = ["Auth", "$state", function (Auth, $state) {
+            if (Auth.$getAuth()) {
+                $state.go('index', { "eventID": 'a' });
             }
         }];
 
@@ -40,9 +40,9 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 resolve: {
                     // controller will not be loaded until $waitForSignIn resolves
                     // Auth refers to our $firebaseAuth wrapper in the factory below
-                    "currentAuth": ["Auth", function(Auth) {
-                      // $waitForSignIn returns a promise so the resolve waits for it to complete
-                      return Auth.$waitForSignIn();
+                    "currentAuth": ["Auth", function (Auth) {
+                        // $waitForSignIn returns a promise so the resolve waits for it to complete
+                        return Auth.$waitForSignIn();
                     }]
                 },
                 onEnter: redirectToIndexIfSignedIn
@@ -53,9 +53,9 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 resolve: {
                     // controller will not be loaded until $waitForSignIn resolves
                     // Auth refers to our $firebaseAuth wrapper in the factory below
-                    "currentAuth": ["Auth", function(Auth) {
-                      // $waitForSignIn returns a promise so the resolve waits for it to complete
-                      return Auth.$waitForSignIn();
+                    "currentAuth": ["Auth", function (Auth) {
+                        // $waitForSignIn returns a promise so the resolve waits for it to complete
+                        return Auth.$waitForSignIn();
                     }]
                 },
                 onEnter: redirectToIndexIfSignedIn
@@ -67,11 +67,17 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('event', {
-                url: '/event/:eventID',
+                url: '/events/:eventID',
                 templateUrl: 'templates/dashboard.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
             })
+            // .state('team', {
+            //     url: '/events/:eventID/teams/:teamID',
+            //     templateUrl: 'templates/dashboard.html',
+            //     resolve: requireSignInResolver,
+            //     onEnter: redirectToLoginIfNotSignedIn
+            // })
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'templates/profile.html',
@@ -85,16 +91,23 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('admin_event', {
-                url: '/create_event',
+                url: '/new_event',
                 templateUrl: 'templates/admin/event.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('leader_event', {
-                url: '/event/:eventID/create_team',
+                url: '/events/:eventID/new_team',
                 templateUrl: 'templates/leader/event.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
-            });
+            })
+            // .state('edit_event', {
+            //     url: '/events/:eventID/edit',
+            //     templateUrl: 'templates/admin/event.html',
+            //     resolve: requireSignInResolver,
+            //     onEnter: redirectToLoginIfNotSignedIn
+            // })
+            ;
     }
 ]);
