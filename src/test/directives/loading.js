@@ -13,7 +13,7 @@ describe('loading', function() {
 	  	  
 		  it('rdLoading', function() {
           
-          expect(controller.rdLoading()).toHaveBeenCalled();
+          expect(controller.rdLoading).toHaveBeenCalled();
 
 		  });
 
