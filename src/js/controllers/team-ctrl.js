@@ -1,11 +1,11 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Auth', 'Event', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Auth', 'Event', '$stateParams', TeamCtrl]);
 
-function TeamCtrl($scope, Auth, Event) {
+function TeamCtrl($scope, Auth, Event, $stateParams) {
 
     var userId = Auth.$getAuth().uid;
-    var eventId = Event.getEventId();
+    var eventId = $stateParams.eventID;
 
     $scope.selector = {
         options: [],
