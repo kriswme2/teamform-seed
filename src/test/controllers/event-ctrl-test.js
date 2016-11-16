@@ -12,9 +12,23 @@ describe('event-ctrl function', function () {
         }));
 
         it('test addEvent', function () {
+            controller.input = {
+                organizer: "HKUST",
+                semester: "Fall",
+                course: "COMP3111",
+                title: "COMP3111 Group Project",
+                numOfTeam: "10",
+                maxMem: 6,
+                minMem: 5,
+                privacy: "public",
+                desc: "teamforming",
+                tags: [{"text": "teamform"}]
+            };
             var userId = 'ABCDEFGHIJKLMN';
-            controller.input.deadline = new Data().getTime();
-            controller.input.createDate = new Date().getTime();
+            constructor.dt = new Date();
+            controller.addEvent();
+            expect(controller)
+
         })
     });
 });
