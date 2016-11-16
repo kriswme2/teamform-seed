@@ -61,7 +61,7 @@
 				<div class="table-responsive">
 					<table class="table">
 						<tbody ng-controller="ChatroomCtrl">
-							<tr ng-repeat="p in posts">
+							<tr data-ng-repeat="p in posts.slice().reverse()">
 								<td>{{p.from}}</td>
 								<td>{{p.msg}}</td>
 								<td>{{p.timestamp | date:'medium'}}</td>

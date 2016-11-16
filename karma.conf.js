@@ -16,18 +16,19 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // Do not use minified version here, easier to debug
-      './components/angular/angular.js',
-      './components/angular-ui-router/release/angular-ui-router.js',
-      './components/angular-cookies/angular-cookies.js',
-      './components/angular-bootstrap/ui-bootstrap-tpls.js',
-      './components/firebase/firebase.js',
-      './components/angularfire/angularfire.js',
-      './components/angular-mocks/angular-mocks.js',
-      './components/mockfirebase/mockfirebase.js',
-      './js/module.js',
-      './js/routes.js',
-      './js/**/*.js',
-      './test/**/*.js'
+      'components/angular/angular.js',
+      'components/angular-ui-router/release/angular-ui-router.js',
+      'components/angular-cookies/angular-cookies.js',
+      'components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'components/firebase/firebase.js',
+      'components/angularfire/dist/angularfire.js',
+      'components/angular-mocks/angular-mocks.js',
+      'components/mockfirebase/browser/mockfirebase.js',
+      'components/ng-tags-input/ng-tags-input.js',
+      'js/module.js',
+      'js/routes.js',
+      'js/**/*.js',
+      'test/**/*.js'
     ],
 
 
