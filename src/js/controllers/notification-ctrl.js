@@ -7,7 +7,7 @@ angular
 
     //Notification.send("aa", "bb", "4434");
     $scope.listLength = function() {
--      return Notification.list().length;
--    };
+      return Notification.list().length;
+    };
   }
 ]);
