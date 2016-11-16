@@ -15,10 +15,10 @@ describe('Unit testing great quotes', function() {
 
   it('Replaces the element with the appropriate content', function() {
     // Compile a piece of HTML containing the directive
-    var element = $compile("<rdWidgetHeader></rdWidgetHeader>")($rootScope);
+    var element = $compile("<rdWidgetBody></rdWidgetBody>")($rootScope);
     // fire all the watches, so the scope expression {{1 + 1}} will be evaluated
     $rootScope.$digest();
     // Check that the compiled element contains the templated content
-    expect(element.html()).toContain('<div class="widget-header">');
+    expect(element.html()).toContain('<div class="widget-body" style = "height: 550px" ng-class="classes"><rd-loading ng-show="loading"></rd-loading><div ng-hide="loading" class="widget-content" ng-transclude></div></div>');
   });
 });
