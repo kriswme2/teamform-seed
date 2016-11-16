@@ -85,13 +85,13 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('admin_event', {
-                url: '/admin/event',
+                url: '/create_event',
                 templateUrl: 'templates/admin/event.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('leader_event', {
-                url: '/leader/event',
+                url: '/event/:eventID/create_team',
                 templateUrl: 'templates/leader/event.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
