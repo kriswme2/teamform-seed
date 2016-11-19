@@ -47,7 +47,7 @@ function EventsCtrl($scope, Events, Auth, $stateParams, $state) {
             $scope.eventID = Events.push($scope.input).key;
             $state.go('event', { "eventID": $scope.eventID });
         }
-    };
+    }
 
     $scope.eventFormAction = function () {
       if ($scope.input.mode == "edit") {
@@ -71,7 +71,7 @@ function EventsCtrl($scope, Events, Auth, $stateParams, $state) {
       } else {
         addEvent();
       }
-    }
+    };
 
     function loadEvent(eId) {
       $scope.eventID = eId;
