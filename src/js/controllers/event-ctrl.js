@@ -33,6 +33,7 @@ function EventsCtrl($scope, Events, Auth, $stateParams, $state) {
             $scope.input.adminId = uId;
             $scope.input.deadline = $scope.dt.getTime();
             $scope.input.createDate = new Date().getTime();
+            $scope.input.mode = null;
             $scope.eventID = Events.push($scope.input).key;
             $state.go('event', { "eventID": $scope.eventID });
         }
