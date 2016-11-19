@@ -1,14 +1,18 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', TeamCtrl]);
 
-function TeamCtrl($scope, Events, Teams, Auth, $stateParams) {
+function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state) {
 
-    var uId = Auth.$getAuth().uid;
-    if ($stateParams.eventID)
+    var uid = Auth.$getAuth().uid;
+    if (($state.is("new_team") || $state.is("edit_team")) && $stateParams.eventID)
         setRange($stateParams.eventID);
-    if ($stateParams.teamID)
+    if ($state.is("edit_team") && $stateParams.teamID)
         loadTeam($stateParams.eventID, $stateParams.teamID);
+
+
+    $scope.eventID = $stateParams.eventID;
+    $scope.teams = Teams.arr($scope.eventID);
 
     $scope.selector = {
         options: [],
@@ -20,17 +24,17 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams) {
         tags: [],
         member: []
     };
-    $scope.input.member.push(uId);
+    $scope.input.member.push(uid);
 
     $scope.addTeam = function () {
         var newInput = {
-            'leaderId': uId,
+            'leaderId': uid,
             'teamSize': $scope.input.teamSize,
             'regData': new Date().getTime(),
             'tags': $scope.input.tags,
             'member': $scope.input.member
         };
-        Teams.set($scope.eId, $scope.input.name, newInput);
+        Teams.set($scope.eId, $scope.input.teamName, newInput);
     };
 
     function setRange(eId) {

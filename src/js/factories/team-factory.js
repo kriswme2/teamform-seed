@@ -1,17 +1,20 @@
 angular
     .module('teamform')
-    .factory('Teams', ['firebase', function (firebase) {
+    .factory('Teams', ['firebase','$firebaseArray', function (firebase,$firebaseArray) {
         var ref = firebase.database().ref('teams');
         var Teams = {
             ref: function () {
                 return ref;
             },
             set: function ($eId, $tName, $input) {
-                return ref($eId + '/' + $tName).set($input);
+                return Teams.childRef($eId, $tName).set($input);
             },
             childRef: function ($eId, $tName) {
-                return ref.child($eId + '/' + $tName);
-            }
+                return Teams.ref().child($eId + '/' + $tName);
+            },
+            arr: function(eventID) {
+                return $firebaseArray(Teams.ref().child(eventID));
+            },
         };
         return Teams;
     }]);
