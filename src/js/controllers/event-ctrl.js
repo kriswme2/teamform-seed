@@ -1,13 +1,16 @@
 angular
     .module('teamform')
-    .controller("EventsCtrl", ['$scope', 'Events', 'Auth', '$stateParams', EventsCtrl]);
+    .controller("EventsCtrl", ['$scope', 'Events', 'Auth', '$stateParams', '$state', EventsCtrl]);
 
-function EventsCtrl($scope, Events, Auth, $stateParams) {
+function EventsCtrl($scope, Events, Auth, $stateParams, $state) {
 
     var uId = Auth.$getAuth().uid;
-    $scope.events = Events.arr();
+    $scope.eventID = $stateParams.eventID;
 
-    if ($stateParams.eventID) {
+    $scope.events = Events.arr();
+    $scope.event = null;
+
+    if ($stateParams.eventID && $state.is("edit_event")) {
         loadEvent($stateParams.eventID);
     }
 
@@ -21,39 +24,67 @@ function EventsCtrl($scope, Events, Auth, $stateParams) {
         minMem: 1,
         privacy: "public",
         desc: "",
-        tags: []
+        tags: [],
+        mode: "add",
     };
 
-    var eId = null;
-    $scope.addEvent = function () {
+    function addEvent() {
         if ($scope.input.organizer !== "" && $scope.input.title !== "") {
             $scope.input.adminId = uId;
             $scope.input.deadline = $scope.dt.getTime();
             $scope.input.createDate = new Date().getTime();
-            eId = Events.push($scope.input).key;
+            $scope.eventID = Events.push($scope.input).key;
+            $state.go('event', { "eventID": $scope.eventID });
         }
     };
 
+    $scope.eventFormAction = function () {
+      if ($scope.input.mode == "edit") {
+        var updatedRecord = {
+          organizer: $scope.input.organizer,
+          semester: $scope.input.semester,
+          course: $scope.input.course,
+          title: $scope.input.title,
+          deadline: $scope.dt.getTime(),
+          numOfTeam: $scope.input.numOfTeam,
+          maxMem: $scope.input.maxMem,
+          minMem: $scope.input.minMem,
+          privacy: $scope.input.privacy,
+          desc: $scope.input.desc,
+        };
+        if ($scope.input.tags) {
+          updatedRecord.tags = $scope.input.tags;
+        }
+        $scope.event.update(updatedRecord);
+        $state.go('event', { "eventID": $scope.eventID });
+      } else {
+        addEvent();
+      }
+    }
+
     function loadEvent(eId) {
-        Events.childRef(eId).once("value").then(function (data) {
-            if (data.val() !== null) {
-                var eData = data.val();
-                $scope.input = {
-                    organizer: eData.organizer,
-                    semester: eData.semester,
-                    course: eData.course,
-                    title: eData.title,
-                    numOfTeam: eData.numOfTeam,
-                    maxMem: eData.maxMem,
-                    minMem: eData.minMem,
-                    privacy: eData.privacy,
-                    desc: eData.desc,
-                    tags: eData.tags
-                };
-                $scope.dt = new Date(eData.deadline);
-            }
-            $scope.$apply();
-        });
+      $scope.eventID = eId;
+      $scope.event = Events.childRef(eId);
+      $scope.event.once("value").then(function (data) {
+          if (data.val() !== null) {
+              var eData = data.val();
+              $scope.input = {
+                  organizer: eData.organizer,
+                  semester: eData.semester,
+                  course: eData.course,
+                  title: eData.title,
+                  numOfTeam: eData.numOfTeam,
+                  maxMem: eData.maxMem,
+                  minMem: eData.minMem,
+                  privacy: eData.privacy,
+                  desc: eData.desc,
+                  tags: eData.tags,
+                  mode: "edit",
+              };
+              $scope.dt = new Date(eData.deadline);
+          }
+          $scope.$apply();
+      });
     }
 
     $scope.editMaxMem = function (i) {
