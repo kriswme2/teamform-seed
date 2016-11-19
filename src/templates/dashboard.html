@@ -84,9 +84,10 @@
 
 
 
-	<div class="col-lg-4">
+	<div class="col-lg-4" ng-controller="TeamCtrl">
 		<rd-widget>
 			<rd-widget-header icon="fa-users" title="Teams">
+				<a ui-sref="new_team({ eventID: eventID })">Create Team</a>
 				<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
 			</rd-widget-header>
 			<rd-widget-body classes="medium no-padding">
@@ -95,59 +96,20 @@
 						<thead>
 							<tr>
 								<th class="text-center">Team</th>
-								<th>Username</th>
+								<th>teamSize</th>
 								<th>Role</th>
 								<!-- <th>Account</th> -->
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="text-center">1</td>
-								<td>Joe Bloggs</td>
+							<tr ng-repeat="t in teams">
+								<td class="text-center">{{t.$id}}</td>
+								<td>{{t.teamSize}}</td>
 								<td>Super Admin</td>
 								<!-- <td>AZ23045</td> -->
 							</tr>
-							<tr>
-								<td class="text-center">1</td>
-								<td>Timothy Hernandez</td>
-								<td>Admin</td>
-								<!-- <td>AU24783</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">2</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">2</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">2</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">3</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">3</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">3</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
+							<tr ng-if="!teams.length">
+								<td>No Teams found.</td>
 							</tr>
 						</tbody>
 					</table>
