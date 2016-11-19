@@ -88,7 +88,8 @@
 			<tags-input ng-model="input.tags"></tags-input>
 		</div>
 
-		<input type="button" class="btn btn-default" value="Submit" ng-click="addEvent()">
+		<input type="hidden" name="mode" ng-model="input.mode" />
+		<input type="button" class="btn btn-default" value="Submit" ng-click="eventFormAction()">
 		<hr>
 	</form>
 </div>
