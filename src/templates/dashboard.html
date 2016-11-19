@@ -53,7 +53,7 @@
 
 <div class="row" ng-controller="EventsCtrl">
 	<div class="col-lg-8">
-		<a ui-sref="edit_event({ eventID: eventID })">Edit event</a>
+		<a ui-sref="edit_event({ eventID: eventID })" ng-if="isEventAdmin">Edit event</a>
 		<rd-widget>
 			<rd-widget-header icon="fa-tasks" title="Announcement">
 				<!-- <a href="#">Manage</a> -->

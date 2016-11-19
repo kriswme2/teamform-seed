@@ -4,11 +4,13 @@ angular
 
 function EventsCtrl($scope, Events, Auth, $stateParams, $state) {
 
-    var uId = Auth.$getAuth().uid;
+    var uid = Auth.$getAuth().uid;
     $scope.eventID = $stateParams.eventID;
 
     $scope.events = Events.arr();
     $scope.event = null;
+    $scope.eventObj = null;
+    $scope.isEventAdmin = false;
 
     if ($stateParams.eventID && $state.is("edit_event")) {
         loadEvent($stateParams.eventID);
@@ -28,9 +30,17 @@ function EventsCtrl($scope, Events, Auth, $stateParams, $state) {
         mode: "add",
     };
 
+    $scope.$watchCollection("eventID", function() {
+      if (!$scope.eventID) return;
+      $scope.eventObj = Events.childObj($scope.eventID);
+      $scope.eventObj.$loaded().then(function() {
+        if ($scope.eventObj.adminId == uid) $scope.isEventAdmin = true;
+      });
+    });
+
     function addEvent() {
         if ($scope.input.organizer !== "" && $scope.input.title !== "") {
-            $scope.input.adminId = uId;
+            $scope.input.adminId = uid;
             $scope.input.deadline = $scope.dt.getTime();
             $scope.input.createDate = new Date().getTime();
             $scope.input.mode = null;
