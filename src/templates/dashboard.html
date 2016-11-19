@@ -63,7 +63,7 @@
 					<table class="table">
 						<tbody ng-controller="ChatroomCtrl">
 							<tr data-ng-repeat="p in posts.slice().reverse()">
-								<td>{{p.from}}</td>
+								<td>{{p.from | emailByUID}}</td>
 								<td>{{p.msg}}</td>
 								<td>{{p.timestamp | date:'medium'}}</td>
 							</tr>
@@ -105,7 +105,7 @@
 							<tr ng-repeat="t in teams">
 								<td class="text-center">{{t.$id}}</td>
 								<td>{{t.teamSize}}</td>
-								<td>{{t.leaderId | nameByUID}}</td>
+								<td>{{t.leaderId | emailByUID}}</td>
 								<!-- <td>AZ23045</td> -->
 							</tr>
 							<tr ng-if="!teams.length">
