@@ -97,7 +97,7 @@
 							<tr>
 								<th class="text-center">Team</th>
 								<th>teamSize</th>
-								<th>Role</th>
+								<th>Admin</th>
 								<!-- <th>Account</th> -->
 							</tr>
 						</thead>
@@ -105,7 +105,7 @@
 							<tr ng-repeat="t in teams">
 								<td class="text-center">{{t.$id}}</td>
 								<td>{{t.teamSize}}</td>
-								<td>Super Admin</td>
+								<td>{{t.leaderId | nameByUID}}</td>
 								<!-- <td>AZ23045</td> -->
 							</tr>
 							<tr ng-if="!teams.length">
