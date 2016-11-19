@@ -15,7 +15,7 @@ angular
           return false;
 
         $newPost = {};
-        $newPost.from = Auth.$getAuth().email;
+        $newPost.from = Auth.$getAuth().uid;
         $newPost.msg = $msg;
         $newPost.timestamp = firebase.database.ServerValue.TIMESTAMP;
         var post = currentRoomRef.push();
