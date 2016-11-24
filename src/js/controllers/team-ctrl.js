@@ -1,11 +1,19 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Auth', 'Event', '$stateParams', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', TeamCtrl]);
 
-function TeamCtrl($scope, Auth, Event, $stateParams) {
+function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state) {
 
-    var userId = Auth.$getAuth().uid;
-    var eventId = $stateParams.eventID;
+    var uid = Auth.$getAuth().uid;
+    if (($state.is("new_team") || $state.is("edit_team")) && $stateParams.eventID)
+        setRange($stateParams.eventID);
+    if ($state.is("edit_team") && $stateParams.teamID)
+        loadTeam($stateParams.eventID, $stateParams.teamID);
+
+
+    $scope.eventID = $stateParams.eventID;
+    $scope.teams = Teams.arr($scope.eventID);
+>>>>>>> upstream/master
 
     $scope.selector = {
         options: [],
@@ -17,35 +25,35 @@ function TeamCtrl($scope, Auth, Event, $stateParams) {
         tags: [],
         member: []
     };
-    $scope.input.member.push(userId);
+    $scope.input.member.push(uid);
 
-    var refPath = 'events/' + eventId;
-    firebase.database().ref(refPath).once("value").then(function(data) {
-        if (data.val() !== null) {
-            $scope.getEvent = data.val();
-            $scope.input.teamSize = $scope.getEvent.minMem;
-            for (var i = $scope.getEvent.minMem; i <= $scope.getEvent.maxMem; i++)
-                $scope.selector.options.push(i);
-        }
-        $scope.$apply();
-    });
-
-    $scope.addTeam = function() {
+    $scope.addTeam = function () {
         var newInput = {
-            'leaderId': userId,
+            'leaderId': uid,
             'teamSize': $scope.input.teamSize,
             'regData': new Date().getTime(),
             'tags': $scope.input.tags,
             'member': $scope.input.member
         };
-        var newPath = 'teams/' + eventId + '/' + $scope.input.teamName;
-        var ref = firebase.database().ref(newPath);
-        ref.set(newInput);
+        Teams.set($scope.eId, $scope.input.teamName, newInput);
     };
 
-    $scope.loadTeam = function(eId, tName) {
-        var tPath = 'teams/' + eId + '/' + tName;
-        firebase.database().ref(tPath).once('value').then(function(data) {
+    function setRange(eId) {
+        $scope.eId = eId;
+        Events.childRef(eId).once("value").then(function (data) {
+            if (data.val() !== null) {
+                var eData = data.val();
+                $scope.input.teamSize = eData.minMem;
+                $scope.selector.options = [];
+                for (var i = eData.minMem; i <= eData.maxMem; i++)
+                    $scope.selector.options.push(i);
+            }
+            $scope.$apply();
+        });
+    }
+
+    function loadTeam(eId, tName) {
+        Teams.childRef(eId, tName).once('value').then(function (data) {
             if (data.val() !== null) {
                 var tData = data.val();
                 $scope.input = {
@@ -56,5 +64,5 @@ function TeamCtrl($scope, Auth, Event, $stateParams) {
             }
             $scope.$apply();
         });
-    };
+    }
 }

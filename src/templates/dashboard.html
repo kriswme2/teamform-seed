@@ -51,8 +51,9 @@
 	</div>
 </div> -->
 
-<div class="row">
+<div class="row" ng-controller="EventsCtrl">
 	<div class="col-lg-8">
+		<a ui-sref="edit_event({ eventID: eventID })" ng-if="isEventAdmin">Edit event</a>
 		<rd-widget>
 			<rd-widget-header icon="fa-tasks" title="Announcement">
 				<!-- <a href="#">Manage</a> -->
@@ -62,7 +63,7 @@
 					<table class="table">
 						<tbody ng-controller="ChatroomCtrl">
 							<tr data-ng-repeat="p in posts.slice().reverse()">
-								<td>{{p.from}}</td>
+								<td>{{p.from | emailByUID}}</td>
 								<td>{{p.msg}}</td>
 								<td>{{p.timestamp | date:'medium'}}</td>
 							</tr>
@@ -83,9 +84,10 @@
 
 
 
-	<div class="col-lg-4">
+	<div class="col-lg-4" ng-controller="TeamCtrl">
 		<rd-widget>
 			<rd-widget-header icon="fa-users" title="Teams">
+				<a ui-sref="new_team({ eventID: eventID })">Create Team</a>
 				<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
 			</rd-widget-header>
 			<rd-widget-body classes="medium no-padding">
@@ -94,59 +96,20 @@
 						<thead>
 							<tr>
 								<th class="text-center">Team</th>
-								<th>Username</th>
-								<th>Role</th>
+								<th>teamSize</th>
+								<th>Admin</th>
 								<!-- <th>Account</th> -->
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td class="text-center">1</td>
-								<td>Joe Bloggs</td>
-								<td>Super Admin</td>
+							<tr ng-repeat="t in teams">
+								<td class="text-center">{{t.$id}}</td>
+								<td>{{t.teamSize}}</td>
+								<td>{{t.leaderId | emailByUID}}</td>
 								<!-- <td>AZ23045</td> -->
 							</tr>
-							<tr>
-								<td class="text-center">1</td>
-								<td>Timothy Hernandez</td>
-								<td>Admin</td>
-								<!-- <td>AU24783</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">2</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">2</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">2</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">3</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">3</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
-							</tr>
-							<tr>
-								<td class="text-center">3</td>
-								<td>Joe Bickham</td>
-								<td>User</td>
-								<!-- <td>AM23781</td> -->
+							<tr ng-if="!teams.length">
+								<td>No Teams found.</td>
 							</tr>
 						</tbody>
 					</table>
