@@ -45,7 +45,7 @@
 							</tr>
 						</thead>
 						<script type="text/ng-template" id="tpl.html">
-						  <div ng-repeat = "uid in t.member"><img ng-src="{{uid | profilePicByUID}}" height = "30" width = "30"> {{uid | emailByUID}}</div>
+						  <div ng-repeat = "uid in t.member"><a href = "/profile/{{uid}}"><img ng-src="{{uid | profilePicByUID}}" height = "30" width = "30"> {{uid | emailByUID}}</a></div>
 						  <!-- <div>Heello</div> -->
 						</script>
 						<tbody>
