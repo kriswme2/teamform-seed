@@ -1,6 +1,6 @@
 angular
   .module('teamform')
-  .factory("AccessControl", ["firebase", "$firebaseArray", "Auth", "$stateParams", "$q",function(firebase,$firebaseArray,Auth,$stateParams,$q) {
+  .factory("AccessControl", ["firebase", "$firebaseArray", "Auth", "$stateParams", "$q", '$state',function(firebase,$firebaseArray,Auth,$stateParams,$q,$state) {
     var val = {};
     val.eventID = null;
     val.access = null;
@@ -22,22 +22,16 @@ angular
         AccessControl.setcurrentUser();
         currentUserRef.update({access: $access});
       },
-      requireAccess: function() {
+      requireAccess: function() {console.log($state);
         var deferred = $q.defer();
         AccessControl.setcurrentUser();
         currentUserRef.on("value", function(snapshot){
-          if (!snapshot.val()) {
-            deferred.resolve();
-            return ;
+          if (snapshot.val()) {
+            val.access = snapshot.val().access;
           }
-          access = snapshot.val().access;
-          if (access && access == 'accept') {
-            deferred.resolve();
-          } else {
-            deferred.reject();
-          }
+          deferred.resolve();
         }, function(){
-          deferred.reject();
+          deferred.reject('firebase error');
         });
         return deferred.promise;
       },
