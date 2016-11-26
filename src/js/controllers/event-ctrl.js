@@ -29,7 +29,6 @@ function EventsCtrl($scope, Events, Auth, $stateParams, $state, Tags) {
         // tags: [],
         mode: "add",
     };
-
     $scope.tags = [];
 
     $scope.$watchCollection("eventID", function () {
