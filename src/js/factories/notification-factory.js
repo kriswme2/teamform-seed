@@ -10,7 +10,7 @@ angular
       },
       send: function($to, $msg){
         $newNotification = {};
-        $newNotification.from = Auth.$getAuth().uid;
+        $newNotification.from = Auth.$getAuth().email;
         $newNotification.msg = $msg;
         $firebaseArray(ref.child($to).child('box')).$add($newNotification);
       },
