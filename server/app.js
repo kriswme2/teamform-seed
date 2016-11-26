@@ -10,14 +10,14 @@ var db = admin.database();
 
 // Teams
 var teams_ref = db.ref("teams");
-ref.on("value", function(snapshot) {
+teams_ref.on("value", function(snapshot) {
   console.log(snapshot.val());
 });
 
 // Events
-var teams_ref = db.ref("teams");
-ref.on("value", function(snapshot) {
+var events_ref = db.ref("events");
+events_ref.on("value", function(snapshot) {
   console.log(snapshot.val());
 });
 
-/* Instead of doing console.log to display the entire database, it can do notification, send email! */
+/* Instead of doing console.log to display the entire database, it can do notification, send email!  */
