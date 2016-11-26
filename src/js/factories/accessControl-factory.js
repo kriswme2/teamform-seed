@@ -9,8 +9,8 @@ angular
 
     var AccessControl = {
       setcurrentUser: function () {
-        if (!currentUserRef) {console.log('$stateParams');
-          val.eventID = $stateParams.eventID;console.log(val.eventID);
+        if (!currentUserRef) {
+          val.eventID = $stateParams.eventID;
           currentUserRef = ref.child(val.eventID).child(Auth.$getAuth().uid);
         }
       },
@@ -24,7 +24,7 @@ angular
       },
       requireAccess: function() {
         var deferred = $q.defer();
-        AccessControl.setcurrentUser();console.log(val.eventID);
+        AccessControl.setcurrentUser();
         currentUserRef.on("value", function(snapshot){
           if (!snapshot.val()) {
             deferred.resolve();
@@ -34,10 +34,10 @@ angular
           if (access && access == 'accept') {
             deferred.resolve();
           } else {
-            deferred.resolve(); //reject
+            deferred.reject();
           }
         }, function(){
-          deferred.resolve();
+          deferred.reject();
         });
         return deferred.promise;
       },
