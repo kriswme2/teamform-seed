@@ -1,16 +1,15 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', '$sce', 'Events', 'Teams', 'Auth', '$stateParams', '$state', TeamCtrl]);
 
-function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state) {
+function TeamCtrl($scope, $sce, Events, Teams, Auth, $stateParams, $state) {
 
     var uid = Auth.$getAuth().uid;
     if (($state.is("new_team") || $state.is("edit_team")) && $stateParams.eventID)
         setRange($stateParams.eventID);
     if ($state.is("edit_team") && $stateParams.teamID)
         loadTeam($stateParams.eventID, $stateParams.teamID);
-
-
+    
     $scope.eventID = $stateParams.eventID;
     $scope.teams = Teams.arr($scope.eventID);
 
