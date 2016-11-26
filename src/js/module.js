@@ -1,4 +1,4 @@
-angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase', 'ngTagsInput'])
+angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase', 'ngTagsInput', 'ngFileUpload'])
 
 .run(["$rootScope", "$state", "$location", "$cookies", "Auth",
   function($rootScope, $state, $location, $cookies, Auth) {

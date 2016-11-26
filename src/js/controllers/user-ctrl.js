@@ -4,9 +4,9 @@
 
 angular
   .module('teamform')
-  .controller('UserCtrl', ['$scope', 'Auth', UserCtrl]);
+  .controller('UserCtrl', ['$scope', 'Auth', 'User', UserCtrl]);
 
-function UserCtrl($scope, Auth) {
+function UserCtrl($scope, Auth, User) {
   var firebaseUser = Auth.$getAuth();
   $scope.displayName = firebaseUser.displayName;
   $scope.email = firebaseUser.email;
@@ -37,6 +37,10 @@ function UserCtrl($scope, Auth) {
     }).catch(function(error) {
       $scope.errorMessage = error.message;
     });
+  };
+
+  $scope.updatePicture = function() {
+    User.updatePicture($scope.pictureField);
   };
 
 }
