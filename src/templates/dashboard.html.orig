@@ -1,4 +1,4 @@
-<div class="row"> 
+<div class="row">
 	<div class="col-lg-3 col-md-6 col-xs-12">
 		<rd-widget>
 			<rd-widget-body>
@@ -80,10 +80,31 @@
 			<rd-widget-body classes="medium no-padding">
 				<div class="table-responsive">
 					<table class="table">
-						<tbody>
 						<thead>
 							<tr><th class="text-center">ID</th><th>Username</th><th>Role</th><th>Account</th></tr>
-						</thead>						
+						</thead>
+						<script type="text/ng-template" id="tpl.html">
+						  <div ng-repeat = "m in t.member">{{m | emailByUID}}</div>
+						  <!-- <div>Heello</div> -->
+						</script>
+						<tbody>
+
+							<tr ng-repeat="t in teams">
+								<!-- <td class="text-center" uib-popover-html="htmlPopover" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
+								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top" popover-append-to-body="true"><a href = "#">{{t.$id}}</a> </td>
+								<!-- <td class="text-center" uib-popover-html="><a href = "#">{{t.$id}}</a> </td> -->
+
+								<!-- <td class="text-center" uib-popover="{{t.member}}" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
+								<!-- Add team members to a popover view instead -->
+								<!-- <td ng-repeat ="m in t.member">{{m}}</td> -->
+								<td>{{t.teamSize}}</td>
+								<td>{{t.leaderId | emailByUID}}</td>
+								<td> <button type="button" class="btn btn-default btn-sm">join</button> </td>
+							</tr>
+							<tr ng-if="!teams.length">
+								<td>No Teams found.</td>
+							</tr>
+
 							<tr><td class="text-center">1</td><td>Joe Bloggs</td><td>Super Admin</td><td>AZ23045</td></tr>
 							<tr><td class="text-center">2</td><td>Timothy Hernandez</td><td>Admin</td><td>AU24783</td></tr>
 							<tr><td class="text-center">3</td><td>Joe Bickham</td><td>User</td><td>AM23781</td></tr>
@@ -93,5 +114,39 @@
         		</div>
 			</rd-widget-body>
 		<rd-widget>
+	</div>
+</div>
+
+
+
+<!-- <div class="row">
+
+<div class="row">
+
+	<div class="col-lg-6">
+   		<rd-widget>
+   			<rd-widget-header icon="fa-plus" title="Extras">
+   				<button class="btn btn-sm btn-info">Button</button>
+   			</rd-widget-header>
+   			<rd-widget-body>
+				<div class="message">
+					This is a standard message which will also work the ".no-padding" class, I can also <span class="error">be an error message!</span>
+				</div>
+				<hr />
+				<div class="message">
+					<a href="http://angular-ui.github.io/bootstrap/" target="_blank">UI Bootstrap</a> is included, so you can use <a href="#" tooltip="I'm a tooltip!">tooltips</a> and all of the other native Bootstrap JS components!
+				</div>
+   			</rd-widget-body>
+   		</rd-widget>
+	</div>
+	<div class="col-lg-6">
+		<rd-widget>
+			<rd-widget-header icon="fa-cog fa-spin" title="Loading Directive">
+				<a href="http://tobiasahlin.com/spinkit/" target="_blank">SpinKit</a>
+			</rd-widget-header>
+			<rd-widget-body>
+				<rd-loading></rd-loading>
+			</rd-widget-body>
+		</rd-widget>
 	</div>
 </div>

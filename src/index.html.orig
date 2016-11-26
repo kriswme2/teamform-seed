@@ -31,13 +31,12 @@
         </li>
         <li class="sidebar-title"><span>Event</span></li>
 
-<<<<<<< HEAD
         <li class="sidebar-list" ng-repeat = "e in events">
-          <a ui-sref="event({ eventID: '{{e.$id}}' })">{{e.title}}</a>          
-=======
+          <a ui-sref="event({ eventID: '{{e.$id}}' })">{{e.title}}</a>
+
         <li class="sidebar-list" ng-repeat="e in events">
           <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
->>>>>>> fbf7749b8b35ec50e0ce3d4041ea3b6242e4d684
+
         </li>
 
         <li class="sidebar-title"><span>Forms (Change Me)</span></li>
