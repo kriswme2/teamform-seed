@@ -46,17 +46,10 @@
 						</thead>
 						<script type="text/ng-template" id="tpl.html">
 						  <div ng-repeat = "uid in t.member"><a href = "/profile/{{uid}}"><img ng-src="{{uid | profilePicByUID}}" height = "30" width = "30"> {{uid | emailByUID}}</a></div>
-						  <!-- <div>Heello</div> -->
 						</script>
 						<tbody>
 							<tr ng-repeat="t in teams">
-								<!-- <td class="text-center" uib-popover-html="htmlPopover" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
 								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top" popover-append-to-body="true"><a href = "#">{{t.$id}}</a> </td>
-								<!-- <td class="text-center" uib-popover-html="><a href = "#">{{t.$id}}</a> </td> -->
-
-								<!-- <td class="text-center" uib-popover="{{t.member}}" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
-								<!-- Add team members to a popover view instead -->
-								<!-- <td ng-repeat ="m in t.member">{{m}}</td> -->
 								<td>{{t.teamSize}}</td>
 								<td>{{t.leaderId | emailByUID}}</td>
 								<td> <button type="button" class="btn btn-default btn-sm">join</button> </td>
@@ -72,7 +65,6 @@
 				<a ui-sref="new_team({ eventID: eventID })">Create Team (+) </a>
 			</div>
 			<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
-
 			<rd-widget>
 	</div>
 </div>
