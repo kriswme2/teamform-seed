@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', TeamCtrl]);
 
-function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state) {
+function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags) {
 
     var uid = Auth.$getAuth().uid;
     if (($state.is("new_team") || $state.is("edit_team")) && $stateParams.eventID)
@@ -21,25 +21,27 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state) {
     $scope.input = {
         teamName: '',
         teamSize: null,
-        tags: [],
+        // tags: [],
         member: []
     };
     $scope.input.member.push(uid);
+    $scope.tags = [];
 
-    $scope.addTeam = function () {
+    $scope.addTeam = function() {
         var newInput = {
             'leaderId': uid,
             'teamSize': $scope.input.teamSize,
             'regData': new Date().getTime(),
-            'tags': $scope.input.tags,
+            // 'tags': $scope.input.tags,
             'member': $scope.input.member
         };
         Teams.set($scope.eId, $scope.input.teamName, newInput);
+        Tags.tAdd($scope.eId, $scope.input.teamName, $scope.tags);
     };
 
     function setRange(eId) {
         $scope.eId = eId;
-        Events.childRef(eId).once("value").then(function (data) {
+        Events.childRef(eId).once("value").then(function(data) {
             if (data.val() !== null) {
                 var eData = data.val();
                 $scope.input.teamSize = eData.minMem;
@@ -52,7 +54,7 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state) {
     }
 
     function loadTeam(eId, tName) {
-        Teams.childRef(eId, tName).once('value').then(function (data) {
+        Teams.childRef(eId, tName).once('value').then(function(data) {
             if (data.val() !== null) {
                 var tData = data.val();
                 $scope.input = {
@@ -63,5 +65,12 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state) {
             }
             $scope.$apply();
         });
+        Tags.tref.child(eId).child(tName).once('value').then(function(data) {
+            if(data.val() !== null){
+                $scope.tags = data.val().tags;
+            }
+            $scope.$apply();
+        });
+
     }
 }
