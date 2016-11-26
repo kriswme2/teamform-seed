@@ -1,3 +1,8 @@
+<div class="row" ng-if="message.length > 0">
+	<div class="alert alert-success col-sm-6 col-sm-offset-3">
+		{{message}}
+	</div>
+</div>
 <div ng-controller="UserCtrl">
 
 	<div class="row">
@@ -6,7 +11,7 @@
 
 	<div class="row profile-row">
 		<div class="col-sm-3 col-xs-12 profile-icon">
-			<i class="fa fa-3x fa-envelope"></i> 
+			<i class="fa fa-3x fa-envelope"></i>
 		</div>
 		<div class="col-sm-3 col-xs-3" style="text-align:center">
 			Email:
@@ -20,7 +25,7 @@
 
 	<div class="row profile-row">
 		<div class="col-sm-3 col-xs-12 profile-icon">
-			<i class="fa fa-3x fa-user"></i> 
+			<i class="fa fa-3x fa-user"></i>
 		</div>
 		<div class="col-sm-3 col-xs-3" style="text-align:center">
 			Name:
@@ -34,7 +39,7 @@
 
 	<div class="row profile-row">
 		<div class="col-sm-3 col-xs-12 profile-icon">
-			<i class="fa fa-3x fa-key"></i> 
+			<i class="fa fa-3x fa-key"></i>
 		</div>
 		<div class="col-sm-3 col-xs-12" style="text-align:center">
 			Password:

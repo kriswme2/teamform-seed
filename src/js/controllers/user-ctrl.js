@@ -4,9 +4,9 @@
 
 angular
   .module('teamform')
-  .controller('UserCtrl', ['$scope', '$cookieStore', 'Auth', UserCtrl]);
+  .controller('UserCtrl', ['$scope', 'Auth', UserCtrl]);
 
-function UserCtrl($scope, $cookieStore, Auth) {
+function UserCtrl($scope, Auth) {
   var firebaseUser = Auth.$getAuth();
   $scope.displayName = firebaseUser.displayName;
   $scope.email = firebaseUser.email;

@@ -1,38 +1,102 @@
 angular
     .module('teamform')
-    .controller("EventsCtrl", ['$scope', 'Auth', "$firebaseArray",EventsCtrl]);
+    .controller("EventsCtrl", ['$scope', 'Events', 'Auth', '$stateParams', '$state', EventsCtrl]);
 
-function EventsCtrl($scope, Auth, $firebaseArray) {
+function EventsCtrl($scope, Events, Auth, $stateParams, $state) {
+
+    var uid = Auth.$getAuth().uid;
+    $scope.eventID = $stateParams.eventID;
+
+    $scope.events = Events.arr();
+    $scope.event = null;
+    $scope.eventObj = null;
+    $scope.isEventAdmin = false;
+
+    if ($stateParams.eventID && $state.is("edit_event")) {
+        loadEvent($stateParams.eventID);
+    }
 
     $scope.input = {
         organizer: "",
         semester: "Not Applicable",
         course: "",
         title: "",
-        deadline: "",
         numOfTeam: "",
         maxMem: 4,
         minMem: 1,
         privacy: "public",
         desc: "",
-        createDate: null,
-        tags: []
+        tags: [],
+        mode: "add",
     };
 
-    var userId = Auth.$getAuth().uid;
-    var eventId = null;
-    var ref = firebase.database().ref('events');
+    $scope.$watchCollection("eventID", function() {
+      if (!$scope.eventID) return;
+      $scope.eventObj = Events.childObj($scope.eventID);
+      $scope.eventObj.$loaded().then(function() {
+        if ($scope.eventObj.adminId == uid) $scope.isEventAdmin = true;
+      });
+    });
 
-    $scope.addEvent = function () {
-        $scope.input.deadline = $scope.dt.getTime();
-        $scope.input.createDate = new Date().getTime();
-        eventId = ref.push($scope.input).key;
-        ref.child('teams').child('eventId').push().set({
-            admin: userId
-        });
+    function addEvent() {
+        if ($scope.input.organizer !== "" && $scope.input.title !== "") {
+            $scope.input.adminId = uid;
+            $scope.input.deadline = $scope.dt.getTime();
+            $scope.input.createDate = new Date().getTime();
+            $scope.input.mode = null;
+            $scope.eventID = Events.push($scope.input).key;
+            $state.go('event', { "eventID": $scope.eventID });
+        }
+    }
+
+    $scope.eventFormAction = function () {
+      if ($scope.input.mode == "edit") {
+        var updatedRecord = {
+          organizer: $scope.input.organizer,
+          semester: $scope.input.semester,
+          course: $scope.input.course,
+          title: $scope.input.title,
+          deadline: $scope.dt.getTime(),
+          numOfTeam: $scope.input.numOfTeam,
+          maxMem: $scope.input.maxMem,
+          minMem: $scope.input.minMem,
+          privacy: $scope.input.privacy,
+          desc: $scope.input.desc,
+        };
+        if ($scope.input.tags) {
+          updatedRecord.tags = $scope.input.tags;
+        }
+        $scope.event.update(updatedRecord);
+        $state.go('event', { "eventID": $scope.eventID });
+      } else {
+        addEvent();
+      }
     };
 
-    $scope.events = $firebaseArray(firebase.database().ref('events'));
+    function loadEvent(eId) {
+      $scope.eventID = eId;
+      $scope.event = Events.childRef(eId);
+      $scope.event.once("value").then(function (data) {
+          if (data.val() !== null) {
+              var eData = data.val();
+              $scope.input = {
+                  organizer: eData.organizer,
+                  semester: eData.semester,
+                  course: eData.course,
+                  title: eData.title,
+                  numOfTeam: eData.numOfTeam,
+                  maxMem: eData.maxMem,
+                  minMem: eData.minMem,
+                  privacy: eData.privacy,
+                  desc: eData.desc,
+                  tags: eData.tags,
+                  mode: "edit",
+              };
+              $scope.dt = new Date(eData.deadline);
+          }
+          $scope.$apply();
+      });
+    }
 
     $scope.editMaxMem = function (i) {
         $scope.input.maxMem += i;
