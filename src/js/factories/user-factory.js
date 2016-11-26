@@ -1,6 +1,6 @@
 angular
   .module('teamform')
-  .factory("User", ["firebase", "$firebaseArray", "$firebaseObject", "Auth", function (firebase, $firebaseArray, $firebaseObject, Auth) {
+  .factory("User", ["firebase", "$firebaseArray", "$firebaseObject", "Auth", "Upload", "$state", function (firebase, $firebaseArray, $firebaseObject, Auth, Upload, $state) {
     var ref = firebase.database().ref("users");
     var currentProfileRef = null;
 
@@ -17,7 +17,18 @@ angular
         $profile.name = Auth.$getAuth().displayName;
         $profile.email = Auth.$getAuth().email;
         currentProfileRef.set($profile);
-      }
+      },
+      updatePicture: function(pictureField) {
+        Upload.base64DataUrl(pictureField).then(function(base64){
+          $profile = {};
+          $profile.name = Auth.$getAuth().displayName;
+          $profile.email = Auth.$getAuth().email;
+          $profile.picture = base64[0];
+          ref.child(Auth.$getAuth().uid).set($profile);
+
+          $state.reload();
+        });
+      },
     };
 
     return User;
