@@ -1,0 +1,78 @@
+<div class="row" ng-controller="EventsCtrl">
+	<div class="col-lg-7">
+		<a ui-sref="edit_event({ eventID: eventID })" ng-if="isEventAdmin">Edit event</a>
+		<rd-widget>
+			<rd-widget-header icon="fa-tasks" title="Announcement">
+				<!-- <a href="#">Manage</a> -->
+			</rd-widget-header>
+			<rd-widget-body classes="large no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<tbody ng-controller="ChatroomCtrl">
+							<tr data-ng-repeat="p in posts.slice().reverse()">
+								<td>{{p.from | emailByUID}}</td>
+								<td>{{p.msg}}</td>
+								<td>{{p.timestamp | date:'short'}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</rd-widget-body>
+		</rd-widget>
+
+		<br>
+		<span ng-controller="ChatroomCtrl">
+			<form ng-submit="sendMessage()">
+				<input id="message-box" type="text" class="form-control message-input-box" placeholder="Type your message here" ng-model = "message">
+			</form>
+		</span>
+
+	</div>
+
+	<div class="col-lg-5" ng-controller="TeamCtrl">
+		<rd-widget>
+			<rd-widget-header icon="fa-users" title="Teams">
+			</rd-widget-header>
+			<rd-widget-body classes="large no-padding">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="text-center">Team</th>
+								<th>teamSize</th>
+								<th>Admin</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<script type="text/ng-template" id="tpl.html">
+						  <div ng-repeat = "uid in t.member"><img ng-src="{{uid | profilePicByUID}}" height = "30" width = "30"> {{uid | emailByUID}}</div>
+						  <!-- <div>Heello</div> -->
+						</script>
+						<tbody>
+							<tr ng-repeat="t in teams">
+								<!-- <td class="text-center" uib-popover-html="htmlPopover" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
+								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top" popover-append-to-body="true"><a href = "#">{{t.$id}}</a> </td>
+								<!-- <td class="text-center" uib-popover-html="><a href = "#">{{t.$id}}</a> </td> -->
+
+								<!-- <td class="text-center" uib-popover="{{t.member}}" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
+								<!-- Add team members to a popover view instead -->
+								<!-- <td ng-repeat ="m in t.member">{{m}}</td> -->
+								<td>{{t.teamSize}}</td>
+								<td>{{t.leaderId | emailByUID}}</td>
+								<td> <button type="button" class="btn btn-default btn-sm">join</button> </td>
+							</tr>
+							<tr ng-if="!teams.length">
+								<td>No Teams found.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</rd-widget-body>
+			<div align="right">
+				<a ui-sref="new_team({ eventID: eventID })">Create Team (+) </a>
+			</div>
+			<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
+
+			<rd-widget>
+	</div>
+</div>

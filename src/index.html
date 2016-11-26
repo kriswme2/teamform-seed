@@ -13,6 +13,7 @@
 
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
+
       <ul class="sidebar" ng-if="!auth.$getAuth()">
         <li class="sidebar-main">
           <a ng-click="toggleSidebar()">
@@ -22,6 +23,7 @@
         </li>
         <li class="sidebar-title"><span>Please sign in first</span></li>
       </ul>
+
       <ul class="sidebar" ng-if="auth.$getAuth()" ng-controller="EventsCtrl">
         <li class="sidebar-main">
           <a ng-click="toggleSidebar()">
@@ -29,16 +31,23 @@
             <span class="menu-icon glyphicon glyphicon-transfer"></span>
           </a>
         </li>
+        
+        <li class="sidebar-list">
+          <a href="/">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+        </li>
+
         <li class="sidebar-title"><span>Event</span></li>
 
         <li class="sidebar-list" ng-repeat="e in events">
           <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
         </li>
 
-        <!-- <li class="sidebar-title"><span>Forms (Change Me)</span></li> -->
-        <hr>
+        <li class="sidebar-title"><span>Event Management</span></li>
+
         <li class="sidebar-list">
-          <a href="/event/new">Create Event (+)</a>
+          <a href="/event/new">Create Event
+            <span class="menu-icon glyphicon glyphicon-plus"></span>
+          </a>
         </li>
       </ul>
       <div class="sidebar-footer">
