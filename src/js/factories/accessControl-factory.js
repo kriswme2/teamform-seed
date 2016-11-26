@@ -1,16 +1,17 @@
 angular
   .module('teamform')
   .factory("AccessControl", ["firebase", "$firebaseArray", "Auth", "$stateParams", "$q",function(firebase,$firebaseArray,Auth,$stateParams,$q) {
-    var eventID = null;
+    var val = {};
+    val.eventID = null;
+    val.access = null;
     var ref = firebase.database().ref("accessControls");
     var currentUserRef = null;
-    var access = null;
 
     var AccessControl = {
       setcurrentUser: function () {
-        if (!currentUserRef) {
-          eventID = $stateParams.eventID;
-          currentUserRef = ref.child(eventID).child(Auth.$getAuth().uid);
+        if (!currentUserRef) {console.log('$stateParams');
+          val.eventID = $stateParams.eventID;console.log(val.eventID);
+          currentUserRef = ref.child(val.eventID).child(Auth.$getAuth().uid);
         }
       },
       get: function(){
@@ -23,7 +24,7 @@ angular
       },
       requireAccess: function() {
         var deferred = $q.defer();
-        AccessControl.setcurrentUser();
+        AccessControl.setcurrentUser();console.log(val.eventID);
         currentUserRef.on("value", function(snapshot){
           if (!snapshot.val()) {
             deferred.resolve();
@@ -33,15 +34,15 @@ angular
           if (access && access == 'accept') {
             deferred.resolve();
           } else {
-            deferred.reject();
+            deferred.resolve(); //reject
           }
         }, function(){
-          deferred.reject();
+          deferred.resolve();
         });
         return deferred.promise;
       },
       $ref: ref,
-      access:access
+      $val: val,
     };
 
     return AccessControl;

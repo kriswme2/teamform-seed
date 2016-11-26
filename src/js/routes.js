@@ -16,7 +16,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             return Auth.$requireSignIn();
         }];
 
-        var redirectToLoginIfNotSignedIn = ["Auth", "$state",'AccessControl', function (Auth, $state,AccessControl) {
+        var redirectToLoginIfNotSignedIn = ["Auth", "$state", function (Auth, $state) {
             if (!Auth.$getAuth()) {
                 $state.go('login');
             }
@@ -28,14 +28,16 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             }
         }];
 
-        var AccessControlResolver = ['AccessControl', function (AccessControl) {
+        var AccessControlResolver = ['AccessControl', '$state', function (AccessControl,$state) {console.log($state);
           return AccessControl.requireAccess();
         }];
 
-        var redirectToJoinPageIfNotAccepted = ['AccessControl', '$state', function (AccessControl, $state) {
-          redirectToLoginIfNotSignedIn;
-          if (AccessControl.access && AccessControl.access != 'accepted') {
-            $state.go('joinEvent', { "eventID": AccessControl.eventID });
+        var redirectToJoinPageIfNotAccepted = ['AccessControl', '$state', function (AccessControl, $state) {console.log(AccessControl);
+          // redirectToLoginIfNotSignedIn;
+          if (!AccessControl.access) {
+            $state.go('joinEvent', { "eventID": AccessControl.$val.eventID });
+          } else if (AccessControl.access && AccessControl.access != 'accepted') {
+            $state.go('joinEvent', { "eventID": AccessControl.$val.eventID });
           }
         }];
 
@@ -74,7 +76,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('joinEvent', {
-                url: '/event/{eventID}/join',
+                url: '/join/{eventID}',
                 templateUrl: 'templates/accessControl/join.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
