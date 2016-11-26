@@ -9,18 +9,6 @@ angular
       childObj: function($uid) {
           return $firebaseObject(User.ref.child($uid));
       },
-      currentProfile: function(field) {
-        if (!currentProfileRef) {
-          User.setCurrentProfile();
-        }
-        $profile = [];
-        currentProfileRef.on("child_added", function(snapshot, field) {console.log(snapshot.key);
-          // $profile[snapshot.key] = snapshot.val();console.log($profile);
-          if (snapshot.key == 'picture')
-          field = snapshot.val();
-        });
-        return $profile;
-      },
       setCurrentProfile: function () {
         currentProfileRef = ref.child(Auth.$getAuth().uid);
       },

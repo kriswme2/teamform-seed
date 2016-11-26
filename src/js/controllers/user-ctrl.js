@@ -10,6 +10,7 @@ function UserCtrl($scope, Auth, User) {
   var firebaseUser = Auth.$getAuth();
   $scope.displayName = firebaseUser.displayName;
   $scope.email = firebaseUser.email;
+  $scope.uid = Auth.$getAuth().uid;
   $scope.message = null;
   $scope.newPassword = null;
 
