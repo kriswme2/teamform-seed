@@ -1,10 +1,10 @@
-<!-- <div class="row alerts-container" data-ng-controller="AlertsCtrl" data-ng-show="alerts.length">
+<div class="row alerts-container" data-ng-controller="AlertsCtrl" data-ng-show="alerts.length">
   <div class="col-xs-12">
     <uib-alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
   </div>
-</div> -->
+</div>
 
-<!-- <div class="row">
+<div class="row">
 	<div class="col-lg-3 col-md-6 col-xs-12">
 		<rd-widget>
 			<rd-widget-body>
@@ -49,80 +49,59 @@
 			</rd-widget-body>
 		</rd-widget>
 	</div>
-</div> -->
+</div>
 
-<div class="row" ng-controller="EventsCtrl">
-	<div class="col-lg-7">
-		<a ui-sref="edit_event({ eventID: eventID })" ng-if="isEventAdmin">Edit event</a>
+<div class="row">
+	<div class="col-lg-6">
 		<rd-widget>
-			<rd-widget-header icon="fa-tasks" title="Announcement">
-				<!-- <a href="#">Manage</a> -->
-			</rd-widget-header>
-			<rd-widget-body classes="medium no-padding">
+      		<rd-widget-header icon="fa-tasks" title="Servers">
+				<a href="#">Manage</a>
+      		</rd-widget-header>
+      		<rd-widget-body classes="medium no-padding">
 				<div class="table-responsive">
 					<table class="table">
-						<tbody ng-controller="ChatroomCtrl">
-							<tr data-ng-repeat="p in posts.slice().reverse()">
-								<td>{{p.from | emailByUID}}</td>
-								<td>{{p.msg}}</td>
-								<td>{{p.timestamp | date:'short'}}</td>
-							</tr>
+						<tbody>
+							<tr><td>RDVMPC001</td><td>238.103.133.37</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDVMPC002</td><td>68.66.63.170</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDVMPC003</td><td>76.117.212.33</td><td><span tooltip="Server Down!" class="text-danger"><i class="fa fa-warning"></i></span></td></tr>
+							<tr><td>RDPHPC001</td><td>91.88.224.5</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDESX001</td><td>197.188.15.93</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDESX002</td><td>168.85.154.251</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDESX003</td><td>209.25.191.61</td><td><span tooltip="Server Down!" class="text-danger"><i class="fa fa-warning"></i></span></td></tr>
+							<tr><td>RDESX004</td><td>252.37.192.235</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDTerminal01</td><td>139.71.18.207</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
+							<tr><td>RDTerminal02</td><td>136.80.122.212</td><td><span tooltip="Could not connect!" class="text-warning"><i class="fa fa-flash"></i></span></td></tr>
+							<tr><td>RDDomainCont01</td><td>196.80.245.33</td><td><span class="text-success"><i class="fa fa-check"></i></span></td></tr>
 						</tbody>
 					</table>
 				</div>
 			</rd-widget-body>
 		</rd-widget>
-
-		<br>
-		<span ng-controller="ChatroomCtrl">
-			<form ng-submit="sendMessage()">
-				<input id="message-box" type="text" class="form-control message-input-box" placeholder="Type your message here" ng-model = "message">
-			</form>
-		</span>
-
 	</div>
-
-
-
-	<div class="col-lg-5" ng-controller="TeamCtrl">
+	<div class="col-lg-6">
 		<rd-widget>
-			<rd-widget-header icon="fa-users" title="Teams">
+			<rd-widget-header icon="fa-users" title="Users">
+				<input type="text" placeholder="Search" class="form-control input-sm" />
 			</rd-widget-header>
 			<rd-widget-body classes="medium no-padding">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<tr>
-								<th class="text-center">Team</th>
-								<th>teamSize</th>
-								<th>Admin</th>
-								<th>Action</th>
-							</tr>
+							<tr><th class="text-center">ID</th><th>Username</th><th>Role</th><th>Account</th></tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="t in teams">
-								<td class="text-center">{{t.$id}}</td>
-								<td>{{t.teamSize}}</td>
-								<td>{{t.leaderId | emailByUID}}</td>
-								<td> <button type="button" class="btn btn-default btn-sm">join</button> </td>
-							</tr>
-							<tr ng-if="!teams.length">
-								<td>No Teams found.</td>
-							</tr>
+							<tr><td class="text-center">1</td><td>Joe Bloggs</td><td>Super Admin</td><td>AZ23045</td></tr>
+							<tr><td class="text-center">2</td><td>Timothy Hernandez</td><td>Admin</td><td>AU24783</td></tr>
+							<tr><td class="text-center">3</td><td>Joe Bickham</td><td>User</td><td>AM23781</td></tr>
 						</tbody>
 					</table>
-				</div>
+        		</div>
 			</rd-widget-body>
-			<div align="right">
-				<a ui-sref="new_team({ eventID: eventID })">Create Team (+) </a>
-			</div>
-			<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
-
-			<rd-widget>
+		<rd-widget>
 	</div>
 </div>
 
-<!-- <div class="row">
+<div class="row">
 	<div class="col-lg-6">
    		<rd-widget>
    			<rd-widget-header icon="fa-plus" title="Extras">
@@ -149,4 +128,4 @@
 			</rd-widget-body>
 		</rd-widget>
 	</div>
-</div> -->
+</div>
