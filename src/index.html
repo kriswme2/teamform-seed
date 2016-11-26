@@ -94,16 +94,16 @@
                   </li>
                 </ul>
               </div>
-              <div class="item dropdown" uib-dropdown ng-controller="NotificationCtrl" ng-if="auth.$getAuth()">
+              <div class="item dropdown" uib-dropdown ng-controller="NotificationCtrl" ng-if="auth.$getAuth()" on-toggle="toggled(open)">
                 <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-                  <i class="fa fa-bell-o"></i>
+                  <i class="fa fa-bell-o notifications-bell-{{notifications.new | bellSwitch}}"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
                     Notifications
                   </li>
                   <li class="divider"></li>
-                  <li ng-repeat="n in notifications">
+                  <li ng-repeat="n in notifications.box">
                     <a href="#">{{n.msg}} from {{n.from}}</a>
                   </li>
                 </ul>
@@ -151,6 +151,8 @@
   <script type="text/javascript" src="components/angularfire/dist/angularfire.min.js"></script>
   <script type="text/javascript" src="components/firebase/firebase.js"></script>
   <script type="text/javascript" src="components/angularfire/dist/angularfire.min.js"></script>
+  <script type="text/javascript" src="components/ng-file-upload-shim/ng-file-upload-shim.min.js"></script>
+  <script type="text/javascript" src="components/ng-file-upload-shim/ng-file-upload.min.js"></script>
   <!-- endbuild -->
 
   <!-- Custom Scripts -->

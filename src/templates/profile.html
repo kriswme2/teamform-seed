@@ -66,5 +66,26 @@
 		</div>
 	</div>
 
+	<hr style="background:lightgray;height:2px">
+
+	<div class="row profile-row">
+		<div class="col-sm-3 col-xs-12 profile-icon">
+			<i class="fa fa-3x fa-user"></i>
+		</div>
+		<div class="col-sm-3 col-xs-3" style="text-align:center">
+			Profile Picture:
+		</div>
+		<div class="col-sm-6 col-xs-9">
+			<img ng-src="{{uid | profilePicByUID}}">
+			<form ng-submit="updatePicture()">
+			  <div class="form-group">
+					<input id="pictures" type="file" ngf-select ng-model="pictureField" name="file"
+accept="image/*" ngf-max-size="2MB" ngf-keep="true" ngf-keep-distinct="true" class="btn btn-primary"/>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Change profile picture</button>
+			</form>
+		</div>
+	</div>
+
 
 </div>
