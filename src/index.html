@@ -38,12 +38,12 @@
 
         <li class="sidebar-title"><span>Event</span></li>
 
-        <span class = "scrollView">
+        <div class = "scrollView">
         <!-- <li class="sidebar-list" ng-repeat="e in events | limitTo : 5"> -->
         <li class="sidebar-list" ng-repeat="e in events">
           <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
         </li>
-        </span>
+        </div>
 
         <li class="sidebar-title"><span>Event Management</span></li>
 
