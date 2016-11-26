@@ -7,6 +7,12 @@ angular
     $scope.notifications = obj;
     obj.$bindTo($scope, "notifications");
 
-    // Notification.send(RECEIVER, "2222");
+    $scope.toggled = function(state) {
+      if (state) {
+        Notification.opened();
+      }
+    }
+
+    // Notification.send(ReceiverUid, "33333");
   }
 ]);

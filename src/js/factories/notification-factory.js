@@ -10,13 +10,20 @@ angular
       },
       send: function($to, $msg){
         $newNotification = {};
+        receiverRef = ref.child($to);
         $newNotification.from = Auth.$getAuth().email;
         $newNotification.msg = $msg;
-        $firebaseArray(ref.child($to).child('box')).$add($newNotification);
+        $newNotification.timestamp = firebase.database.ServerValue.TIMESTAMP;
+        $firebaseArray(receiverRef.child('box')).$add($newNotification);
+        receiverRef.update({new: true});
       },
       list: function(){
         if (!currentUserRef) Notification.setcurrentUser();
-        return currentUserRef.child('box');
+        return currentUserRef;
+      },
+      opened: function(){
+        if (!currentUserRef) Notification.setcurrentUser();
+        currentUserRef.update({new: false});
       },
       $ref: ref
     };
