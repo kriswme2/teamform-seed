@@ -11,7 +11,7 @@ angular
       if (state) {
         Notification.opened();
       }
-    }
+    };
 
     // Notification.send(ReceiverUid, "33333");
   }
