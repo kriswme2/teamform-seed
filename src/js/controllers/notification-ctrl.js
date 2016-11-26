@@ -1,13 +1,12 @@
 angular
   .module('teamform')
-  .controller("NotificationCtrl",["$scope", "$timeout", "Notification",
+  .controller("NotificationCtrl",["$scope", "$timeout", "Notification", "$firebaseObject",
 
-  function($scope,$timeout,Notification) {
-    $scope.notifications = Notification.list("bb");
+  function($scope,$timeout,Notification,$firebaseObject) {
+    obj = $firebaseObject(Notification.list());
+    $scope.notifications = obj;
+    obj.$bindTo($scope, "notifications");
 
-    //Notification.send("aa", "bb", "4434");
-    $scope.listLength = function() {
-      return Notification.list().length;
-    };
+    // Notification.send(RECEIVER, "2222");
   }
 ]);
