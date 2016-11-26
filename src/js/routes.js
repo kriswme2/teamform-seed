@@ -62,7 +62,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             })
             .state('index', {
                 url: '/',
-                templateUrl: 'templates/dashboard.html',
+                templateUrl: 'templates/eventboard.html',
                 resolve: requireSignInResolver,
                 onEnter: redirectToLoginIfNotSignedIn
             })
