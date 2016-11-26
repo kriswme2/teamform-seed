@@ -99,9 +99,19 @@
 								<th>Action</th>
 							</tr>
 						</thead>
+						<script type="text/ng-template" id="tpl.html">
+						  <div ng-repeat = "m in t.member">{{m | emailByUID}}</div>
+						  <!-- <div>Heello</div> -->
+						</script>
 						<tbody>
 							<tr ng-repeat="t in teams">
-								<td class="text-center">{{t.$id}}</td>
+								<!-- <td class="text-center" uib-popover-html="htmlPopover" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
+								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top"><a href = "#">{{t.$id}}</a> </td>
+								<!-- <td class="text-center" uib-popover-html="><a href = "#">{{t.$id}}</a> </td> -->
+
+								<!-- <td class="text-center" uib-popover="{{t.member}}" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
+								<!-- Add team members to a popover view instead -->
+								<!-- <td ng-repeat ="m in t.member">{{m}}</td> -->
 								<td>{{t.teamSize}}</td>
 								<td>{{t.leaderId | emailByUID}}</td>
 								<td> <button type="button" class="btn btn-default btn-sm">join</button> </td>
@@ -121,6 +131,7 @@
 			<rd-widget>
 	</div>
 </div>
+
 
 <!-- <div class="row">
 	<div class="col-lg-6">
