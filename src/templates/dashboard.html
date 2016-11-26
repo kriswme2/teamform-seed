@@ -82,29 +82,7 @@
 					<table class="table">
 						<thead>
 							<tr><th class="text-center">ID</th><th>Username</th><th>Role</th><th>Account</th></tr>
-						</thead>
-						<script type="text/ng-template" id="tpl.html">
-						  <div ng-repeat = "m in t.member">{{m | emailByUID}}</div>
-						  <!-- <div>Heello</div> -->
-						</script>
-						<tbody>
-
-							<tr ng-repeat="t in teams">
-								<!-- <td class="text-center" uib-popover-html="htmlPopover" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
-								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top" popover-append-to-body="true"><a href = "#">{{t.$id}}</a> </td>
-								<!-- <td class="text-center" uib-popover-html="><a href = "#">{{t.$id}}</a> </td> -->
-
-								<!-- <td class="text-center" uib-popover="{{t.member}}" popover-placement="top"><a href = "#">{{t.$id}}</a> </td> -->
-								<!-- Add team members to a popover view instead -->
-								<!-- <td ng-repeat ="m in t.member">{{m}}</td> -->
-								<td>{{t.teamSize}}</td>
-								<td>{{t.leaderId | emailByUID}}</td>								
-								<td> <button type="button" class="btn btn-default btn-sm">join</button> </td>
-							</tr>
-							<tr ng-if="!teams.length">
-								<td>No Teams found.</td>
-							</tr>
-
+						</thead>						
 							<tr><td class="text-center">1</td><td>Joe Bloggs</td><td>Super Admin</td><td>AZ23045</td></tr>
 							<tr><td class="text-center">2</td><td>Timothy Hernandez</td><td>Admin</td><td>AU24783</td></tr>
 							<tr><td class="text-center">3</td><td>Joe Bickham</td><td>User</td><td>AM23781</td></tr>
