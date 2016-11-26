@@ -54,12 +54,17 @@
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<tr><th class="text-center">Event Name</th><th>Date created</th></tr>
+							<tr>
+								<th class="text-center">Event Name</th>
+								<th>Date created</th>
+								<th>Deadline</th>
+							</tr>
 						</thead>
 						<tbody ng-controller="EventsCtrl">
 							<tr ng-repeat="event in events">
 								<td>{{event.title}}</td>
 								<td>{{event.createDate | date}}</td>
+								<td>{{event.deadline | date}}</td>
 							</tr>
 						</tbody>
 					</table>
