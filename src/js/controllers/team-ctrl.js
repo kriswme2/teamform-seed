@@ -15,8 +15,11 @@ function TeamCtrl($scope, $sce, Events, Teams, Auth, $stateParams, $state) {
     $scope.teams = Teams.arr($scope.eventID);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> save
+=======
+>>>>>>> fix
 =======
     .controller("TeamCtrl", ['$scope', 'Auth', 'Event', '$stateParams', TeamCtrl]);
 
@@ -26,10 +29,15 @@ function TeamCtrl($scope, Auth, Event, $stateParams) {
     var eventId = $stateParams.eventID;
 >>>>>>> save
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fix
 =======
 >>>>>>> save
+=======
+=======
+>>>>>>> fix
+>>>>>>> fix
 
     $scope.selector = {
         options: [],
