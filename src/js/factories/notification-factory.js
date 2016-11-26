@@ -1,21 +1,29 @@
 angular
   .module('teamform')
-  .factory("Notification", ["firebase", "$firebaseArray",function(firebase,$firebaseArray) {
+  .factory("Notification", ["firebase", "$firebaseArray", "Auth",function(firebase,$firebaseArray,Auth) {
     var ref = firebase.database().ref("notifications");
+    var currentUserRef = null;
+
     var Notification = {
-      send: function($from, $to, $msg){
-        $newNotification = {};
-        $newNotification.from = $from;
-        $newNotification.to = $to;
-        $newNotification.msg = $msg;
-        $firebaseArray(ref).$add($newNotification);
+      setcurrentUser: function () {
+        currentUserRef = ref.child(Auth.$getAuth().uid);
       },
-      list: function($uid){
-        $notificationsaa = [];
-        ref.orderByChild("to").startAt($uid).endAt($uid).on("child_added", function(snapshot) {
-          $notificationsaa.push(snapshot.val());
-        });
-        return $notificationsaa;
+      send: function($to, $msg){
+        $newNotification = {};
+        receiverRef = ref.child($to);
+        $newNotification.from = Auth.$getAuth().email;
+        $newNotification.msg = $msg;
+        $newNotification.timestamp = firebase.database.ServerValue.TIMESTAMP;
+        $firebaseArray(receiverRef.child('box')).$add($newNotification);
+        receiverRef.update({new: true});
+      },
+      list: function(){
+        if (!currentUserRef) Notification.setcurrentUser();
+        return currentUserRef;
+      },
+      opened: function(){
+        if (!currentUserRef) Notification.setcurrentUser();
+        currentUserRef.update({new: false});
       },
       $ref: ref
     };
