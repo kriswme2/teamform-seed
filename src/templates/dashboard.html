@@ -59,7 +59,7 @@
 						<tbody ng-controller="EventsCtrl">
 							<tr ng-repeat="event in events">
 								<td>{{event.title}}</td>
-								<td>{{event.createDate.TIMESTAMP}}</td>
+								<td>{{event.createDate | date}}</td>
 							</tr>
 						</tbody>
 					</table>
