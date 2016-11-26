@@ -52,7 +52,7 @@
 </div> -->
 
 <div class="row" ng-controller="EventsCtrl">
-	<div class="col-lg-8">
+	<div class="col-lg-7">
 		<a ui-sref="edit_event({ eventID: eventID })" ng-if="isEventAdmin">Edit event</a>
 		<rd-widget>
 			<rd-widget-header icon="fa-tasks" title="Announcement">
@@ -65,7 +65,7 @@
 							<tr data-ng-repeat="p in posts.slice().reverse()">
 								<td>{{p.from | emailByUID}}</td>
 								<td>{{p.msg}}</td>
-								<td>{{p.timestamp | date:'medium'}}</td>
+								<td>{{p.timestamp | date:'short'}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -84,11 +84,9 @@
 
 
 
-	<div class="col-lg-4" ng-controller="TeamCtrl">
+	<div class="col-lg-5" ng-controller="TeamCtrl">
 		<rd-widget>
 			<rd-widget-header icon="fa-users" title="Teams">
-				<a ui-sref="new_team({ eventID: eventID })">Create Team</a>
-				<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
 			</rd-widget-header>
 			<rd-widget-body classes="medium no-padding">
 				<div class="table-responsive">
@@ -98,7 +96,7 @@
 								<th class="text-center">Team</th>
 								<th>teamSize</th>
 								<th>Admin</th>
-								<!-- <th>Account</th> -->
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -106,7 +104,7 @@
 								<td class="text-center">{{t.$id}}</td>
 								<td>{{t.teamSize}}</td>
 								<td>{{t.leaderId | emailByUID}}</td>
-								<!-- <td>AZ23045</td> -->
+								<td> <button type="button" class="btn btn-default btn-sm">join</button> </td>
 							</tr>
 							<tr ng-if="!teams.length">
 								<td>No Teams found.</td>
@@ -115,6 +113,11 @@
 					</table>
 				</div>
 			</rd-widget-body>
+			<div align="right">
+				<a ui-sref="new_team({ eventID: eventID })">Create Team (+) </a>
+			</div>
+			<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
+
 			<rd-widget>
 	</div>
 </div>
