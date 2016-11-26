@@ -75,9 +75,9 @@ gulp.task('lint', function(){
 
 gulp.task('custom-js', ['lint'], function() {
     return gulp.src(paths.scripts)
-        .pipe(minifyJs({
-            //mangle: false
-        }))
+        // .pipe(minifyJs({
+        //     //mangle: false
+        // }))
         .pipe(concat('dashboard.min.js'))
         .pipe(gulp.dest('dist/js'));
 });
