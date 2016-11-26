@@ -13,7 +13,6 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state) {
 
     $scope.eventID = $stateParams.eventID;
     $scope.teams = Teams.arr($scope.eventID);
->>>>>>> upstream/master
 
     $scope.selector = {
         options: [],
