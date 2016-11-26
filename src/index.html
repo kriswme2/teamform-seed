@@ -37,10 +37,11 @@
         </li>
 
         <li class="sidebar-title"><span>Event</span></li>
+        <!-- Search bar for event -->
+        <li><input ng-model="searchEventName" placeholder="Search event..."></li>
 
         <div class = "scrollView">
-        <!-- <li class="sidebar-list" ng-repeat="e in events | limitTo : 5"> -->
-        <li class="sidebar-list" ng-repeat="e in events">
+        <li class="sidebar-list" ng-repeat="e in events | filter: {title : searchEventName}">
           <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
         </li>
         </div>
