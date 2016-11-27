@@ -5,24 +5,29 @@
             <tags-input ng-model="uSearch"></tags-input>
         </div>
         <input type="button" class="btn btn-default" value="Search" ng-click="SearchUser()">
-        <tr ng-repeat="user in users">
+        <h3>{{ uSearch | json }}</h3>
+        <h3>{{ uResult | json }}</h3>
+        <!--<h3>{{ arr | json }}</h3>-->
+        <!--<tr ng-repeat="user in users">
 
-        </tr>
+        </tr>-->
         <div class="form-group">
             <label>Search Events:</label><br>
-            <tags-input ng-model="eResult"></tags-input>
+            <tags-input ng-model="eSearch"></tags-input>
         </div>
         <input type="button" class="btn btn-default" value="Search" ng-click="SearchEvent()">
-        <tr ng-repeat="event in events">
+        <h3>{{ eSearch | json }}</h3>
+        <h3>{{ eResult | json }}</h3>
+        <!--<tr ng-repeat="event in events">
 
-        </tr>
+        </tr>-->
         <div class="form-group">
             <label>Search Teams:</label><br>
-            <tags-input ng-model="tResult"></tags-input>
+            <tags-input ng-model="tSearch"></tags-input>
         </div>
         <input type="button" class="btn btn-default" value="Search" ng-click="SearchTeam()">
-        <tr ng-repeat="team in teams">
+        <!--<tr ng-repeat="team in teams">
 
-        </tr>
+        </tr>-->
     </form>
 </div>
