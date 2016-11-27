@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("EventsCtrl", ['$scope', 'Events', 'Auth', '$stateParams', '$state', 'Tags', EventsCtrl]);
+    .controller("EventsCtrl", ['$scope', 'Events', 'Auth', '$stateParams', '$state', 'Tags', 'AccessControl', EventsCtrl]);
 
-function EventsCtrl($scope, Events, Auth, $stateParams, $state, Tags) {
+function EventsCtrl($scope, Events, Auth, $stateParams, $state, Tags, AccessControl) {
 
     var uid = Auth.$getAuth().uid;
     $scope.eventID = $stateParams.eventID;
@@ -47,6 +47,7 @@ function EventsCtrl($scope, Events, Auth, $stateParams, $state, Tags) {
             $scope.input.mode = null;
             $scope.eventID = Events.push($scope.input).key;
             Tags.eAdd($scope.eventID, $scope.tags);
+            AccessControl.set($scope.eventID, uid, 'accepted');
             $state.go('event', { "eventID": $scope.eventID });
         }
     }

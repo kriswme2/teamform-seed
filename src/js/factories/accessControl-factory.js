@@ -1,6 +1,6 @@
 angular
   .module('teamform')
-  .factory('AccessControl', ['firebase', '$firebaseArray', 'Auth', 'Events', '$q',function(firebase,$firebaseArray,Auth,Events,$q) {
+  .factory('AccessControl', ['firebase', '$firebaseObject', 'Auth', 'Events', '$q',function(firebase,$firebaseObject,Auth,Events,$q) {
     var val = {};
     val.eventID = null;
     val.access = null;
@@ -10,26 +10,29 @@ angular
     var deferred = null;
 
     var AccessControl = {
-      init: function (eventID) {
-        val.eventID = eventID;
+      init: function ($eventID) {
+        val.eventID = $eventID;
         val.access = null;
         currentUserRef = ref.child(val.eventID).child(Auth.$getAuth().uid);
         eventRef = Events.ref();
       },
-      get: function(){
-        return currentUserRef;
+      obj: function() {
+          return $firebaseObject(currentUserRef);
       },
-      set: function($access){
-        currentUserRef.update({access: $access});
+      set: function($eventID, $uid, $access){
+        ref.child($eventID).child($uid).update({access: $access});
       },
-      requireAccess: function(eventID) {
+      listAsked: function () {
+        return (ref.child(val.eventID).orderByChild('access').equalTo('asked'));
+      },
+      requireAccess: function($eventID) {
         if (deferred) deferred.reject('reset promise');
         deferred = $q.defer();
-        AccessControl.init(eventID);
-        eventRef.orderByKey().equalTo(eventID).on('value', function(snapshot){console.log(snapshot.val()[eventID].privacy);
-          if (!snapshot) {console.log('reject');
+        AccessControl.init($eventID);
+        eventRef.orderByKey().equalTo($eventID).on('value', function(snapshot){console.log(snapshot.val()[$eventID].privacy);
+          if (!snapshot) {
             deferred.reject('no this event');
-          } else if (snapshot.val()[eventID].privacy == 'public') {
+          } else if (snapshot.val()[$eventID].privacy == 'public') {
             val.access = 'accepted';
             deferred.resolve();
           } else {
