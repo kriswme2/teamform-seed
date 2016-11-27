@@ -1,0 +1,28 @@
+<div class="row" ng-controller="SkillsMatchCtrl">
+    <form class="col-md-6">
+        <div class="form-group">
+            <label>Search Users:</label><br>
+            <tags-input ng-model="uSearch"></tags-input>
+        </div>
+        <input type="button" class="btn btn-default" value="Search" ng-click="SearchUser()">
+        <tr ng-repeat="user in users">
+
+        </tr>
+        <div class="form-group">
+            <label>Search Events:</label><br>
+            <tags-input ng-model="eResult"></tags-input>
+        </div>
+        <input type="button" class="btn btn-default" value="Search" ng-click="SearchEvent()">
+        <tr ng-repeat="event in events">
+
+        </tr>
+        <div class="form-group">
+            <label>Search Teams:</label><br>
+            <tags-input ng-model="tResult"></tags-input>
+        </div>
+        <input type="button" class="btn btn-default" value="Search" ng-click="SearchTeam()">
+        <tr ng-repeat="team in teams">
+
+        </tr>
+    </form>
+</div>
