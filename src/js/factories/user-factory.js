@@ -15,11 +15,11 @@ angular
       setCurrentProfile: function () {
         currentProfileRef = ref.child(Auth.$getAuth().uid);
       },
-      setTeamInfo: function($uid, $eventID, $teamID, $role, $teamInfo=null) {
+      setTeamInfo: function($uid, $eventID, $teamID, $role, $teamInfo) {
         data = {};
-        data['eventID'] = $eventID;
-        data['teamID'] = $teamID;
-        data['role'] = $role;
+        data.eventID = $eventID;
+        data.teamID = $teamID;
+        data.role = $role;
         if ($teamInfo && $teamInfo.$id) {
           User.setInfo($uid, 'teams', data, $teamInfo.$id);
         } else {
