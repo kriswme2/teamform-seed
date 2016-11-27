@@ -4,9 +4,9 @@
 
 angular
   .module('teamform')
-  .controller('UserCtrl', ['$scope', '$filter', 'Auth', 'User', 'Tags', UserCtrl]);
+  .controller('UserCtrl', ['$scope', 'Auth', 'User', 'Tags', UserCtrl]);
 
-function UserCtrl($scope, $filter, Auth, User, Tags) {
+function UserCtrl($scope, Auth, User, Tags) {
   var firebaseUser = Auth.$getAuth();
   $scope.displayName = firebaseUser.displayName;
   $scope.email = firebaseUser.email;
@@ -14,8 +14,7 @@ function UserCtrl($scope, $filter, Auth, User, Tags) {
   $scope.message = null;
   $scope.newPassword = null;
   $scope.skillTags = [];
-  $scope.profilePic = User.childObj($scope.uid).picture;
-  //$filter('profilePicByUID')(Auth.$getAuth().uid);
+  $scope.profilePic = User.profilePic($scope.uid);
   console.log($scope.profilePic);
 
   function loadTag(uId) {
@@ -69,7 +68,6 @@ function UserCtrl($scope, $filter, Auth, User, Tags) {
 
     User.updatePicture($scope.pictureField).then(function() {
       $scope.message = 'Profile picture successfully changed!';
-
     })
     .catch(function(error) {
       $scope.errorMessage = error.errorMessage;
