@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller('AccessControlCtrl', ['$scope', '$firebaseArray', 'AccessControl', '$stateParams', '$state', 'Events', 'Auth',
+    .controller('AccessControlCtrl', ['$scope', '$firebaseArray', 'AccessControl', '$stateParams', '$state', 'Events', 'Auth', 'User',
 
-        function($scope, $firebaseArray, AccessControl, $stateParams, $state, Events, Auth) {
+        function($scope, $firebaseArray, AccessControl, $stateParams, $state, Events, Auth, User) {
             var $eventID;
             if (AccessControl.$val.eventID && $stateParams.eventID) {
               $eventID = $stateParams.eventID;
@@ -34,6 +34,7 @@ angular
 
             $scope.acceptRequest = function($uid) {
               AccessControl.set($eventID, $uid, 'accepted');
+              User.setTeamInfo($uid, $eventID, null, 'member');
             };
             $scope.rejectRequest = function($uid) {
               AccessControl.set($eventID, $uid, 'rejected');
