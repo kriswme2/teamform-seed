@@ -45,10 +45,10 @@
 			Password:
 		</div>
 		<div class="col-sm-4 col-xs-12">
-			<div class="alert alert-success" ng-if="message.length > 0">
+			<div class="alert alert-success" ng-if="messageLocation === 'password' && message.length > 0">
 				{{message}}
 			</div>
-			<div class="alert alert-danger" ng-if="errorMessage.length > 0">
+			<div class="alert alert-danger" ng-if="messageLocation === 'password' && errorMessage.length > 0">
 				{{errorMessage}}
 				<span ng-if="errorCode.length>0">Error code: {{errorCode}}</span>
 			</div>
@@ -76,12 +76,19 @@
 		<div class="col-sm-3 col-xs-3 text-center">
 			Profile Picture:
 		</div>
-		<div class="col-sm-6 col-xs-9">
-			<img ng-src="{{uid | profilePicByUID}}">
+		<div class="col-sm-4 col-xs-9">
+			<div class="alert alert-success" ng-if="messageLocation === 'profile_pic' && message.length > 0">
+				{{message}}
+			</div>
+			<div class="alert alert-danger" ng-if=" messageLocation === 'profile_pic' && errorMessage.length > 0">
+				{{errorMessage}}
+				<span ng-if="errorCode.length>0">Error code: {{errorCode}}</span>
+			</div>
+			<img class="img-thumbnail img-responsive" ng-src="{{uid | profilePicByUID}}">
 			<form ng-submit="updatePicture()">
 				<div class="form-group">
 					<input id="pictures" type="file" ngf-select ng-model="pictureField" name="file" accept="image/*" ngf-max-size="2MB" ngf-keep="true"
-						ngf-keep-distinct="true" class="btn btn-primary" />
+						ngf-keep-distinct="true" class="btn btn-default" />
 				</div>
 				<button type="submit" class="btn btn-primary">Change profile picture</button>
 			</form>

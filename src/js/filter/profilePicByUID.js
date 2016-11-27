@@ -16,7 +16,7 @@ angular
             }
           });
         }
-
+        console.log(profilePic);
         return profilePic[uid];
       }
       profilePicFunc.$stateful = true;

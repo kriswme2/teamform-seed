@@ -4,9 +4,9 @@
 
 angular
   .module('teamform')
-  .controller('UserCtrl', ['$scope', 'Auth', 'User', 'Tags', UserCtrl]);
+  .controller('UserCtrl', ['$scope', '$filter', 'Auth', 'User', 'Tags', UserCtrl]);
 
-function UserCtrl($scope, Auth, User, Tags) {
+function UserCtrl($scope, $filter, Auth, User, Tags) {
   var firebaseUser = Auth.$getAuth();
   $scope.displayName = firebaseUser.displayName;
   $scope.email = firebaseUser.email;
@@ -14,6 +14,9 @@ function UserCtrl($scope, Auth, User, Tags) {
   $scope.message = null;
   $scope.newPassword = null;
   $scope.skillTags = [];
+  $scope.profilePic = User.childObj($scope.uid).picture;
+  //$filter('profilePicByUID')(Auth.$getAuth().uid);
+  console.log($scope.profilePic);
 
   function loadTag(uId) {
     Tags.uref.child(uId).once("value").then(function (data) {
@@ -21,7 +24,7 @@ function UserCtrl($scope, Auth, User, Tags) {
         $scope.skillTags = data.val().tags;
     });
   }
-  loadTag($scope.uid);
+  loadTag($scope.uid );
 
   $scope.addTags = function () {
     Tags.uAdd($scope.uid, $scope.skillTags);
@@ -41,6 +44,7 @@ function UserCtrl($scope, Auth, User, Tags) {
   $scope.changePassword = function () {
     $scope.message = '';
     $scope.errorMessage = '';
+    $scope.messageLocation = 'password';
     if ($scope.newPassword !== $scope.confirmPassword) {
       $scope.errorMessage = "Confirm Password is different from new password";
       return;
@@ -54,7 +58,22 @@ function UserCtrl($scope, Auth, User, Tags) {
   };
 
   $scope.updatePicture = function () {
-    User.updatePicture($scope.pictureField);
+    $scope.message = '';
+    $scope.errorMessage = '';
+    $scope.messageLocation = "profile_pic";
+
+    if($scope.pictureField === undefined) {
+      $scope.errorMessage = "Please select a file before submit!";
+      return;
+    }
+
+    User.updatePicture($scope.pictureField).then(function() {
+      $scope.message = 'Profile picture successfully changed!';
+
+    })
+    .catch(function(error) {
+      $scope.errorMessage = error.errorMessage;
+    });
   };
 
 }
