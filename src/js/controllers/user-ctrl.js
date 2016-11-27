@@ -65,7 +65,9 @@ function UserCtrl($scope, Auth, User, Tags) {
     }
 
     User.updatePicture($scope.pictureField).then(function() {
-      $scope.message = 'Profile picture successfully changed!';
+      $scope.message = 'Profile picture successfully changed! Will now reload the page to reflect the change.';
+      alert($scope.message);
+      location.reload();
     })
     .catch(function(error) {
       $scope.errorMessage = error.errorMessage;

@@ -82,7 +82,7 @@
             <div class="user pull-right">
               <div class="item dropdown" uib-dropdown ng-if="auth.$getAuth()">
                 <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-                  <img src="img/avatar.jpg">
+                  <img ng-controller="UserCtrl" ng-src="{{uid | profilePicByUID}}">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
