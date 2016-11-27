@@ -1,6 +1,6 @@
 angular
   .module('teamform')
-  .factory('AccessControl', ['firebase', '$firebaseArray', 'Auth', 'Events', '$q',function(firebase,$firebaseArray,Auth,Events,$q) {
+  .factory('AccessControl', ['firebase', '$firebaseObject', 'Auth', 'Events', '$q',function(firebase,$firebaseObject,Auth,Events,$q) {
     var val = {};
     val.eventID = null;
     val.access = null;
@@ -15,6 +15,9 @@ angular
         val.access = null;
         currentUserRef = ref.child(val.eventID).child(Auth.$getAuth().uid);
         eventRef = Events.ref();
+      },
+      obj: function() {
+          return $firebaseObject(currentUserRef);
       },
       set: function($eventID, $uid, $access){
         ref.child($eventID).child($uid).update({access: $access});
