@@ -79,7 +79,7 @@
 								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top" popover-append-to-body="true"><a href = "#">{{t.$id}}</a> </td>
 								<td>{{t.teamSize}}</td>
 								<td>{{t.leaderId | emailByUID}}</td>
-								<td> <button type="button" class="btn btn-default btn-sm" ng-click="join(t)" ng-if="noTeam">join</button> </td>
+								<td> <button type="button" class="btn btn-default btn-sm" ng-click="join(t)" ng-if="noTeam || t.teamSize>t.member.length">join</button> </td>
 							</tr>
 							<tr ng-if="!teams.length">
 								<td>No Teams found.</td>

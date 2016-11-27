@@ -9,6 +9,9 @@ angular
       childObj: function($uid) {
           return $firebaseObject(User.ref.child($uid));
       },
+      teamArr: function($uid) {
+          return $firebaseArray(ref.child($uid).child('teams'));
+      },
       setCurrentProfile: function () {
         currentProfileRef = ref.child(Auth.$getAuth().uid);
       },
