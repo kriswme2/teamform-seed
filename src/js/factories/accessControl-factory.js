@@ -12,6 +12,7 @@ angular
     var AccessControl = {
       init: function (eventID) {
         val.eventID = eventID;
+        val.access = null;
         currentUserRef = ref.child(val.eventID).child(Auth.$getAuth().uid);
         eventRef = Events.ref();
       },
@@ -29,6 +30,7 @@ angular
           if (!snapshot) {console.log('reject');
             deferred.reject('no this event');
           } else if (snapshot.val()[eventID].privacy == 'public') {
+            val.access = 'accepted';
             deferred.resolve();
           } else {
             currentUserRef.on('value', function(snapshot){
