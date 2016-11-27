@@ -17,10 +17,26 @@ angular
             var accessObj = AccessControl.obj();
             $scope.access = accessObj;
 
+            $scope.isEventAdmin = false;
+            $scope.listAsked = {};
+            eventObj.$loaded().then(function () {
+                if (eventObj.adminId == uid) {
+                  $scope.isEventAdmin = true;
+                  $scope.listAsked = $firebaseArray(AccessControl.listAsked());
+                }
+            });
+
             var requested = false;
             $scope.requestAccess = function() {
               if (!requested) requested=true;
               AccessControl.set($eventID, uid, 'asked');
+            };
+
+            $scope.acceptRequest = function($uid) {
+              AccessControl.set($eventID, $uid, 'accepted');
+            };
+            $scope.rejectRequest = function($uid) {
+              AccessControl.set($eventID, $uid, 'rejected');
             };
         }
 

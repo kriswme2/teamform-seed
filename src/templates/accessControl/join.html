@@ -2,11 +2,12 @@
   <div>
     Event Title: {{event.title}}<br />
     Organizer: {{event.organizer}}<br />
+    Event Admin: {{event.adminId | emailByUID}}<br />
   </div>
 
   <div ng-if="!access.access">
     No access yet for this private event<br />
-    <button type="button" class="btn btn-default btn-sm"  ng-click="requestAccess()">Request Access</button>
+    <button type="button" class="btn btn-default btn-sm" ng-click="requestAccess()">Request Access</button>
   </div>
 
   <div ng-if="access.access=='asked'">
