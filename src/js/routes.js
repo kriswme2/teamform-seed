@@ -10,15 +10,11 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
         // For unmatched routes
         $urlRouterProvider.otherwise('/');
 
-        var requireSignInResolver = {
-            // controller will not be loaded until $requireSignIn resolves
-            // Auth refers to our $firebaseAuth wrapper in the factory below
-            "currentAuth": ["Auth", function (Auth) {
-                // $requireSignIn returns a promise so the resolve waits for it to complete
-                // If the promise is rejected, it will throw a $stateChangeError (see above)
-                return Auth.$requireSignIn();
-            }]
-        };
+        var requireSignInResolver = ["Auth", function (Auth) {
+            // $requireSignIn returns a promise so the resolve waits for it to complete
+            // If the promise is rejected, it will throw a $stateChangeError (see above)
+            return Auth.$requireSignIn();
+        }];
 
         var redirectToLoginIfNotSignedIn = ["Auth", "$state", function (Auth, $state) {
             if (!Auth.$getAuth()) {
@@ -30,6 +26,19 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             if (Auth.$getAuth()) {
                 $state.go('index', { "eventID": 'a' });
             }
+        }];
+
+        var AccessControlResolver = ['AccessControl', '$stateParams', function (AccessControl,$stateParams) {
+          return AccessControl.requireAccess($stateParams.eventID);
+        }];
+
+        var redirectToJoinPageIfNotAccepted = ['AccessControl', '$state', function (AccessControl, $state) {
+          redirectToLoginIfNotSignedIn;
+          if (!AccessControl.$val.access) {
+            $state.go('joinEvent', { "eventID": AccessControl.$val.eventID }, { reload: true });
+          } else if (AccessControl.$val.access && AccessControl.$val.access != 'accepted') {
+            $state.go('joinEvent', { "eventID": AccessControl.$val.eventID }, { reload: true });
+          }
         }];
 
         // Application routes
@@ -63,55 +72,82 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             .state('index', {
                 url: '/',
                 templateUrl: 'templates/dashboard.html',
-                resolve: requireSignInResolver,
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
+                onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('joinEvent', {
+                url: '/join/{eventID}',
+                templateUrl: 'templates/accessControl/join.html',
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('new_event', {
                 url: '/event/new',
                 templateUrl: 'templates/admin/event.html',
-                resolve: requireSignInResolver,
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('event', {
                 url: '/event/{eventID}',
                 templateUrl: 'templates/event.html',
-                resolve: requireSignInResolver,
-                onEnter: redirectToLoginIfNotSignedIn
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                  accessControl:AccessControlResolver
+                },
+                onEnter: redirectToJoinPageIfNotAccepted
             })
             .state('edit_event', {
                 url: '/event/{eventID}/edit',
                 templateUrl: 'templates/admin/event.html',
-                resolve: requireSignInResolver,
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('new_team', {
                 url: '/event/{eventID}/team/new',
                 templateUrl: 'templates/leader/event.html',
-                resolve: requireSignInResolver,
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('team', {
                 url: '/event/{eventID}/team/{teamID}',
                 templateUrl: 'templates/event.html',
-                resolve: requireSignInResolver,
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('edit_team', {
                 url: '/event/{eventID}/team/{teamID}/edit',
                 templateUrl: 'templates/leader/event.html',
-                resolve: requireSignInResolver,
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'templates/profile.html',
-                resolve: requireSignInResolver,
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('tables', {
                 url: '/tables',
                 templateUrl: 'templates/tables.html',
-                resolve: requireSignInResolver,
+                resolve: {
+                  currentAuth:requireSignInResolver,
+                },
                 onEnter: redirectToLoginIfNotSignedIn
             });
     }

@@ -31,16 +31,24 @@
             <span class="menu-icon glyphicon glyphicon-transfer"></span>
           </a>
         </li>
-        
+
         <li class="sidebar-list">
           <a href="/">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
         </li>
 
         <li class="sidebar-title"><span>Event</span></li>
+        <!-- Search bar for event -->
+        <li>
+          <div class="form-group">
+            <input class="form-control sidebar-search-event" ng-model="searchEventName" placeholder="Search event...">
+          </div>
+        </li>
 
-        <li class="sidebar-list" ng-repeat="e in events">
+        <div class = "scrollView">
+        <li class="sidebar-list" ng-repeat="e in events | filter: {title : searchEventName}">
           <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
         </li>
+        </div>
 
         <li class="sidebar-title"><span>Event Management</span></li>
 
@@ -74,7 +82,7 @@
             <div class="user pull-right">
               <div class="item dropdown" uib-dropdown ng-if="auth.$getAuth()">
                 <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
-                  <img src="img/avatar.jpg">
+                  <img ng-controller="UserCtrl" ng-src="{{uid | profilePicByUID}}">
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                   <li class="dropdown-header">
