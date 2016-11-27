@@ -28,11 +28,11 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
             }
         }];
 
-        var AccessControlResolver = ['AccessControl', '$state', function (AccessControl,$state) {
-          return AccessControl.requireAccess();
+        var AccessControlResolver = ['AccessControl', '$stateParams', function (AccessControl,$stateParams) {
+          return AccessControl.requireAccess($stateParams.eventID);
         }];
 
-        var redirectToJoinPageIfNotAccepted = ['AccessControl', '$state', function (AccessControl, $state) {console.log($state);
+        var redirectToJoinPageIfNotAccepted = ['AccessControl', '$state', function (AccessControl, $state) {
           redirectToLoginIfNotSignedIn;
           if (!AccessControl.access) {
             $state.go('joinEvent', { "eventID": AccessControl.$val.eventID });
