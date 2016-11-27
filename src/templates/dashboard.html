@@ -1,45 +1,34 @@
-<div class="row"> 
-	<div class="col-lg-3 col-md-6 col-xs-12">
-		<rd-widget>
-			<rd-widget-body>
-				<div class="widget-icon green pull-left">
-					<i class="fa fa-users"></i>
-				</div>
-				<div class="title">80</div>
-				<div class="comment">Users</div>
-			</rd-widget-body>
-		</rd-widget>
-	</div>
-	<div class="col-lg-3 col-md-6 col-xs-12">
-		<rd-widget>
-			<rd-widget-body>
-				<div class="widget-icon red pull-left">
-					<i class="fa fa-tasks"></i>
-				</div>
-				<div class="title">16</div>
-				<div class="comment">Servers</div>
-			</rd-widget-body>
-		</rd-widget>
-	</div>
-	<div class="col-lg-3 col-md-6 col-xs-12">
+<div class="row" ng-controller="DashboardCtrl"> 
+	<div class="col-xs-12">
 		<rd-widget>
 			<rd-widget-body>
 				<div class="widget-icon orange pull-left">
-					<i class="fa fa-sitemap"></i>
+					<i class="fa fa-users"></i>
 				</div>
-				<div class="title">225</div>
-				<div class="comment">Documents</div>
+				<div class="title">Howdy,</div>
+				<div class="comment">{{firebaseUser.displayName}}</div>
 			</rd-widget-body>
 		</rd-widget>
 	</div>
-	<div class="col-lg-3 col-md-6 col-xs-12">
+	<div class="col-lg-6 col-md-6 col-xs-12">
 		<rd-widget>
 			<rd-widget-body>
-				<div class="widget-icon blue pull-left">
-					<i class="fa fa-support"></i>
+				<div class="widget-icon green pull-left">
+					<i class="fa fa-calendar"></i>
 				</div>
-				<div class="title">62</div>
-				<div class="comment">Tickets</div>
+				<div class="title">{{events.length}}</div>
+				<div class="comment">Total Events</div>
+			</rd-widget-body>
+		</rd-widget>
+	</div>
+	<div class="col-lg-6 col-md-6 col-xs-12">
+		<rd-widget>
+			<rd-widget-body>
+				<div class="widget-icon red pull-left">
+					<i class="fa fa-clock-o"></i>
+				</div>
+				<div class="title">{{dateTime | date:'hh:mm:ss a'}}</div>
+				<div class="comment">{{dateTime | date:'yyyy-MM-dd'}}</div>
 			</rd-widget-body>
 		</rd-widget>
 	</div>
@@ -74,7 +63,7 @@
 	</div>
 	<div class="col-lg-6">
 		<rd-widget>
-			<rd-widget-header icon="fa-users" title="Users">
+			<rd-widget-header icon="fa-users" title="Events that you participated">
 				<input type="text" placeholder="Search" class="form-control input-sm" />
 			</rd-widget-header>
 			<rd-widget-body classes="medium no-padding">

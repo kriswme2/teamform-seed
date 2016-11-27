@@ -8,7 +8,7 @@
 		<div class="col-sm-3 col-xs-12 profile-icon">
 			<i class="fa fa-3x fa-envelope"></i>
 		</div>
-		<div class="col-sm-3 col-xs-3" style="text-align:center">
+		<div class="col-sm-3 col-xs-3 text-center" >
 			Email:
 		</div>
 		<div class="col-sm-6 col-xs-9">
@@ -22,7 +22,7 @@
 		<div class="col-sm-3 col-xs-12 profile-icon">
 			<i class="fa fa-3x fa-user"></i>
 		</div>
-		<div class="col-sm-3 col-xs-3" style="text-align:center">
+		<div class="col-sm-3 col-xs-3 text-center">
 			Name:
 		</div>
 		<div class="col-sm-6 col-xs-9">
@@ -33,14 +33,19 @@
 	<hr style="background:lightgray;height:2px">
 
 	<div class="row profile-row">
+		<div class="col-sm-offset-2 col-sm-8 col-xs-offset-0 col-xs-12">
+			<div class="alert alert-info">
+				If you are using a third party credentials provider such as facebook and google to login to teamform, entering a new password here will also enables you to login via your email and password directly.
+			</div>
+		</div>
 		<div class="col-sm-3 col-xs-12 profile-icon">
 			<i class="fa fa-3x fa-key"></i>
 		</div>
-		<div class="col-sm-3 col-xs-12" style="text-align:center">
+		<div class="col-sm-3 col-xs-12 text-center">
 			Password:
 		</div>
-		<div class="col-sm-5 col-xs-12">
-			<div class="alert alert-info" ng-if="message.length > 0">
+		<div class="col-sm-4 col-xs-12">
+			<div class="alert alert-success" ng-if="message.length > 0">
 				{{message}}
 			</div>
 			<div class="alert alert-danger" ng-if="errorMessage.length > 0">
@@ -68,7 +73,7 @@
 		<div class="col-sm-3 col-xs-12 profile-icon">
 			<i class="fa fa-3x fa-user"></i>
 		</div>
-		<div class="col-sm-3 col-xs-3" style="text-align:center">
+		<div class="col-sm-3 col-xs-3 text-center">
 			Profile Picture:
 		</div>
 		<div class="col-sm-6 col-xs-9">
@@ -88,7 +93,7 @@
 		<div class="col-sm-3 col-xs-12 profile-icon">
 			<i class="fa fa-3x fa-user"></i>
 		</div>
-		<div class="col-sm-3 col-xs-3" style="text-align:center">
+		<div class="col-sm-3 col-xs-3 text-center">
 			Skills:
 		</div>
 		<div class="col-sm-5 col-xs-12">

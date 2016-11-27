@@ -38,7 +38,11 @@
 
         <li class="sidebar-title"><span>Event</span></li>
         <!-- Search bar for event -->
-        <li><input ng-model="searchEventName" placeholder="Search event..."></li>
+        <li>
+          <div class="form-group">
+            <input class="form-control sidebar-search-event" ng-model="searchEventName" placeholder="Search event...">
+          </div>
+        </li>
 
         <div class = "scrollView">
         <li class="sidebar-list" ng-repeat="e in events | filter: {title : searchEventName}">
