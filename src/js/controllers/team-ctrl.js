@@ -16,8 +16,7 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags) {
     if ($state.is("edit_team") && $stateParams.teamID)
         loadTeam($stateParams.eventID, $stateParams.teamID);
 
-    var teamsArr = Teams.arr($scope.eventID);
-    // $scope.teams = Teams.arr($scope.eventID);
+    $scope.teams = Teams.arr($scope.eventID);
 
     $scope.selector = {
         options: [],
@@ -35,7 +34,7 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags) {
 
     $scope.$watchCollection("teamID", function () {
         if (!$scope.teamID) return;
-        $scope.teamObj = $firebaseObject(teamsArr.child($scope.teamID));
+        $scope.teamObj = $firebaseObject($scope.teams.child($scope.teamID));
         $scope.teamObj.$loaded().then(function () {
             if ($scope.teamObj.leaderId == uid) $scope.isTeamLeader = true;
         });
