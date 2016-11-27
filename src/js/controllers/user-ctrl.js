@@ -14,7 +14,8 @@ function UserCtrl($scope, Auth, User, Tags) {
   $scope.message = null;
   $scope.newPassword = null;
   $scope.skillTags = [];
-  
+  $scope.teamInfo = User.teamArr($scope.uid);
+
   function loadTag(uId) {
     Tags.uref.child(uId).once("value").then(function (data) {
       if (data.val() !== null)
