@@ -12,6 +12,18 @@ angular
       setCurrentProfile: function () {
         currentProfileRef = ref.child(Auth.$getAuth().uid);
       },
+      setTeamInfo: function($uid, $eventID, $teamID, $role, $teamInfo=null) {
+        data = {};
+        data['eventID'] = $eventID;
+        data['teamID'] = $teamID;
+        data['role'] = $role;
+        if ($teamInfo && $teamInfo.$id) {
+          User.setInfo($uid, 'teams', data, $teamInfo.$id);
+        } else {
+          User.pushInfo($uid, 'teams', data);
+        }
+
+      },
       updateProfile: function () {
         $profile = {};
         $profile.name = Auth.$getAuth().displayName;
@@ -32,6 +44,12 @@ angular
             reject('Upload Profile picture failed!');
           });
         });
+      },
+      pushInfo: function(uid, type, data) {
+        ref.child(uid).child(type).push(data);
+      },
+      setInfo: function(uid, type, data, id) {
+        ref.child(uid).child(type).child(id).set(data);
       },
     };
 

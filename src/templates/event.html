@@ -79,7 +79,7 @@
 								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top" popover-append-to-body="true"><a href = "#">{{t.$id}}</a> </td>
 								<td>{{t.teamSize}}</td>
 								<td>{{t.leaderId | emailByUID}}</td>
-								<td> <button type="button" class="btn btn-default btn-sm">join</button> </td>
+								<td> <button type="button" class="btn btn-default btn-sm" ng-click="join(t)" ng-if="noTeam">join</button> </td>
 							</tr>
 							<tr ng-if="!teams.length">
 								<td>No Teams found.</td>
@@ -89,7 +89,7 @@
 				</div>
 			</rd-widget-body>
 			<div align="right">
-				<a ui-sref="new_team({ eventID: eventID })">Create Team (+) </a>
+				<a ui-sref="new_team({ eventID: eventID })" ng-if="noTeam">Create Team (+) </a>
 			</div>
 			<!-- <input type="text" placeholder="Search" class="form-control input-sm" /> -->
 			<rd-widget>
