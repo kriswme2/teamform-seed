@@ -34,10 +34,10 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
 
         var redirectToJoinPageIfNotAccepted = ['AccessControl', '$state', function (AccessControl, $state) {
           redirectToLoginIfNotSignedIn;
-          if (!AccessControl.access) {
-            $state.go('joinEvent', { "eventID": AccessControl.$val.eventID });
-          } else if (AccessControl.access && AccessControl.access != 'accepted') {
-            $state.go('joinEvent', { "eventID": AccessControl.$val.eventID });
+          if (!AccessControl.$val.access) {
+            $state.go('joinEvent', { "eventID": AccessControl.$val.eventID }, { reload: true });
+          } else if (AccessControl.$val.access && AccessControl.$val.access != 'accepted') {
+            $state.go('joinEvent', { "eventID": AccessControl.$val.eventID }, { reload: true });
           }
         }];
 

@@ -10,7 +10,7 @@ angular
 
     var AccessControl = {
       setcurrentUser: function (eventID) {
-        val.eventID = eventID;console.log(val.eventID);
+        val.eventID = eventID;
         currentUserRef = ref.child(val.eventID).child(Auth.$getAuth().uid);
       },
       get: function(){
