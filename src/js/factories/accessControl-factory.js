@@ -16,11 +16,8 @@ angular
         currentUserRef = ref.child(val.eventID).child(Auth.$getAuth().uid);
         eventRef = Events.ref();
       },
-      get: function(){
-        return currentUserRef;
-      },
-      set: function($access){
-        currentUserRef.update({access: $access});
+      set: function($eventID, $uid, $access){
+        ref.child($eventID).child($uid).update({access: $access});
       },
       requireAccess: function(eventID) {
         if (deferred) deferred.reject('reset promise');

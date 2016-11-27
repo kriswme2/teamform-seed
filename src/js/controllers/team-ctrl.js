@@ -52,7 +52,7 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags) {
         Teams.set($scope.eventID, $scope.input.teamName, newInput);
         Tags.tAdd($scope.eventID, $scope.input.teamName, $scope.tags);
         $state.go('event', { "eventID": $scope.eventID });
-    };
+    }
 
     $scope.teamFormAction = function () {
         if ($scope.input.mode == "edit") {
@@ -68,7 +68,7 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags) {
         } else {
             addTeam();
         }
-    }
+    };
 
     function setRange(eId) {
         $scope.eId = eId;
