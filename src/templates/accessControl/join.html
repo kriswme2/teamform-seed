@@ -1,20 +1,50 @@
 <div ng-controller="AccessControlCtrl">
-  <div>
-    Event Title: {{event.title}}<br />
-    Organizer: {{event.organizer}}<br />
-    Event Admin: {{event.adminId | emailByUID}}<br />
+  <div class="row">
+    <div class="col-xs-12">
+      <rd-widget>
+        <rd-widget-body>
+          <div class="widget-icon orange pull-left">
+            <i class="fa fa-exclamation-triangle"></i>
+          </div>
+          <div class="title">Access Denied</div>
+          <div class="comment">This is a private event. To access it, please request access.</div>
+        </rd-widget-body>
+      </rd-widget>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <i class="fa fa-calendar" style="margin-right: 5px"></i>Event Details
+        </div>
+        <div class="panel-body">
+          Event Title: {{event.title}}<br />
+          Organizer: {{event.organizer}}<br />
+          Event Admin: {{event.adminId | emailByUID}}<br />
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div ng-if="!access.access">
-    No access yet for this private event<br />
-    <button type="button" class="btn btn-default btn-sm" ng-click="requestAccess()">Request Access</button>
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div ng-if="!access.access" class="alert alert-info">
+        No access yet for this private event<br />
+        <button type="button" class="btn btn-default btn-sm" ng-click="requestAccess()">Request Access</button>
+      </div>
+
+      <div ng-if="access.access=='asked'" class="alert alert-warning">
+        Waiting for accept
+      </div>
+
+      <div ng-if="access.access=='rejected'">
+        Rejected
+      </div>
+
+    </div>
   </div>
 
-  <div ng-if="access.access=='asked'">
-    Wait for accept
-  </div>
-
-  <div ng-if="access.access=='rejected'">
-    Rejected
-  </div>
 </div>
