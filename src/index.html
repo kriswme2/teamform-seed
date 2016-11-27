@@ -44,10 +44,10 @@
           </div>
         </li>
 
-        <div class = "scrollView">
-        <li class="sidebar-list" ng-repeat="e in events | filter: {title : searchEventName}">
-          <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
-        </li>
+        <div class="scrollView">
+          <li class="sidebar-list" ng-repeat="e in events | filter: {title : searchEventName}">
+            <a ui-sref="event({ eventID: e.$id })">{{e.title}}</a>
+          </li>
         </div>
 
         <li class="sidebar-title"><span>Event Management</span></li>
@@ -171,6 +171,7 @@
   <script type="text/javascript" src="components/angularfire/dist/angularfire.min.js"></script>
   <script type="text/javascript" src="components/ng-file-upload-shim/ng-file-upload-shim.min.js"></script>
   <script type="text/javascript" src="components/ng-file-upload-shim/ng-file-upload.min.js"></script>
+  <script type="text/javascript" src="components/es5-shim/es5-shim.min.js"></script>
   <!-- endbuild -->
 
   <!-- Custom Scripts -->
