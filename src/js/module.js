@@ -8,7 +8,7 @@ angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase'
     $rootScope.auth.$onAuthStateChanged(function(firebaseUser) {
 
       // Store the entry uri using cookies
-      $cookies.put('initialLocation', $location.path());
+      var initialLocation =  $location.path();
 
       /* Initially, angularFire will set the state to not authenticated, and then do the login,
        * and change the state to authenticated.
@@ -16,11 +16,11 @@ angular.module('teamform', ['ui.bootstrap', 'ui.router', 'ngCookies', 'firebase'
       $rootScope.firebaseUser = Auth.$getAuth();
       if(Auth.$getAuth()) {
       	// redirect user back to the uri where user came from
-        var redirectTo = $cookies.get('initialLocation'); // set in the beginning of this function
         if($location.path() === '/login') {
           $state.go('index');
+          return;
         }
-        $location.path(redirectTo);
+        $location.path(initialLocation);
       }else{
         $state.go('login'); // go to login
       }
