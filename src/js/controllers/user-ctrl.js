@@ -14,9 +14,7 @@ function UserCtrl($scope, Auth, User, Tags) {
   $scope.message = null;
   $scope.newPassword = null;
   $scope.skillTags = [];
-  $scope.profilePic = User.profilePic($scope.uid);
-  console.log($scope.profilePic);
-
+  
   function loadTag(uId) {
     Tags.uref.child(uId).once("value").then(function (data) {
       if (data.val() !== null)
