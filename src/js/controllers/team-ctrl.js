@@ -1,20 +1,37 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', 'User', TeamCtrl]);
 
-function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags) {
+function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User) {
 
     var uid = Auth.$getAuth().uid;
 
     $scope.eventID = $stateParams.eventID;
     $scope.teamID = $stateParams.teamID;
+    $scope.teamInfo = null;
     $scope.teamObj = null;
     $scope.isTeamLeader = false;
+    $scope.noTeam = false;
 
     if (($state.is("new_team") || $state.is("edit_team")) && $stateParams.eventID)
         setRange($stateParams.eventID);
     if ($state.is("edit_team") && $stateParams.teamID)
         loadTeam($stateParams.eventID, $stateParams.teamID);
+
+    User.ref.child(uid).child('teams').orderByChild('eventID').equalTo($scope.eventID).once('value', function (snapshot) {
+      if (!snapshot.val()) {
+        $scope.noTeam = true;
+      }
+      snapshot.forEach(function (data) {
+        if (!data.val().teamID) {
+          $scope.noTeam = true;
+        }
+        console.log(data);
+        $scope.teamInfo = {};
+        $scope.teamInfo = data.val();
+        $scope.teamInfo.$id = data.key;
+      });
+    });
 
     $scope.teams = Teams.arr($scope.eventID);
 
@@ -50,6 +67,7 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags) {
         };
         Teams.set($scope.eventID, $scope.input.teamName, newInput);
         Tags.tAdd($scope.eventID, $scope.input.teamName, $scope.tags);
+        User.setTeamInfo(uid, $scope.eventID, $scope.input.teamName, 'leader', $scope.teamInfo);
         $state.go('event', { "eventID": $scope.eventID });
     }
 
@@ -102,4 +120,12 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags) {
         });
 
     }
+
+    $scope.join = function ($team) {console.log($team);
+      if ($team.member.length < $team.teamSize) {
+        $scope.noTeam = false;
+        User.setTeamInfo(uid, $scope.eventID, $team.$id, 'member', $scope.teamInfo);
+        Teams.childRef($scope.eventID, $team.$id).child('member').child($team.member.length).set(uid);
+      }
+    };
 }
