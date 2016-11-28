@@ -160,6 +160,14 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                     currentAuth: requireSignInResolver,
                 },
                 onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('viewProfile', {
+                url: '/profile/{uid}',
+                templateUrl: 'templates/profile/view.html',
+                resolve: {
+                    currentAuth: requireSignInResolver,
+                },
+                onEnter: redirectToLoginIfNotSignedIn
             });
     }
 ]);
