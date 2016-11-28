@@ -84,6 +84,8 @@ function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $statePara
                                     if (data.val() !== null) {
                                         var Match = {
                                             title: data.val().title,
+                                            organizer: data.val().organizer,
+                                            deadline: data.val().deadline
                                         };
                                         $scope.eResult.push(Match);
                                     }
