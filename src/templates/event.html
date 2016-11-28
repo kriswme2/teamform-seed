@@ -3,19 +3,30 @@
 		<rd-widget>
 			<rd-widget-header icon="fa-users" title="Event Join Request">
 			</rd-widget-header>
-			<rd-widget-body classes="large no-padding">
+			<rd-widget-body classes="medium no-padding">
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
 							<tr>
-								<th>email</th>
-								<th>Action</th>
+								<th class="text-center">Email</th>
+								<th class="text-center">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="i in listAsked">
-								<td>{{i.$id | emailByUID}}</td>
-								<td> <button type="button" class="btn btn-default btn-sm" ng-click="acceptRequest(i.$id)">Accept</button> <br /> <button type="button" class="btn btn-danger btn-sm" ng-click="rejectRequest(i.$id)">Reject</button></td>
+								<td class="col-xs-8">{{i.$id | emailByUID}}</td>
+								<td class="col-xs-4"> 
+									<div class="col-xs-6">
+										<button type="button" class="btn btn-success btn-block" ng-click="acceptRequest(i.$id)">
+											<i class="fa fa-check" style="padding-right: 5px"></i>Accept
+										</button>
+									</div>
+									<div class="col-xs-6">
+							 			<button type="button" class="btn btn-danger btn-block" ng-click="rejectRequest(i.$id)">
+							 				<i class="fa fa-times" style="padding-right: 5px"></i>Reject
+							 			</button>
+							 		</div>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -79,7 +90,7 @@
 								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top" popover-append-to-body="true"><a href = "#">{{t.$id}}</a> </td>
 								<td>{{t.teamSize}}</td>
 								<td>{{t.leaderId | emailByUID}}</td>
-								<td> <button type="button" class="btn btn-default btn-sm" ng-click="join(t)" ng-if="noTeam || t.teamSize>t.member.length">join</button> </td>
+								<td> <button type="button" class="btn btn-default btn-sm" ng-click="join(t)" ng-if="noTeam && t.teamSize>t.member.length">join</button> </td>
 							</tr>
 							<tr ng-if="!teams.length">
 								<td>No Teams found.</td>

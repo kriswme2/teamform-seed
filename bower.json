@@ -32,7 +32,8 @@
     "ng-tags-input": "^3.1.1",
     "mockfirebase": "^0.11.0",
     "angular-mocks": "^1.5.8",
-    "ng-file-upload-shim": "^12.2.13"
+    "ng-file-upload-shim": "^12.2.13",
+    "es5-shim": "^4.5.9"
   },
   "repository": {
     "type": "git",
