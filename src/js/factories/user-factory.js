@@ -39,9 +39,10 @@ angular
           $profile.name = Auth.$getAuth().displayName;
           $profile.email = Auth.$getAuth().email;
           $profile.picture = base64[0];
-          ref.child(Auth.$getAuth().uid).set($profile);
-          alert('User profile update successful!');
-          location.reload();
+          ref.child(Auth.$getAuth().uid).set($profile).then(function() {
+            alert('User profile update successful!');
+            location.reload();  
+          });
         });
       },
       pushInfo: function(uid, type, data) {
