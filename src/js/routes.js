@@ -94,7 +94,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('event', {
-                url: '/event',
+                url: '/event/:eventID',
                 templateUrl: 'templates/event.html',
                 params: {
                     eventID: null

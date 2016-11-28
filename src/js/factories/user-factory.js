@@ -34,18 +34,14 @@ angular
         currentProfileRef.set($profile);
       },
       updatePicture: function(pictureField) {
-        return new Promise(function(resolve, reject) {
-          Upload.base64DataUrl(pictureField).then(function(base64){
-            $profile = {};
-            $profile.name = Auth.$getAuth().displayName;
-            $profile.email = Auth.$getAuth().email;
-            $profile.picture = base64[0];
-            ref.child(Auth.$getAuth().uid).set($profile);
-
-            resolve("Success!");
-          }).catch(function(error) {
-            reject('Upload Profile picture failed!');
-          });
+        Upload.base64DataUrl(pictureField).then(function(base64){
+          $profile = {};
+          $profile.name = Auth.$getAuth().displayName;
+          $profile.email = Auth.$getAuth().email;
+          $profile.picture = base64[0];
+          ref.child(Auth.$getAuth().uid).set($profile);
+          alert('User profile update successful!');
+          location.reload();
         });
       },
       pushInfo: function(uid, type, data) {
