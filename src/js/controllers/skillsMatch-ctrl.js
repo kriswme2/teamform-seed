@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller('SkillsMatchCtrl', ['$scope', '$firebaseArray', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', SkillsMatchCtrl]);
+    .controller('SkillsMatchCtrl', ['$scope', '$firebaseArray', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', '$filter', SkillsMatchCtrl]);
 
-function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $stateParams, $state, Tags) {
+function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $stateParams, $state, Tags, $filter) {
 
     var uid = Auth.$getAuth().uid;
 
@@ -33,7 +33,7 @@ function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $statePara
 
                             $scope.uSearch.some(function (sTag) {
                                  user.tags.some(function (uTag) {
-                                    if (sTag.text === uTag.text)
+                                    if ($filter('lowercase')(sTag.text) === $filter('lowercase')(uTag.text))
                                         found++;
                                 });
                             });
