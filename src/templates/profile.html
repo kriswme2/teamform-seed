@@ -106,11 +106,9 @@
 		<div class="col-sm-5 col-xs-12">
 			<form>
 				<div class="form-group">
-					<tags-input ng-model="skillTags"></tags-input>
+					<tags-input ng-model="skillTags" on-tag-added="addTags()" on-tag-removed="addTags()"></tags-input>
 				</div>
-				<input type="button" class="btn btn-default" value="Edit" ng-click="addTags()">
 			</form>
-			<h3>{{skillTags}}</h3>
 		</div>
 	</div>
 </div>
