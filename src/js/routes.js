@@ -24,7 +24,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
 
         var redirectToIndexIfSignedIn = ["Auth", "$state", function (Auth, $state) {
             if (Auth.$getAuth()) {
-                $state.go('index', { "eventID": 'a' });
+                $state.go('index');
             }
         }];
 
@@ -94,8 +94,11 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 onEnter: redirectToLoginIfNotSignedIn
             })
             .state('event', {
-                url: '/event/{eventID}',
+                url: '/event',
                 templateUrl: 'templates/event.html',
+                params: {
+                    eventID: null
+                },
                 resolve: {
                     currentAuth: requireSignInResolver,
                     accessControl: AccessControlResolver
