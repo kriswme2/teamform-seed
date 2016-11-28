@@ -1,24 +1,43 @@
 <div class="row" ng-controller="SkillsMatchCtrl">
-    <form class="col-md-6">
+    <form class="col-md-12">
         <div class="form-group">
             <label>Search Users:</label><br>
             <tags-input ng-model="uSearch" on-tag-added="SearchUser()" on-tag-removed="SearchUser()"></tags-input>
         </div>
-        <h3>{{ uSearch | json }}</h3>
-        <h3>{{ uResult | json }}</h3>
-        <!--<h3>{{ arr | json }}</h3>-->
-        <!--<tr ng-repeat="user in users">
-
-        </tr>-->
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="user in uResult">
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                </tr>
+            </table>
+        </div>
         <div class="form-group">
             <label>Search Events:</label><br>
             <tags-input ng-model="eSearch" on-tag-added="SearchEvent()" on-tag-removed="SearchEvent()"></tags-input>
         </div>
-        <h3>{{ eSearch | json }}</h3>
-        <h3>{{ eResult | json }}</h3>
-        <!--<tr ng-repeat="event in events">
-
-        </tr>-->
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Event Title</th>
+                        <th>Organizer</th>
+                        <th>Deadline</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="event in eResult">
+                    <td>{{event.title}}</td>
+                    <td>{{event.organizer}}</td>
+                    <td>{{event.deadline | date}}</td>
+                </tr>
+            </table>
+        </div>
         <div class="form-group">
             <label>Search Teams:</label><br>
             <tags-input ng-model="tSearch"></tags-input>
