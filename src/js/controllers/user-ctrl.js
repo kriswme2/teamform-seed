@@ -29,10 +29,12 @@ function UserCtrl($scope, Auth, User, Tags) {
   };
 
   $scope.updateProfile = function () {
+    $scope.messageLocation = 'profile';
     firebaseUser.updateProfile({
       displayName: $scope.displayName
     }).then(function () {
       // Profile updated successfully!
+      $scope.message = 'User profile updated!';
     }, function (error) {
       // An error happened.
       $scope.errorMessage = error.message;
