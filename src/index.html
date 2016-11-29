@@ -6,6 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Teamform</title>
+  <link rel="manifest" href="/manifest.json">
 </head>
 
 <body ng-controller="MasterCtrl">
@@ -54,6 +55,12 @@
 
         <li class="sidebar-list">
           <a href="/event/new">Create Event
+            <span class="menu-icon glyphicon glyphicon-plus"></span>
+          </a>
+        </li>
+
+        <li class="sidebar-list">
+          <a href="/match">Skill Matching
             <span class="menu-icon glyphicon glyphicon-plus"></span>
           </a>
         </li>
@@ -169,6 +176,17 @@
   <script type="text/javascript" src="components/es5-shim/es5-shim.min.js"></script>
   <!-- endbuild -->
 
+  <script>
+    if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/firebase-messaging-sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  }
+  </script>
   <!-- Custom Scripts -->
   <script type="text/javascript" src="js/dashboard.min.js"></script>
 </body>

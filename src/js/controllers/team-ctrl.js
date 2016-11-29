@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', 'User', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', 'User', 'Notification', TeamCtrl]);
 
-function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User) {
+function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User, Notification) {
 
     var uid = Auth.$getAuth().uid;
 
@@ -68,6 +68,9 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User)
         Teams.set($scope.eventID, $scope.input.teamName, newInput);
         Tags.tAdd($scope.eventID, $scope.input.teamName, $scope.tags);
         User.setTeamInfo(uid, $scope.eventID, $scope.input.teamName, 'leader', $scope.teamInfo);
+        Events.childObj($scope.eventID).$loaded().then(function (data) {
+          Notification.send(data.adminId, 'A new team was created for event "'+data.title+'"');
+        });
         $state.go('event', { "eventID": $scope.eventID });
     }
 

@@ -60,11 +60,16 @@ gulp.task('copy-bower_fonts', function() {
 /**
  * Handle custom files
  */
-gulp.task('build-custom', ['custom-images', 'lint', 'custom-js', 'custom-less', 'custom-templates']);
+gulp.task('build-custom', ['custom-images', 'service-worker', 'lint', 'custom-js', 'custom-less', 'custom-templates']);
 
 gulp.task('custom-images', function() {
     return gulp.src(paths.images)
         .pipe(gulp.dest('dist/img'));
+});
+
+gulp.task('service-worker', function() {
+    return gulp.src(paths.images)
+        .pipe(gulp.dest('dist/firebase-messaging-sw.js'));
 });
 
 gulp.task('lint', function(){
