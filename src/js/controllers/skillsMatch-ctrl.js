@@ -40,12 +40,13 @@ function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $statePara
                                 });
                             });
 
-                            if (found !== 0) {
+                            if (found) {
                                 firebase.database().ref('users').child(uId).once("value").then(function(data) {
                                     if (data.val() !== null) {
                                         var Match = {
                                             email: data.val().email,
-                                            name: data.val().name
+                                            name: data.val().name,
+                                            tags: user.tags
                                         };
                                         $scope.uResult.push(Match);
                                     }

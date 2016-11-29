@@ -137,6 +137,14 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                 },
                 onEnter: redirectToLoginIfNotSignedIn
             })
+            .state('recruit_member', {
+              url: '/event/{eventID}/team/{teamID}/recruit',
+              templateUrl: 'templates/leader/search.html',
+              resolve: {
+                currentAuth: requireSignInResolver,
+              },
+              onEnter: redirectToLoginIfNotSignedIn
+            })
             .state('profile', {
                 url: '/profile',
                 templateUrl: 'templates/profile.html',

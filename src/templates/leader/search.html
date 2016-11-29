@@ -1,0 +1,27 @@
+<div class="row" ng-controller="SkillsMatchCtrl">
+    <form class="col-md-12">
+        <div class="form-group">
+            <label>Search Users:</label><br>
+            <tags-input ng-model="uSearch" on-tag-added="SearchUser()" on-tag-removed="SearchUser()"></tags-input>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Other Skills</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="user in uResult">
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <tags-input ng-model="user.tags" disabled="true"></tags-input>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+<
