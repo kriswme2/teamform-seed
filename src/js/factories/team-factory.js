@@ -1,6 +1,6 @@
 angular
     .module('teamform')
-    .factory('Teams', ['firebase','$firebaseArray', function (firebase,$firebaseArray) {
+    .factory('Teams', ['firebase','$firebaseArray', '$firebaseObject', function (firebase,$firebaseArray,$firebaseObject) {
         var ref = firebase.database().ref('teams');
         var Teams = {
             ref: ref,
@@ -9,6 +9,9 @@ angular
             },
             childRef: function ($eId, $tName) {
                 return Teams.ref.child($eId + '/' + $tName);
+            },
+            childObj: function($eId, $tName) {
+                return $firebaseObject(ref.child($eId + '/' + $tName));
             },
             arr: function(eventID) {
                 return $firebaseArray(Teams.ref.child(eventID));
