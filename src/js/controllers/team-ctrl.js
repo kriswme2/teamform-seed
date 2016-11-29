@@ -129,6 +129,9 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User,
         $scope.noTeam = false;
         User.setTeamInfo(uid, $scope.eventID, $team.$id, 'member', $scope.teamInfo);
         Teams.childRef($scope.eventID, $team.$id).child('member').child($team.member.length).set(uid);
+        Teams.childObj($scope.eventID, $team.$id).$loaded().then(function (data) {
+          Notification.send(data.leaderId, 'A new member has joined the team "'+data.$id+'"');
+        });
       }
     };
 }
