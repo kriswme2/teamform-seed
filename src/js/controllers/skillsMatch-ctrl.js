@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller('SkillsMatchCtrl', ['$scope', '$firebaseArray', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', '$filter', SkillsMatchCtrl]);
+    .controller('SkillsMatchCtrl', ['$scope', '$firebaseArray', 'User', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', '$filter', SkillsMatchCtrl]);
 
-function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $stateParams, $state, Tags, $filter) {
+function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $stateParams, $state, Tags, $filter) {
 
     var uid = Auth.$getAuth().uid;
 
@@ -19,6 +19,8 @@ function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $statePara
     $scope.uTags = $firebaseArray(Tags.uref);
     $scope.eTags = $firebaseArray(Tags.eref);
     $scope.tTags = $firebaseArray(Tags.tref);
+
+    $scope.arr = [];
 
     $scope.SearchUser = function() {
         if ($scope.uSearch !== []) {
@@ -80,13 +82,14 @@ function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $statePara
                                 });
                             });
 
-                            if (found !== 0) {
+                            if (found) {
                                 Events.childRef(eId).once("value").then(function(data) {
                                     if (data.val() !== null) {
                                         var Match = {
                                             title: data.val().title,
                                             organizer: data.val().organizer,
-                                            deadline: data.val().deadline
+                                            deadline: data.val().deadline,
+                                            tags: event.tags
                                         };
                                         $scope.eResult.push(Match);
                                     }
@@ -100,14 +103,53 @@ function SkillsMatchCtrl($scope, $firebaseArray, Events, Teams, Auth, $statePara
         }
     };
 
-    // $scope.SearchTeam = function() {
-    //     if ($scope.tSearch !== []) {
-    //         $scope.tResult = [];
-    //         $scope.tTags.$loaded().then(function(tData) {
-    //             angular.forEach(tData, function(team) {
-    //               if()
-    //             });
-    //         });
-    //     }
-    // }
+    $scope.SearchTeam = function() {
+        if ($scope.tSearch !== []) {
+            $scope.tResult = [];
+            $scope.tTags.$loaded().then(function(tData) {
+                angular.forEach(tData, function(eData) {
+                    var eId = eData.$id;
+                    angular.forEach(eData, function(team, key) {
+                        if (team.tags !== null)
+                            var tId = key;
+
+                        var sCount = Object.keys($scope.tSearch).length;
+                        var tCount = Object.keys(team.tags).length;
+
+                        if (sCount <= tCount) {
+                            var found = 0;
+
+                            $scope.tSearch.some(function(sTag) {
+                                team.tags.some(function(tTag) {
+                                    if ($filter('lowercase')(sTag.text) === $filter('lowercase')(tTag.text))
+                                        found++;
+                                });
+                            });
+
+                            if (found) {
+                                console.log('true');
+
+                                Teams.childRef(eId, tId).once("value").then(function(data) {
+                                    if (data.val() !== null) {
+                                        console.log(data.val().leaderId);
+                                        User.childObj(data.val().leaderId).$loaded().then(function(uData) {
+                                            var Match = {
+                                                name: tId,
+                                                leader: uData.name,
+                                                teamSize: data.val().teamSize,
+                                                numOfMem: data.val().member.length,
+                                                tags: team.tags
+                                            };
+                                            $scope.tResult.push(Match);
+                                        });
+                                    }
+                                    $scope.$apply();
+                                });
+                            }
+                        }
+                    });
+                });
+            });
+        }
+    }
 }
