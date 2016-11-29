@@ -32,7 +32,7 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
         }];
 
         var redirectToJoinPageIfNotAccepted = ['AccessControl', '$state', function(AccessControl, $state) {
-            redirectToLoginIfNotSignedIn();
+            redirectToLoginIfNotSignedIn;
             if (!AccessControl.$val.access) {
                 $state.go('joinEvent', {
                     "eventID": AccessControl.$val.eventID
