@@ -18,6 +18,7 @@ var paths = {
     templates: 'src/templates/**/*.html',
     index: 'src/index.html',
     bower_fonts: 'src/components/**/*.{ttf,woff,eof,svg}',
+    service_worker: 'src/firebase-messaging-sw.js'
 };
 
  var options = {
@@ -68,7 +69,7 @@ gulp.task('custom-images', function() {
 });
 
 gulp.task('service-worker', function() {
-    return gulp.src(paths.images)
+    return gulp.src(paths.service_worker)
         .pipe(gulp.dest('dist/firebase-messaging-sw.js'));
 });
 

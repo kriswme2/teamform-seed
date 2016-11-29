@@ -12,6 +12,8 @@ angular
             }
 
             var uid = Auth.$getAuth().uid;
+            Notification.send(uid, 'Testing '+$eventID);
+            
             var eventObj = Events.childObj($eventID);
             $scope.event = eventObj;
             var accessObj = AccessControl.obj();
