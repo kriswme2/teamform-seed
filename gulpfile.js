@@ -70,7 +70,7 @@ gulp.task('custom-images', function() {
 
 gulp.task('service-worker', function() {
     return gulp.src(paths.service_worker)
-        .pipe(gulp.dest('dist/firebase-messaging-sw.js'));
+        .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('lint', function(){
