@@ -18,7 +18,8 @@ var paths = {
     templates: 'src/templates/**/*.html',
     index: 'src/index.html',
     bower_fonts: 'src/components/**/*.{ttf,woff,eof,svg}',
-    service_worker: 'src/firebase-messaging-sw.js'
+    service_worker: 'src/firebase-messaging-sw.js',
+    manifest: 'src/manifest.json'
 };
 
  var options = {
@@ -70,6 +71,11 @@ gulp.task('custom-images', function() {
 
 gulp.task('service-worker', function() {
     return gulp.src(paths.service_worker)
+        .pipe(gulp.dest('dist/'));
+});
+
+gulp.task('service-worker', function() {
+    return gulp.src(paths.manifest)
         .pipe(gulp.dest('dist/'));
 });
 
