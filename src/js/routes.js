@@ -183,6 +183,14 @@ angular.module('teamform').config(['$locationProvider', '$stateProvider', '$urlR
                     currentAuth: requireSignInResolver,
                 },
                 onEnter: redirectToLoginIfNotSignedIn
+            })
+            .state('debugNoti', {
+                url: '/debug-notification',
+                templateUrl: 'templates/debug-noti.html',
+                resolve: {
+                    currentAuth: requireSignInResolver,
+                },
+                onEnter: redirectToLoginIfNotSignedIn
             });
     }
 ]);
