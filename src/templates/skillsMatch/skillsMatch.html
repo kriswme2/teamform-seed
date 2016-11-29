@@ -54,6 +54,7 @@
                     <th>Team Size</th>
                     <th>Number of Member</th>
                     <th>Additional Tags</th>
+                    <th></th>
                 </tr>
             </thead>
             <tr ng-repeat="team in tResult">
@@ -64,6 +65,7 @@
                 <td>
                     <tags-input ng-model="team.tags" disabled="true"></tags-input>
                 </td>
+                <td><button type="button" class="btn btn-default btn-sm" ng-click="join(team)" ng-if="!team.isLeader">join</button> </td>
             </tr>
         </table>
     </form>

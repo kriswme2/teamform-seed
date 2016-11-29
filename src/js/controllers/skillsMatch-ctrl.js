@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller('SkillsMatchCtrl', ['$scope', '$firebaseArray', 'User', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', '$filter', SkillsMatchCtrl]);
+    .controller('SkillsMatchCtrl', ['$scope', '$firebaseArray', 'User', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', '$filter', 'Notification', SkillsMatchCtrl]);
 
-function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $stateParams, $state, Tags, $filter) {
+function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $stateParams, $state, Tags, $filter, Notification) {
 
     var uid = Auth.$getAuth().uid;
 
@@ -104,6 +104,7 @@ function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $sta
     };
 
     $scope.SearchTeam = function() {
+      var isLeader = false;
         if ($scope.tSearch !== []) {
             $scope.tResult = [];
             $scope.tTags.$loaded().then(function(tData) {
@@ -133,12 +134,18 @@ function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $sta
                                     if (data.val() !== null) {
                                         console.log(data.val().leaderId);
                                         User.childObj(data.val().leaderId).$loaded().then(function(uData) {
+                                          if(data.val().leaderId === uid){
+                                            isLeader = true;
+                                          }
                                             var Match = {
                                                 name: tId,
                                                 leader: uData.name,
                                                 teamSize: data.val().teamSize,
                                                 numOfMem: data.val().member.length,
-                                                tags: team.tags
+                                                tags: team.tags,
+                                                isLeader: isLeader,
+                                                eId: eId,
+                                                tId: tId
                                             };
                                             $scope.tResult.push(Match);
                                         });
@@ -151,5 +158,15 @@ function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $sta
                 });
             });
         }
+    }
+
+    $scope.join = function(t) {
+      if (t.numOfMem < t.teamSize) {
+        User.setTeamInfo(uid, t.eId, t.tId, 'member');
+        Teams.childRef(t.eId, t.tId).child('member').child(t.numOfMem).set(uid);
+        Teams.childObj(t.eId, t.tId).$loaded().then(function (data) {
+          Notification.send(data.leaderId, 'A new member has joined the team "'+data.$id+'"');
+        });
+      }
     }
 }
