@@ -16,12 +16,12 @@
 							<tr ng-repeat="i in listAsked">
 								<td class="col-xs-8">{{i.$id | emailByUID}}</td>
 								<td class="col-xs-4"> 
-									<div class="col-xs-6">
+									<div class="col-sm-6 col-xs-12">
 										<button type="button" class="btn btn-success btn-block" ng-click="acceptRequest(i.$id)">
 											<i class="fa fa-check" style="padding-right: 5px"></i>Accept
 										</button>
 									</div>
-									<div class="col-xs-6">
+									<div class="col-sm-6 col-xs-12">
 							 			<button type="button" class="btn btn-danger btn-block" ng-click="rejectRequest(i.$id)">
 							 				<i class="fa fa-times" style="padding-right: 5px"></i>Reject
 							 			</button>
