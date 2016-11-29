@@ -104,7 +104,7 @@ function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $sta
     };
 
     $scope.SearchTeam = function() {
-      var isLeader = false;
+        var isLeader = false;
         if ($scope.tSearch !== []) {
             $scope.tResult = [];
             $scope.tTags.$loaded().then(function(tData) {
@@ -134,10 +134,11 @@ function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $sta
                                     if (data.val() !== null) {
                                         console.log(data.val().leaderId);
                                         User.childObj(data.val().leaderId).$loaded().then(function(uData) {
-                                          if(data.val().leaderId === uid){
-                                            isLeader = true;
-                                          }
+                                            if (data.val().leaderId === uid) {
+                                                isLeader = true;
+                                            }
                                             var Match = {
+                                                eventTitle: ,
                                                 name: tId,
                                                 leader: uData.name,
                                                 teamSize: data.val().teamSize,
@@ -161,12 +162,12 @@ function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $sta
     }
 
     $scope.join = function(t) {
-      if (t.numOfMem < t.teamSize) {
-        User.setTeamInfo(uid, t.eId, t.tId, 'member');
-        Teams.childRef(t.eId, t.tId).child('member').child(t.numOfMem).set(uid);
-        Teams.childObj(t.eId, t.tId).$loaded().then(function (data) {
-          Notification.send(data.leaderId, 'A new member has joined the team "'+data.$id+'"');
-        });
-      }
+        if (t.numOfMem < t.teamSize) {
+            User.setTeamInfo(uid, t.eId, t.tId, 'member');
+            Teams.childRef(t.eId, t.tId).child('member').child(t.numOfMem).set(uid);
+            Teams.childObj(t.eId, t.tId).$loaded().then(function(data) {
+                Notification.send(data.leaderId, 'A new member has joined the team "' + data.$id + '"');
+            });
+        }
     }
 }
