@@ -1,0 +1,27 @@
+{
+  "short_name": "AirHorner",
+  "name": "Kinlan's AirHorner of Infamy",
+  "icons": [
+    {
+      "src": "./img/launcher-icon-1x.png",
+      "type": "image/png",
+      "sizes": "75x48"
+    },
+    {
+      "src": "./img/launcher-icon-2x.png",
+      "type": "image/png",
+      "sizes": "149x96"
+    },
+    {
+      "src": "./img/launcher-icon-4x.png",
+      "type": "image/png",
+      "sizes": "299x192"
+    }
+  ],
+  "start_url": "index.html?launcher=true",
+  "display": "standalone",
+  "theme_color": "#2196F3",
+  "//": "Some browsers will use this to enable push notifications.",
+  "//": "It is the same for all projects, this is not your project's sender ID",
+  "gcm_sender_id": "103953800507"
+}
