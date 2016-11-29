@@ -37,11 +37,16 @@ angular
             $scope.acceptRequest = function($uid) {
               AccessControl.set($eventID, $uid, 'accepted');
               User.setTeamInfo($uid, $eventID, null, 'member');
-              Notification.send($uid, 'You have gained access to eventID '+$eventID);
+              Events.childObj($eventID).$loaded().then(function (data) {
+                Notification.send($uid, 'You have gained access to event "'+data.title+'"');
+              });
+
             };
             $scope.rejectRequest = function($uid) {
               AccessControl.set($eventID, $uid, 'rejected');
-              Notification.send($uid, 'You have been rejceted access to eventID '+$eventID);
+              Events.childObj($eventID).$loaded().then(function (data) {
+                Notification.send($uid, 'You have been rejceted access to event "'+data.title+'"');
+              });
             };
         }
 

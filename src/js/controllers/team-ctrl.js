@@ -1,8 +1,8 @@
 angular
     .module('teamform')
-    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', 'User', TeamCtrl]);
+    .controller("TeamCtrl", ['$scope', 'Events', 'Teams', 'Auth', '$stateParams', '$state', 'Tags', 'User', 'Notification', TeamCtrl]);
 
-function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User) {
+function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User, Notification) {
 
     var uid = Auth.$getAuth().uid;
 
@@ -68,6 +68,9 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User)
         Teams.set($scope.eventID, $scope.input.teamName, newInput);
         Tags.tAdd($scope.eventID, $scope.input.teamName, $scope.tags);
         User.setTeamInfo(uid, $scope.eventID, $scope.input.teamName, 'leader', $scope.teamInfo);
+        Events.childObj($scope.eventID).$loaded().then(function (data) {
+          Notification.send(data.adminId, 'A new team was created for event "'+data.title+'"');
+        });
         $state.go('event', { "eventID": $scope.eventID });
     }
 
@@ -126,6 +129,9 @@ function TeamCtrl($scope, Events, Teams, Auth, $stateParams, $state, Tags, User)
         $scope.noTeam = false;
         User.setTeamInfo(uid, $scope.eventID, $team.$id, 'member', $scope.teamInfo);
         Teams.childRef($scope.eventID, $team.$id).child('member').child($team.member.length).set(uid);
+        Teams.childObj($scope.eventID, $team.$id).$loaded().then(function (data) {
+          Notification.send(data.leaderId, 'A new member has joined the team "'+data.$id+'"');
+        });
       }
     };
 }

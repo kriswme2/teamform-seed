@@ -1,6 +1,6 @@
 <div class="row" ng-controller="SkillsMatchCtrl">
     <form class="col-md-12">
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label>Search Users:</label><br>
             <tags-input ng-model="uSearch" on-tag-added="SearchUser()" on-tag-removed="SearchUser()"></tags-input>
         </div>
@@ -17,7 +17,7 @@
                     <td>{{user.email}}</td>
                 </tr>
             </table>
-        </div>
+        </div> -->
         <div class="form-group">
             <label>Search Events:</label><br>
             <tags-input ng-model="eSearch" on-tag-added="SearchEvent()" on-tag-removed="SearchEvent()"></tags-input>
@@ -29,22 +29,42 @@
                         <th>Event Title</th>
                         <th>Organizer</th>
                         <th>Deadline</th>
+                        <th>Event Tags</th>
                     </tr>
                 </thead>
                 <tr ng-repeat="event in eResult">
                     <td>{{event.title}}</td>
                     <td>{{event.organizer}}</td>
                     <td>{{event.deadline | date}}</td>
+                    <td>
+                        <tags-input ng-model="event.tags" disabled="true"></tags-input>
+                    </td>
                 </tr>
             </table>
         </div>
         <div class="form-group">
             <label>Search Teams:</label><br>
-            <tags-input ng-model="tSearch"></tags-input>
+            <tags-input ng-model="tSearch" on-tag-added="SearchTeam()" on-tag-removed="SearchTeam()"></tags-input>
         </div>
-        <input type="button" class="btn btn-default" value="Search" ng-click="SearchTeam()">
-        <!--<tr ng-repeat="team in teams">
-
-        </tr>-->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Leader</th>
+                    <th>Team Size</th>
+                    <th>Number of Member</th>
+                    <th>Additional Tags</th>
+                </tr>
+            </thead>
+            <tr ng-repeat="team in tResult">
+                <td>{{team.name}}</td>
+                <td>{{team.leader}}</td>
+                <td>{{team.teamSize}}</td>
+                <td>{{team.numOfMem}}</td>
+                <td>
+                    <tags-input ng-model="team.tags" disabled="true"></tags-input>
+                </td>
+            </tr>
+        </table>
     </form>
 </div>
