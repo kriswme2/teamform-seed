@@ -70,11 +70,11 @@
 				<div class="table-responsive">
 					<table class="table">
 						<thead>
-							<tr><th class="text-center">eventID</th><th>teamID</th><th>Role</th></tr>
+							<tr><th class="text-center">Event</th><th>Team</th><th>Role</th></tr>
 						</thead>
 						<tbody ng-controller="UserCtrl">
 							<tr ng-repeat="team in teamInfo">
-								<td class="text-center">{{team.eventID}}</td>
+								<td class="text-center">{{team.eventID | nameByEventID}}</td>
 								<td>{{team.teamID}}</td>
 								<td>{{team.role}}</td>
 							</tr>
