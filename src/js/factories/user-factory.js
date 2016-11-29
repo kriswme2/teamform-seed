@@ -31,7 +31,7 @@ angular
         $profile = {};
         $profile.name = Auth.$getAuth().displayName;
         $profile.email = Auth.$getAuth().email;
-        currentProfileRef.set($profile);
+        currentProfileRef.update($profile);
       },
       updatePicture: function(pictureField) {
         Upload.base64DataUrl(pictureField).then(function(base64){
@@ -39,9 +39,9 @@ angular
           $profile.name = Auth.$getAuth().displayName;
           $profile.email = Auth.$getAuth().email;
           $profile.picture = base64[0];
-          ref.child(Auth.$getAuth().uid).set($profile).then(function() {
+          ref.child(Auth.$getAuth().uid).update($profile).then(function() {
             alert('User profile update successful!');
-            location.reload();  
+            location.reload();
           });
         });
       },
@@ -49,7 +49,7 @@ angular
         ref.child(uid).child(type).push(data);
       },
       setInfo: function(uid, type, data, id) {
-        ref.child(uid).child(type).child(id).set(data);
+        ref.child(uid).child(type).child(id).update(data);
       },
     };
 
