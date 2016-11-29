@@ -11,6 +11,8 @@ angular
               return ;
             }
 
+            var uid = Auth.$getAuth().uid;
+            
             var eventObj = Events.childObj($eventID);
             $scope.event = eventObj;
             var accessObj = AccessControl.obj();
