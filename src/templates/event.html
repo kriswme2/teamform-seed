@@ -15,7 +15,7 @@
 						<tbody>
 							<tr ng-repeat="i in listAsked">
 								<td class="col-xs-8">{{i.$id | emailByUID}}</td>
-								<td class="col-xs-4"> 
+								<td class="col-xs-4">
 									<div class="col-sm-6 col-xs-12">
 										<button type="button" class="btn btn-success btn-block" ng-click="acceptRequest(i.$id)">
 											<i class="fa fa-check" style="padding-right: 5px"></i>Accept
@@ -90,7 +90,10 @@
 								<td class="text-center"  popover-trigger="mouseenter" uib-popover-template="'tpl.html'" popover-placement="top" popover-append-to-body="true"><a href = "#">{{t.$id}}</a> </td>
 								<td>{{t.teamSize}}</td>
 								<td>{{t.leaderId | emailByUID}}</td>
-								<td> <button type="button" class="btn btn-default btn-sm" ng-click="join(t)" ng-if="noTeam && t.teamSize>t.member.length">join</button> </td>
+								<td>
+									<button type="button" class="btn btn-default btn-sm" ng-click="join(t)" ng-if="noTeam && t.teamSize>t.member.length">Join</button>
+									<button type="button" class="btn btn-default btn-sm" ui-sref="edit_team({ eventID: eventID, teamID: t.$id })" ng-if="uid==t.leaderId">Edit</button>
+								</td>
 							</tr>
 							<tr ng-if="!teams.length">
 								<td>No Teams found.</td>
