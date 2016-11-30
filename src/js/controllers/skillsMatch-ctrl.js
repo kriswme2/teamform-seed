@@ -138,7 +138,6 @@ function SkillsMatchCtrl($scope, $firebaseArray, User, Events, Teams, Auth, $sta
                                                 isLeader = true;
                                             }
                                             var Match = {
-                                                eventTitle: ,
                                                 name: tId,
                                                 leader: uData.name,
                                                 teamSize: data.val().teamSize,
