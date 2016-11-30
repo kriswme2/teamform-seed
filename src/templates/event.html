@@ -84,6 +84,8 @@
 						</thead>
 						<script type="text/ng-template" id="tpl.html">
 						  <div ng-repeat = "uid in t.member"><a href = "/profile/{{uid}}"><img ng-src="{{uid | profilePicByUID}}" height = "30" width = "30"> {{uid | emailByUID}}</a></div>
+						 	<hr>
+						  <div align = "center"><a ui-sref="recruit_member({ eventID: eventID, teamID: t.$id })" ng-if="uid==t.leaderId">Hire <span class="menu-icon glyphicon glyphicon-plus"></span></div>
 						</script>
 						<tbody>
 							<tr ng-repeat="t in teams">
