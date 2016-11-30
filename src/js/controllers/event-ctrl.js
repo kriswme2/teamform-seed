@@ -5,6 +5,7 @@ angular
 function EventsCtrl($scope, Events, Auth, $stateParams, $state, Tags, AccessControl, User) {
 
     var uid = Auth.$getAuth().uid;
+    $scope.uid = uid;
     $scope.eventID = $stateParams.eventID;
 
     $scope.events = Events.arr();
